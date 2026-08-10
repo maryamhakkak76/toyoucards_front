@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from 'react'
-import { ArrowRight, Check, Loader2, AlertCircle, Sparkles } from 'lucide-react'
+import { ArrowRight, Check, Loader as Loader2, CircleAlert as AlertCircle, Sparkles } from 'lucide-react'
 import { supabase } from '@/lib/supabase'
 
 type FormStatus = 'idle' | 'loading' | 'success' | 'error'

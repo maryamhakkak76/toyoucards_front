@@ -1,9 +1,5 @@
 import { Link } from 'react-router-dom'
-import {
-  ArrowRight, Check, Zap, Globe, Layers, Shield, Code2,
-  TrendingUp, Building2, Gift, Users, Sparkles, BarChart3,
-  Plug, Award, Headphones,
-} from 'lucide-react'
+import { ArrowRight, Check, Zap, Globe, Layers, Shield, Code as Code2, TrendingUp, Building2, Gift, Users, Sparkles, ChartBar as BarChart3, Plug, Award, Headphones } from 'lucide-react'
 import TalkToSalesForm from '@/components/TalkToSalesForm'
 
 export default function LandingPage() {

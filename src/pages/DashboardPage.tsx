@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { BarChart3, ArrowRight, LogOut, Gift, Zap, Settings } from 'lucide-react'
+import { ChartBar as BarChart3, ArrowRight, LogOut, Gift, Zap, Settings } from 'lucide-react'
 import { useAuth } from '@/lib/auth'
 
 export default function DashboardPage() {
