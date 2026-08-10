@@ -1,0 +1,158 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-ink-950 text-white font-sans antialiased;
+    background-color: #050A12;
+    background-image:
+      radial-gradient(ellipse 80% 60% at 50% -10%, rgba(22, 193, 232, 0.10), transparent 60%),
+      radial-gradient(ellipse 60% 50% at 100% 100%, rgba(19, 93, 169, 0.08), transparent 50%),
+      radial-gradient(ellipse 50% 40% at 0% 80%, rgba(22, 119, 200, 0.06), transparent 50%);
+    background-attachment: fixed;
+  }
+
+  ::selection {
+    background: rgba(22, 193, 232, 0.3);
+    color: #fff;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #070E1A;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #13233B;
+    border-radius: 5px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #1B2F4D;
+  }
+}
+
+@layer components {
+  .container-px {
+    @apply px-5 sm:px-8 lg:px-12 xl:px-16;
+  }
+
+  .container-max {
+    @apply mx-auto max-w-7xl;
+  }
+
+  .eyebrow {
+    @apply inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-brand-500;
+  }
+
+  .text-gradient {
+    @apply bg-gradient-to-r from-brand-500 via-brand-400 to-brand-600 bg-clip-text text-transparent;
+  }
+
+  .glass-card {
+    background: rgba(255, 255, 255, 0.035);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+  }
+
+  .glass-card-hover {
+    transition: border-color 0.3s ease, background 0.3s ease, transform 0.3s ease;
+  }
+  .glass-card-hover:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(22, 193, 232, 0.25);
+  }
+
+  .glow-blue {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .field-input {
+    @apply w-full rounded-xl bg-white/[0.04] border border-white/[0.08] px-4 py-3.5 text-[15px] text-white placeholder-white/30 transition-all duration-200 outline-none;
+  }
+  .field-input:hover {
+    border-color: rgba(255, 255, 255, 0.14);
+  }
+  .field-input:focus {
+    border-color: rgba(22, 193, 232, 0.5);
+    box-shadow: 0 0 0 3px rgba(22, 193, 232, 0.15);
+    background: rgba(255, 255, 255, 0.05);
+  }
+  .field-input::placeholder {
+    color: rgba(255, 255, 255, 0.3);
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl bg-brand-500 px-6 py-3.5 text-[15px] font-semibold text-ink-950 transition-all duration-200;
+    box-shadow: 0 0 0 0 rgba(22, 193, 232, 0);
+  }
+  .btn-primary:hover {
+    background: #27CEF0;
+    box-shadow: 0 8px 30px rgba(22, 193, 232, 0.25);
+    transform: translateY(-1px);
+  }
+  .btn-primary:active {
+    transform: translateY(0);
+  }
+  .btn-primary:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/[0.03] px-6 py-3.5 text-[15px] font-semibold text-white/90 transition-all duration-200;
+  }
+  .btn-secondary:hover {
+    border-color: rgba(22, 193, 232, 0.4);
+    background: rgba(255, 255, 255, 0.06);
+    color: #fff;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-3.5 py-2 text-sm font-medium text-white/60 transition-all duration-200;
+  }
+  .btn-ghost:hover {
+    color: rgba(255, 255, 255, 0.95);
+    background: rgba(255, 255, 255, 0.04);
+  }
+
+  .link-arrow {
+    @apply inline-flex items-center gap-1.5 text-[15px] font-semibold text-brand-500 transition-colors duration-200;
+  }
+  .link-arrow:hover {
+    color: #27CEF0;
+  }
+  .link-arrow svg {
+    transition: transform 0.2s ease;
+  }
+  .link-arrow:hover svg {
+    transform: translateX(3px);
+  }
+}
+
+@layer utilities {
+  .animate-delay-100 { animation-delay: 0.1s; opacity: 0; }
+  .animate-delay-200 { animation-delay: 0.2s; opacity: 0; }
+  .animate-delay-300 { animation-delay: 0.3s; opacity: 0; }
+  .animate-delay-400 { animation-delay: 0.4s; opacity: 0; }
+  .animate-delay-500 { animation-delay: 0.5s; opacity: 0; }
+  .animate-delay-600 { animation-delay: 0.6s; opacity: 0; }
+  .animate-delay-700 { animation-delay: 0.7s; opacity: 0; }
+}
