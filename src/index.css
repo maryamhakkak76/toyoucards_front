@@ -14,12 +14,11 @@
   }
 
   body {
-    @apply bg-ink-950 text-white font-sans antialiased;
-    background-color: #050A12;
+    @apply text-white font-sans antialiased;
+    background-color: #05080c;
     background-image:
-      radial-gradient(ellipse 80% 60% at 50% -10%, rgba(22, 193, 232, 0.10), transparent 60%),
-      radial-gradient(ellipse 60% 50% at 100% 100%, rgba(19, 93, 169, 0.08), transparent 50%),
-      radial-gradient(ellipse 50% 40% at 0% 80%, rgba(22, 119, 200, 0.06), transparent 50%);
+      radial-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+    background-size: 42px 42px;
     background-attachment: fixed;
   }
 
@@ -32,36 +31,59 @@
     width: 10px;
   }
   ::-webkit-scrollbar-track {
-    background: #070E1A;
+    background: #070b10;
   }
   ::-webkit-scrollbar-thumb {
-    background: #13233B;
+    background: #13233b;
     border-radius: 5px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: #1B2F4D;
+    background: #1b2f4d;
   }
 }
 
 @layer components {
   .container-px {
-    @apply px-5 sm:px-8 lg:px-12 xl:px-16;
+    @apply px-4 sm:px-6;
   }
 
   .container-max {
-    @apply mx-auto max-w-7xl;
+    @apply mx-auto max-w-6xl;
   }
 
   .eyebrow {
-    @apply inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-brand-500;
+    @apply inline-flex items-center gap-2 text-[10px] font-medium uppercase tracking-[0.2em] text-brand-400;
   }
 
   .text-gradient {
-    @apply bg-gradient-to-r from-brand-500 via-brand-400 to-brand-600 bg-clip-text text-transparent;
+    background: linear-gradient(135deg, #16c1e8 0%, #1677c8 52%, #135da9 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
+  .text-gradient-brand {
+    background: linear-gradient(135deg, #16c1e8 0%, #1677c8 52%, #135da9 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
+  .bg-gradient-brand {
+    background: linear-gradient(135deg, #16c1e8 0%, #1677c8 52%, #135da9 100%);
+  }
+
+  .bg-app {
+    background-color: #05080c;
+    background-image:
+      radial-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+    background-size: 42px 42px;
   }
 
   .glass-card {
-    background: rgba(255, 255, 255, 0.035);
+    background: rgba(255, 255, 255, 0.025);
     border: 1px solid rgba(255, 255, 255, 0.08);
     backdrop-filter: blur(12px);
   }
@@ -70,8 +92,8 @@
     transition: border-color 0.3s ease, background 0.3s ease, transform 0.3s ease;
   }
   .glass-card-hover:hover {
-    background: rgba(255, 255, 255, 0.05);
-    border-color: rgba(22, 193, 232, 0.25);
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(22, 193, 232, 0.4);
   }
 
   .glow-blue {
@@ -83,61 +105,58 @@
   }
 
   .field-input {
-    @apply w-full rounded-xl bg-white/[0.04] border border-white/[0.08] px-4 py-3.5 text-[15px] text-white placeholder-white/30 transition-all duration-200 outline-none;
+    @apply w-full rounded-xl bg-white/[0.03] border border-white/10 px-4 py-3 text-sm text-white placeholder-white/40 outline-none transition-all duration-200;
   }
   .field-input:hover {
     border-color: rgba(255, 255, 255, 0.14);
   }
   .field-input:focus {
     border-color: rgba(22, 193, 232, 0.5);
-    box-shadow: 0 0 0 3px rgba(22, 193, 232, 0.15);
+    box-shadow: 0 0 0 2px rgba(22, 193, 232, 0.25);
     background: rgba(255, 255, 255, 0.05);
   }
   .field-input::placeholder {
-    color: rgba(255, 255, 255, 0.3);
+    color: rgba(255, 255, 255, 0.4);
   }
 
+  /* Original pill-shaped gradient buttons */
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 rounded-xl bg-brand-500 px-6 py-3.5 text-[15px] font-semibold text-ink-950 transition-all duration-200;
-    box-shadow: 0 0 0 0 rgba(22, 193, 232, 0);
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-medium transition-all duration-200;
+    background: linear-gradient(135deg, #16c1e8 0%, #1677c8 52%, #135da9 100%);
+    color: #04121a;
+    box-shadow: 0 10px 40px -8px rgba(22, 193, 232, 0.55);
   }
   .btn-primary:hover {
-    background: #27CEF0;
-    box-shadow: 0 8px 30px rgba(22, 193, 232, 0.25);
-    transform: translateY(-1px);
+    filter: brightness(1.1);
   }
   .btn-primary:active {
-    transform: translateY(0);
+    transform: scale(0.98);
   }
   .btn-primary:disabled {
     opacity: 0.6;
     cursor: not-allowed;
-    transform: none;
-    box-shadow: none;
   }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/[0.03] px-6 py-3.5 text-[15px] font-semibold text-white/90 transition-all duration-200;
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-5 py-3 text-sm font-medium text-white/90 backdrop-blur-sm transition-all duration-200;
   }
   .btn-secondary:hover {
     border-color: rgba(22, 193, 232, 0.4);
-    background: rgba(255, 255, 255, 0.06);
-    color: #fff;
+    color: #16c1e8;
   }
 
   .btn-ghost {
-    @apply inline-flex items-center justify-center gap-2 rounded-lg px-3.5 py-2 text-sm font-medium text-white/60 transition-all duration-200;
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-3.5 py-2 text-sm font-medium text-white/55 transition-all duration-200;
   }
   .btn-ghost:hover {
     color: rgba(255, 255, 255, 0.95);
-    background: rgba(255, 255, 255, 0.04);
   }
 
   .link-arrow {
-    @apply inline-flex items-center gap-1.5 text-[15px] font-semibold text-brand-500 transition-colors duration-200;
+    @apply inline-flex items-center gap-1.5 text-sm font-medium text-brand-400 transition-colors duration-200;
   }
   .link-arrow:hover {
-    color: #27CEF0;
+    color: #fff;
   }
   .link-arrow svg {
     transition: transform 0.2s ease;
@@ -189,10 +208,28 @@
   animation: float-slow-orbit 7s ease-in-out infinite;
 }
 
+@keyframes float-slower {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-22px); }
+}
+.animate-float-slower {
+  animation: float-slower 9s ease-in-out infinite;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.animate-marquee {
+  animation: marquee 40s linear infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .animate-pulse-dot,
   .animate-float-slow-orbit,
-  .animate-orbit-spin {
+  .animate-float-slower,
+  .animate-orbit-spin,
+  .animate-marquee {
     animation: none !important;
   }
 }
