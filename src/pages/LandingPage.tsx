@@ -536,7 +536,7 @@ function FinalCta() {
       />
 
       {/* huge abstract card in the background */}
-      <div className="animate-float-slower pointer-events-none absolute left-1/2 top-1/2 w-[640px] max-w-[90vw] -translate-x-1/2 -translate-y-1/2 rotate-[-8deg] opacity-[0.14] blur-[2px]">
+      <div className="animate-float-slower-centered pointer-events-none absolute left-0 right-0 top-1/2 mx-auto w-[640px] max-w-[90vw] opacity-[0.14] blur-[2px]">
         <GiftCard variant="blue" amount="$50" label="DIGITAL VALUE" />
       </div>
 

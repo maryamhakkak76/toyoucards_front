@@ -216,6 +216,14 @@
   animation: float-slower 9s ease-in-out infinite;
 }
 
+@keyframes float-slower-centered {
+  0%, 100% { transform: translateY(-50%) rotate(-8deg); }
+  50% { transform: translateY(calc(-50% - 22px)) rotate(-8deg); }
+}
+.animate-float-slower-centered {
+  animation: float-slower-centered 9s ease-in-out infinite;
+}
+
 @keyframes marquee {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
