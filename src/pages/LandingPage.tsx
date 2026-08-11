@@ -1,6 +1,9 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { ArrowRight, Check, Zap, Globe, Layers, Shield, Code as Code2, TrendingUp, Building2, Gift, Users, Sparkles, ChartBar as BarChart3, Plug, Award, Headphones } from 'lucide-react'
+import { ArrowRight, ArrowDown, Check, Zap, Globe, Shield, Code as Code2, TrendingUp, Building2, Gift, Users, Plug, Award, Headphones, Wallet, Package } from 'lucide-react'
 import TalkToSalesForm from '@/components/TalkToSalesForm'
+import { GiftCard, type GiftCardVariant } from '@/components/GiftCard'
+import { CardOrbit } from '@/components/CardOrbit'
 
 export default function LandingPage() {
   return (
@@ -27,45 +30,46 @@ export default function LandingPage() {
 
 function Hero() {
   return (
-    <section className="relative pt-32 pb-20 lg:pt-44 lg:pb-32 overflow-hidden">
-      {/* Atmospheric glow */}
+    <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-28 overflow-hidden">
       <div className="glow-blue top-0 left-1/2 -translate-x-1/2 w-[700px] h-[400px] bg-brand-500/15 animate-glow-pulse" />
       <div className="glow-blue top-40 -right-20 w-[400px] h-[400px] bg-brand-700/10" />
 
       <div className="container-max container-px relative">
-        <div className="mx-auto max-w-4xl text-center">
-          <div className="eyebrow justify-center mb-6 animate-fade-in-up">
-            <span className="flex h-1.5 w-1.5 rounded-full bg-brand-500" />
-            B2B Digital Gift Card Platform
+        <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-12 items-center">
+          <div className="mx-auto max-w-2xl text-center lg:text-left animate-fade-in-up">
+            <div className="eyebrow justify-center lg:justify-start mb-6">
+              <span className="animate-pulse-dot h-1.5 w-1.5 rounded-full bg-brand-500 shadow-[0_0_8px_#16C1E8]" />
+              B2B Digital Gift Card Platform
+            </div>
+            <h1 className="text-display-2xl font-display text-white">
+              Bring digital gift cards
+              <br />
+              <span className="text-gradient">into your business.</span>
+            </h1>
+            <p className="mx-auto lg:mx-0 mt-7 max-w-md text-lg leading-relaxed text-white/55">
+              ToYouCards gives businesses access to a global catalog of digital gift cards through
+              bulk purchasing, API integration, and reseller distribution — all from one platform.
+            </p>
+            <div className="mt-10 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+              <Link to="/contact" className="btn-primary w-full sm:w-auto">
+                Talk to Sales
+                <ArrowRight className="h-4.5 w-4.5" />
+              </Link>
+              <a href="#catalog" className="btn-secondary w-full sm:w-auto">
+                Explore Gift Cards
+              </a>
+            </div>
+            <div className="mt-8 flex items-center justify-center lg:justify-start gap-6 text-sm text-white/40">
+              <span>500+ brands</span>
+              <span className="h-1 w-1 rounded-full bg-white/20" />
+              <span>140+ countries</span>
+              <span className="h-1 w-1 rounded-full bg-white/20" />
+              <span>API access</span>
+            </div>
           </div>
-          <h1 className="text-display-2xl font-display text-white animate-fade-in-up animate-delay-100">
-            Bring digital gift cards
-            <br />
-            <span className="text-gradient">into your business.</span>
-          </h1>
-          <p className="mx-auto mt-7 max-w-2xl text-lg leading-relaxed text-white/55 animate-fade-in-up animate-delay-200">
-            ToYouCards gives businesses access to a global catalog of digital gift cards through
-            bulk purchasing, API integration, and reseller distribution — all from one platform.
-          </p>
-          <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in-up animate-delay-300">
-            <Link to="/contact" className="btn-primary w-full sm:w-auto">
-              Talk to Sales
-              <ArrowRight className="h-4.5 w-4.5" />
-            </Link>
-            <a href="#catalog" className="btn-secondary w-full sm:w-auto">
-              Explore Gift Cards
-            </a>
-          </div>
-          <div className="mt-8 flex items-center justify-center gap-6 text-sm text-white/40 animate-fade-in-up animate-delay-400">
-            <span className="flex items-center gap-1.5">
-              <Check className="h-4 w-4 text-brand-500" /> 500+ brands
-            </span>
-            <span className="hidden sm:flex items-center gap-1.5">
-              <Check className="h-4 w-4 text-brand-500" /> 140+ countries
-            </span>
-            <span className="flex items-center gap-1.5">
-              <Check className="h-4 w-4 text-brand-500" /> API access
-            </span>
+
+          <div className="animate-fade-in-up animate-delay-200">
+            <CardOrbit />
           </div>
         </div>
       </div>
@@ -128,37 +132,75 @@ function WhatWeDo() {
 
 /* ──────────────────────────── CATALOG ──────────────────────────── */
 
+type CatalogItem = {
+  variant: GiftCardVariant
+  amount: string
+  label: string
+  category: string
+  rotate: string
+}
+
 function Catalog() {
-  const categories = [
-    { name: 'Retail & Shopping', count: '180+ brands', icon: <Building2 className="h-5 w-5" /> },
-    { name: 'Gaming & Entertainment', count: '95+ brands', icon: <Zap className="h-5 w-5" /> },
-    { name: 'Food & Delivery', count: '70+ brands', icon: <Gift className="h-5 w-5" /> },
-    { name: 'Streaming & Music', count: '45+ brands', icon: <Layers className="h-5 w-5" /> },
-    { name: 'Travel & Mobility', count: '30+ brands', icon: <Globe className="h-5 w-5" /> },
-    { name: 'Fashion & Lifestyle', count: '60+ brands', icon: <Sparkles className="h-5 w-5" /> },
+  const items: CatalogItem[] = [
+    { variant: 'cyan', amount: '$50', label: 'DIGITAL VALUE', category: 'Shopping', rotate: '-rotate-3' },
+    { variant: 'blue', amount: '$100', label: 'PREMIUM', category: 'Retail', rotate: 'rotate-2' },
+    { variant: 'deep', amount: '$25', label: 'GAMING', category: 'Gaming', rotate: '-rotate-2' },
+    { variant: 'dark', amount: '$75', label: 'STREAMING', category: 'Entertainment', rotate: 'rotate-3' },
+    { variant: 'light', amount: '$200', label: 'CORPORATE', category: 'Rewards', rotate: '-rotate-1' },
   ]
+  const [active, setActive] = useState<number | null>(null)
 
   return (
-    <section id="catalog" className="relative py-24 lg:py-32">
+    <section id="catalog" className="relative py-24 lg:py-32 overflow-hidden">
       <div className="glow-blue top-20 right-0 w-[400px] h-[300px] bg-brand-500/8" />
       <div className="container-max container-px relative">
         <SectionHeader
           eyebrow="Gift Card Catalog"
-          title="A global catalog your business can rely on."
-          subtitle="Access hundreds of digital gift card brands across categories and regions — all available for bulk purchase and API distribution."
+          title="A living catalog of digital value."
+          subtitle="Hundreds of brands and denominations across categories and regions. Hover a card to bring it forward."
         />
-        <div className="mt-16 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {categories.map((cat) => (
-            <div key={cat.name} className="glass-card glass-card-hover rounded-2xl p-6">
-              <div className="flex items-center justify-between mb-4">
-                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-500/10 border border-brand-500/15 text-brand-500">
-                  {cat.icon}
+      </div>
+
+      <div className="relative mt-14">
+        <div className="flex gap-6 overflow-x-auto px-6 pb-16 pt-10 [scrollbar-width:none] sm:justify-center [&::-webkit-scrollbar]:hidden">
+          {items.map((item, i) => {
+            const isActive = active === i
+            const isDimmed = active !== null && !isActive
+            return (
+              <button
+                key={i}
+                onMouseEnter={() => setActive(i)}
+                onMouseLeave={() => setActive(null)}
+                onFocus={() => setActive(i)}
+                onBlur={() => setActive(null)}
+                className={`group relative w-[260px] shrink-0 origin-bottom cursor-pointer text-left transition-all duration-500 ease-out ${item.rotate} ${
+                  isActive ? 'z-10 -translate-y-4 !rotate-0 scale-105' : ''
+                } ${isDimmed ? 'scale-95 opacity-45 blur-[1px]' : ''}`}
+              >
+                <div
+                  className={`transition-shadow duration-500 ${
+                    isActive ? 'drop-shadow-[0_30px_60px_rgba(22,193,232,0.28)]' : ''
+                  }`}
+                >
+                  <GiftCard
+                    variant={item.variant}
+                    amount={item.amount}
+                    label={item.label}
+                  />
                 </div>
-                <span className="text-xs font-medium text-white/35">{cat.count}</span>
-              </div>
-              <h3 className="text-base font-semibold text-white">{cat.name}</h3>
-            </div>
-          ))}
+                <div
+                  className={`mt-4 flex items-center justify-between transition-opacity duration-300 ${
+                    isActive ? 'opacity-100' : 'opacity-0'
+                  }`}
+                >
+                  <span className="text-sm font-medium text-white">
+                    {item.category}
+                  </span>
+                  <span className="text-xs text-brand-400">{item.amount} value</span>
+                </div>
+              </button>
+            )
+          })}
         </div>
       </div>
     </section>
@@ -333,7 +375,7 @@ function ApiSection() {
             </ul>
           </div>
 
-          {/* Code preview */}
+          {/* Code window */}
           <div className="relative">
             <div className="glass-card rounded-2xl overflow-hidden">
               <div className="flex items-center gap-2 px-4 py-3 border-b border-white/[0.06] bg-ink-900/50">
@@ -342,17 +384,38 @@ function ApiSection() {
                   <span className="h-3 w-3 rounded-full bg-white/10" />
                   <span className="h-3 w-3 rounded-full bg-white/10" />
                 </div>
-                <span className="ml-2 text-xs font-medium text-white/35">POST /v1/orders</span>
+                <span className="ml-2 text-xs font-medium text-white/35 font-mono">orders.create</span>
               </div>
-              <pre className="p-5 text-[13px] leading-relaxed overflow-x-auto font-mono">{`curl -X POST \
-  https://api.toyoucards.com/v1/orders \
-  -H "Authorization: Bearer sk_live_…" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "product_code": "AMZN-US-25",
-    "quantity": 100,
-    "recipient_email": "orders@acme.com"
-  }'`}</pre>
+              <div className="space-y-5 p-5 font-mono text-[13px] leading-relaxed">
+                <div>
+                  <div className="flex items-center gap-2">
+                    <span className="rounded bg-brand-500/15 px-1.5 py-0.5 text-[11px] font-semibold text-brand-400">POST</span>
+                    <span className="text-white/90">/v1/orders</span>
+                  </div>
+                  <pre className="mt-3 text-white/60">{`{
+  "product": "gift-card",
+  "amount": 50
+}`}</pre>
+                </div>
+
+                <div className="flex justify-center">
+                  <span className="flex h-7 w-7 items-center justify-center rounded-full border border-brand-500/30 bg-brand-500/10 text-brand-400">
+                    <ArrowDown className="h-3.5 w-3.5" />
+                  </span>
+                </div>
+
+                <div className="rounded-xl border border-brand-500/15 bg-brand-500/[0.04] p-4">
+                  <div className="flex items-center gap-2 text-brand-400">
+                    <Check className="h-4 w-4" strokeWidth={2.5} />
+                    <span className="text-xs font-semibold tracking-wide">ORDER CREATED</span>
+                  </div>
+                  <div className="mt-3 text-white/60">
+                    <span className="text-blue-300">"digital_code"</span>
+                    <span className="text-white/40">: </span>
+                    <span className="tracking-[0.3em] text-white/80">••••••••••••</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -386,73 +449,60 @@ function ApiCTA() {
 
 function PlatformPreview() {
   return (
-    <section className="relative py-24 lg:py-32 bg-ink-900/30 border-y border-white/[0.05]">
+    <section className="relative py-24 lg:py-32 bg-ink-900/30 border-y border-white/[0.05] overflow-hidden">
+      <div
+        className="pointer-events-none absolute bottom-0 left-1/2 h-[420px] w-[820px] -translate-x-1/2"
+        style={{
+          background: 'radial-gradient(circle at 50% 80%, rgba(22,132,214,0.18), transparent 68%)',
+        }}
+      />
       <div className="container-max container-px relative">
         <SectionHeader
           eyebrow="Platform Preview"
-          title="Manage everything from one dashboard."
+          title="Your digital value, in one dashboard."
           subtitle="Orders, catalog, API keys, billing, and reporting — all in one place. Here's a glimpse of what your team gets access to."
         />
-        <div className="mt-16 glass-card rounded-3xl overflow-hidden">
-          {/* Mock dashboard */}
-          <div className="grid lg:grid-cols-[200px_1fr] min-h-[420px]">
-            {/* Sidebar */}
-            <div className="hidden lg:flex flex-col gap-1 p-4 border-r border-white/[0.06] bg-ink-950/40">
-              {['Dashboard', 'Orders', 'Catalog', 'API Keys', 'Billing', 'Reports'].map((item, i) => (
-                <div
-                  key={item}
-                  className={`flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm ${
-                    i === 0 ? 'bg-brand-500/10 text-brand-400 border border-brand-500/15' : 'text-white/40'
-                  }`}
-                >
-                  <BarChart3 className="h-4 w-4" />
-                  {item}
-                </div>
-              ))}
+        <div className="mt-16 mx-auto max-w-4xl">
+          <div className="glass-card rounded-3xl overflow-hidden">
+            <div className="flex items-center gap-2 border-b border-white/[0.06] px-4 py-3">
+              <span className="h-3 w-3 rounded-full bg-white/10" />
+              <span className="h-3 w-3 rounded-full bg-white/10" />
+              <span className="h-3 w-3 rounded-full bg-white/10" />
+              <div className="mx-auto flex items-center gap-2 rounded-md border border-white/10 bg-white/[0.03] px-3 py-1 text-[11px] text-white/35">
+                <span className="h-1.5 w-1.5 rounded-full bg-brand-500" />
+                app.toyoucards.com
+              </div>
             </div>
-            {/* Main */}
-            <div className="p-6 lg:p-8">
-              <div className="flex items-center justify-between mb-6">
-                <div>
-                  <h4 className="text-base font-semibold text-white">Recent Orders</h4>
-                  <p className="text-xs text-white/35 mt-0.5">Last 30 days</p>
-                </div>
-                <div className="hidden sm:flex gap-2">
-                  <div className="rounded-lg border border-white/10 bg-white/[0.03] px-3 py-1.5 text-xs text-white/40">Filter</div>
-                  <div className="rounded-lg bg-brand-500/15 border border-brand-500/20 px-3 py-1.5 text-xs text-brand-400">Export</div>
-                </div>
-              </div>
-              <div className="grid grid-cols-3 gap-4 mb-6">
+
+            <div className="p-5 lg:p-7">
+              <div className="grid gap-4 sm:grid-cols-3">
                 {[
-                  { label: 'Total Orders', value: '1,284' },
-                  { label: 'Volume', value: '$48.2K' },
-                  { label: 'Active Cards', value: '892' },
-                ].map((stat) => (
-                  <div key={stat.label} className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-4">
-                    <p className="text-xs text-white/35 mb-1">{stat.label}</p>
-                    <p className="text-xl font-semibold text-white">{stat.value}</p>
+                  { icon: <Wallet className="h-4 w-4 text-brand-400" strokeWidth={1.5} />, label: 'Balance', value: '$24,850' },
+                  { icon: <Package className="h-4 w-4 text-brand-400" strokeWidth={1.5} />, label: 'Orders', value: '1,284' },
+                  { icon: <TrendingUp className="h-4 w-4 text-brand-400" strokeWidth={1.5} />, label: 'Delivered', value: '99.9%' },
+                ].map((s) => (
+                  <div key={s.label} className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-4 text-left">
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs text-white/35">{s.label}</span>
+                      {s.icon}
+                    </div>
+                    <p className="mt-2 font-mono text-2xl font-semibold tracking-tight text-white">{s.value}</p>
                   </div>
                 ))}
               </div>
-              <div className="space-y-2">
-                {['AMZN-US-25', 'AAPL-US-50', 'GGL-US-10', 'XBOX-US-25'].map((code, i) => (
-                  <div
-                    key={code}
-                    className="flex items-center justify-between rounded-lg border border-white/[0.04] bg-white/[0.01] px-4 py-3"
-                  >
-                    <div className="flex items-center gap-3">
-                      <div className="h-7 w-7 rounded-md bg-brand-500/10 border border-brand-500/15" />
-                      <span className="text-sm font-medium text-white/70">{code}</span>
-                    </div>
-                    <div className="flex items-center gap-4">
-                      <span className="text-sm text-white/40">×{[100, 50, 200, 75][i]}</span>
-                      <span className="text-xs px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/15">Delivered</span>
-                    </div>
-                  </div>
-                ))}
+
+              <div className="mt-6 flex items-center justify-between">
+                <span className="text-sm font-medium text-white">Recent gift cards</span>
+                <span className="text-xs text-brand-400">View all</span>
+              </div>
+              <div className="mt-4 grid grid-cols-3 gap-4">
+                <GiftCard variant="cyan" amount="$50" label="SHOPPING" />
+                <GiftCard variant="blue" amount="$100" label="PREMIUM" />
+                <GiftCard variant="deep" amount="$25" label="GAMING" />
               </div>
             </div>
           </div>
+          <p className="mt-5 text-center text-[11px] text-white/25">Product preview — figures shown are illustrative.</p>
         </div>
       </div>
     </section>
@@ -496,13 +546,11 @@ function Trust() {
 function ContactSection() {
   return (
     <section id="pricing" className="relative py-24 lg:py-32 overflow-hidden">
-      {/* Atmospheric blue glow */}
       <div className="glow-blue top-1/3 left-1/4 w-[600px] h-[500px] bg-brand-500/10 animate-glow-pulse" />
       <div className="glow-blue bottom-0 right-1/4 w-[400px] h-[400px] bg-brand-700/8" />
 
       <div className="container-max container-px relative">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
-          {/* Left: editorial content */}
           <div className="lg:pt-8">
             <div className="eyebrow mb-5">
               <span className="flex h-1.5 w-1.5 rounded-full bg-brand-500" />
@@ -534,7 +582,6 @@ function ContactSection() {
             </ul>
           </div>
 
-          {/* Right: form panel */}
           <div className="relative">
             <div className="absolute inset-0 -inset-4 bg-brand-500/5 blur-3xl rounded-5xl" />
             <div className="relative glass-card rounded-4xl shadow-2xl">
@@ -553,8 +600,17 @@ function FinalCTA() {
   return (
     <section className="relative py-24 lg:py-32 overflow-hidden">
       <div className="glow-blue top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-brand-500/10 animate-glow-pulse" />
+
+      <div className="animate-float-slower pointer-events-none absolute left-1/2 top-1/2 w-[640px] max-w-[90vw] -translate-x-1/2 -translate-y-1/2 rotate-[-8deg] opacity-[0.14] blur-[2px]">
+        <GiftCard variant="blue" amount="$50" label="DIGITAL VALUE" />
+      </div>
+
       <div className="container-max container-px relative text-center">
-        <h2 className="text-display-xl font-display text-white mx-auto max-w-3xl">
+        <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3.5 py-1.5 backdrop-blur-sm">
+          <span className="animate-pulse-dot h-1.5 w-1.5 rounded-full bg-brand-500 shadow-[0_0_8px_#16C1E8]" />
+          <span className="text-[10px] font-medium tracking-[0.2em] text-white/50">START IN MINUTES</span>
+        </div>
+        <h2 className="mt-6 text-display-xl font-display text-white mx-auto max-w-3xl">
           Ready to bring digital gift cards
           <br />
           <span className="text-gradient">to your business?</span>
