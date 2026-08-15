@@ -52,11 +52,9 @@ function Hero() {
           </div>
 
           <h1 className="mt-6 text-balance text-5xl font-semibold leading-[1.02] tracking-tight text-white sm:text-6xl lg:text-7xl">
-            Digital value,
-            <br />
-            built to{' '}
+            Power Your Business With{' '}
             <span className="text-gradient-brand [text-shadow:0_0_40px_rgba(22,193,232,0.35)]">
-              scale.
+              Digital Gift Cards
             </span>
           </h1>
 
