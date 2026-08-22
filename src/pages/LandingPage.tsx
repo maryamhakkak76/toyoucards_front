@@ -67,16 +67,16 @@ function Hero() {
           <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row lg:justify-start">
             <Link
               to="/contact"
-              className="group flex items-center gap-2 rounded-full bg-gradient-brand px-5 py-3 text-sm font-medium text-[#04121a] shadow-[0_10px_40px_-8px_rgba(22,193,232,0.55)] transition-all hover:brightness-110"
+              className="group flex items-center gap-2 rounded-full bg-gradient-brand px-5 py-3 text-sm font-medium text-[#ffffff] shadow-[0_10px_40px_-8px_rgba(22,193,232,0.55)] transition-all hover:brightness-110"
             >
-              Talk to Sales
+              Contact us now
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Link>
             <a
               href="#catalog"
               className="rounded-full border border-white/10 bg-white/[0.03] px-5 py-3 text-sm font-medium text-white backdrop-blur-sm transition-colors hover:border-brand-400/40 hover:text-brand-400"
             >
-              Explore Gift Cards
+              Explore Gift Cards??
             </a>
           </div>
 
