@@ -1,11 +1,21 @@
-export type GiftCardVariant = 'cyan' | 'blue' | 'deep' | 'dark' | 'light'
+export type GiftCardVariant = 'cyan' | 'blue' | 'deep' | 'dark' | 'light' | 'teal'
 
 const surfaces: Record<GiftCardVariant, string> = {
-  cyan: 'linear-gradient(135deg, #16c1e8 0%, #1798d6 55%, #135da9 100%)',
-  blue: 'linear-gradient(135deg, #1c86d6 0%, #1677c8 50%, #124e8f 100%)',
-  deep: 'linear-gradient(150deg, #135da9 0%, #103f78 60%, #0a2547 100%)',
-  dark: 'linear-gradient(150deg, #0c1622 0%, #0a1119 55%, #070d15 100%)',
-  light: 'linear-gradient(150deg, #eef4fb 0%, #d3e2f1 55%, #b9cee4 100%)',
+  cyan: 'linear-gradient(135deg, #0EA5E9 0%, #1677C8 50%, #135DA9 100%)',
+  blue: 'linear-gradient(135deg, #2563EB 0%, #1677C8 50%, #0E477F 100%)',
+  deep: 'linear-gradient(150deg, #135DA9 0%, #0A3260 60%, #061A38 100%)',
+  dark: 'linear-gradient(150deg, #1E293B 0%, #0F172A 55%, #020617 100%)',
+  light: 'linear-gradient(150deg, #F0F9FF 0%, #DBEAFE 55%, #BFDBFE 100%)',
+  teal: 'linear-gradient(135deg, #06B6D4 0%, #0891B2 50%, #155E75 100%)',
+}
+
+const glowColors: Record<GiftCardVariant, string> = {
+  cyan: '#7DD3FC',
+  blue: '#93C5FD',
+  deep: '#60A5FA',
+  dark: '#475569',
+  light: '#FFFFFF',
+  teal: '#67E8F9',
 }
 
 const isLight = (v: GiftCardVariant) => v === 'light'
@@ -24,14 +34,25 @@ export function GiftCard({
   style?: React.CSSProperties
 }) {
   const light = isLight(variant)
+  const glow = glowColors[variant]
+  const cardId = `gc-${variant}-${label.replace(/\s/g, '')}`
 
   return (
     <div
-      className={`relative aspect-[1.586/1] w-full overflow-hidden rounded-2xl border shadow-[0_30px_80px_-30px_rgba(2,10,20,0.9)] ${
-        light ? 'border-black/10' : 'border-white/12'
+      className={`group/gc relative aspect-[1.586/1] w-full overflow-hidden rounded-2xl border shadow-[0_20px_50px_-20px_rgba(19,93,169,0.35)] transition-shadow duration-500 hover:shadow-[0_30px_70px_-20px_rgba(22,193,232,0.4)] ${
+        light ? 'border-black/10' : 'border-white/15'
       } ${className ?? ''}`}
       style={{ background: surfaces[variant], ...style }}
     >
+      {/* Holographic sheen layer */}
+      <div
+        className="pointer-events-none absolute inset-0 opacity-60 transition-opacity duration-500 group-hover/gc:opacity-90"
+        style={{
+          background: `linear-gradient(105deg, transparent 30%, ${light ? 'rgba(255,255,255,0.5)' : 'rgba(255,255,255,0.12)'} 45%, ${light ? 'rgba(255,255,255,0.7)' : 'rgba(255,255,255,0.22)'} 50%, ${light ? 'rgba(255,255,255,0.5)' : 'rgba(255,255,255,0.12)'} 55%, transparent 70%)`,
+        }}
+      />
+
+      {/* Radial glow */}
       <svg
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 h-full w-full"
@@ -39,65 +60,80 @@ export function GiftCard({
         preserveAspectRatio="xMidYMid slice"
       >
         <defs>
-          <radialGradient id={`glow-${variant}`} cx="78%" cy="22%" r="60%">
-            <stop
-              offset="0%"
-              stopColor={light ? '#ffffff' : '#9fe6f7'}
-              stopOpacity={light ? '0.9' : '0.5'}
-            />
-            <stop offset="100%" stopColor="#ffffff" stopOpacity="0" />
+          <radialGradient id={`glow-${cardId}`} cx="75%" cy="25%" r="55%">
+            <stop offset="0%" stopColor={glow} stopOpacity={light ? '0.95' : '0.45'} />
+            <stop offset="100%" stopColor={glow} stopOpacity="0" />
           </radialGradient>
+          <linearGradient id={`shine-${cardId}`} x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor={light ? '#FFFFFF' : glow} stopOpacity={light ? '0.4' : '0.15'} />
+            <stop offset="100%" stopColor={light ? '#FFFFFF' : glow} stopOpacity="0" />
+          </linearGradient>
         </defs>
-        <rect width="320" height="200" fill={`url(#glow-${variant})`} />
+        <rect width="320" height="200" fill={`url(#glow-${cardId})`} />
+        <rect width="320" height="100" fill={`url(#shine-${cardId})`} />
         <g
-          stroke={light ? 'rgba(19,93,169,0.18)' : 'rgba(255,255,255,0.16)'}
+          stroke={light ? 'rgba(19,93,169,0.15)' : 'rgba(255,255,255,0.12)'}
           strokeWidth="1"
           fill="none"
         >
-          <path d="M-20 150 C 80 90, 180 200, 340 120" />
-          <path d="M-20 175 C 90 120, 200 220, 340 150" />
-          <circle cx="250" cy="60" r="46" strokeDasharray="2 6" />
-          <circle cx="250" cy="60" r="70" strokeDasharray="2 10" />
+          <path d="M-20 155 C 80 95, 180 205, 340 125" />
+          <path d="M-20 180 C 90 125, 200 225, 340 155" />
+          <circle cx="255" cy="55" r="42" strokeDasharray="2 6" />
+          <circle cx="255" cy="55" r="65" strokeDasharray="2 10" />
         </g>
       </svg>
 
       <div className="noise" />
 
+      {/* Content */}
       <div
         className={`relative flex h-full flex-col justify-between p-4 sm:p-5 ${
-          light ? 'text-[#0a2547]' : 'text-white'
+          light ? 'text-[#0A2547]' : 'text-white'
         }`}
       >
+        {/* Top row */}
         <div className="flex items-center justify-between">
-          <span className="text-[10px] font-semibold tracking-[0.22em]">
-            TOYOUCARDS
-          </span>
+          <div className="flex items-center gap-2">
+            <span
+              className={`flex h-6 w-6 items-center justify-center rounded-md ${
+                light ? 'bg-[#135DA9]/10' : 'bg-white/15'
+              }`}
+            >
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                <rect x="1" y="3" width="10" height="6" rx="1.5" stroke="currentColor" strokeWidth="1" opacity="0.8" />
+                <line x1="1" y1="5.5" x2="11" y2="5.5" stroke="currentColor" strokeWidth="1" opacity="0.6" />
+              </svg>
+            </span>
+            <span className="text-[10px] font-semibold tracking-[0.2em]">TOYOUCARDS</span>
+          </div>
           <span
-            className={`flex h-5 w-5 items-center justify-center rounded-[6px] border text-[10px] ${
-              light ? 'border-black/20' : 'border-white/30'
+            className={`rounded-full px-2 py-0.5 text-[8px] font-semibold tracking-wider ${
+              light ? 'bg-[#135DA9]/10 text-[#135DA9]/70' : 'bg-white/15 text-white/70'
             }`}
           >
-            ◇
+            SECURE
           </span>
         </div>
 
-        <div className="space-y-0.5">
+        {/* Middle — amount */}
+        <div className="space-y-1">
           <p
             className={`text-[9px] font-medium tracking-[0.24em] ${
-              light ? 'text-[#135da9]/70' : 'text-white/60'
+              light ? 'text-[#135DA9]/60' : 'text-white/55'
             }`}
           >
             {label}
           </p>
-          <p className="font-mono text-2xl font-semibold tracking-tight sm:text-3xl">
+          <p className="font-mono text-2xl font-bold tracking-tight sm:text-3xl">
             {amount}
           </p>
         </div>
 
+        {/* Bottom row */}
         <div className="flex items-center justify-between">
           <span
             className={`text-[8px] font-medium tracking-[0.22em] ${
-              light ? 'text-[#135da9]/70' : 'text-white/50'
+              light ? 'text-[#135DA9]/60' : 'text-white/45'
             }`}
           >
             DIGITAL GIFT CARD
@@ -106,9 +142,7 @@ export function GiftCard({
             {[0, 1, 2].map((i) => (
               <span
                 key={i}
-                className={`h-1 w-3 rounded-full ${
-                  light ? 'bg-[#135da9]/40' : 'bg-white/40'
-                }`}
+                className={`h-1 w-3 rounded-full ${light ? 'bg-[#135DA9]/30' : 'bg-white/35'}`}
               />
             ))}
           </div>

@@ -1,5 +1,22 @@
 import { Link } from 'react-router-dom'
-import { ArrowRight, ArrowDown, Check, LayoutGrid, ShieldCheck, Wallet, Download, Code as Code2, MousePointerClick, CreditCard, Lock } from 'lucide-react'
+import {
+  ArrowRight,
+  ArrowDown,
+  Check,
+  LayoutGrid,
+  ShieldCheck,
+  Wallet,
+  Download,
+  Code as Code2,
+  MousePointerClick,
+  CreditCard,
+  Lock,
+  Gamepad2,
+  Smartphone,
+  Music,
+  ShoppingBag,
+  Tv,
+} from 'lucide-react'
 import { GiftCard, type GiftCardVariant } from '@/components/GiftCard'
 import { CardOrbit } from '@/components/CardOrbit'
 import TalkToSalesForm from '@/components/TalkToSalesForm'
@@ -8,7 +25,7 @@ export default function LandingPage() {
   return (
     <>
       <Hero />
-      <CatalogSection />
+      <CatalogBrandsSection />
       <InlineCta
         prompt="Need volume pricing for hundreds or thousands of cards?"
         action="Talk to Sales"
@@ -19,7 +36,6 @@ export default function LandingPage() {
         prompt="Building something at scale with the API?"
         action="Talk to our team"
       />
-      <SupportedBrandsSection />
       <ApiSection />
       <WhyToYouCardsSection />
       <DashboardPreview />
@@ -97,34 +113,39 @@ function Hero() {
   )
 }
 
-/* ──────────────────────────── CATEGORIES ──────────────────────────── */
+/* ──────────────────── MERGED CATALOG + BRANDS ──────────────────── */
 
-type CategoryItem = {
-  label: string
+type BrandEntry = {
+  name: string
   variant: GiftCardVariant
   amount: string
+  category: string
 }
 
-const categories: CategoryItem[] = [
-  { label: 'Gaming Gift Cards', variant: 'cyan', amount: '$50' },
-  { label: 'Xbox', variant: 'deep', amount: '$25' },
-  { label: 'PlayStation', variant: 'blue', amount: '$50' },
-  { label: 'Steam', variant: 'dark', amount: '$100' },
-  { label: 'Nintendo', variant: 'light', amount: '$35' },
-  { label: 'Google Play', variant: 'cyan', amount: '$25' },
-  { label: 'App Store', variant: 'blue', amount: '$50' },
-  { label: 'Apple', variant: 'light', amount: '$100' },
+const brandEntries: BrandEntry[] = [
+  { name: 'Xbox', variant: 'deep', amount: '$25', category: 'Gaming' },
+  { name: 'PlayStation', variant: 'blue', amount: '$50', category: 'Gaming' },
+  { name: 'Steam', variant: 'dark', amount: '$100', category: 'Gaming' },
+  { name: 'Nintendo', variant: 'light', amount: '$35', category: 'Gaming' },
+  { name: 'App Store', variant: 'blue', amount: '$50', category: 'Apps' },
+  { name: 'Google Play', variant: 'teal', amount: '$25', category: 'Apps' },
+  { name: 'Apple', variant: 'light', amount: '$100', category: 'Apps' },
+  { name: 'Netflix', variant: 'dark', amount: '$30', category: 'Streaming' },
+  { name: 'Amazon', variant: 'cyan', amount: '$50', category: 'Shopping' },
+  { name: 'Noon', variant: 'teal', amount: '$50', category: 'Shopping' },
+  { name: 'PUBG', variant: 'deep', amount: '$10', category: 'Gaming' },
+  { name: 'FIFA', variant: 'cyan', amount: '$20', category: 'Gaming' },
 ]
 
-const variantGradient: Record<GiftCardVariant, string> = {
-  cyan: 'linear-gradient(135deg, #16c1e8, #135da9)',
-  blue: 'linear-gradient(135deg, #1677c8, #124e8f)',
-  deep: 'linear-gradient(150deg, #135da9, #0a2547)',
-  dark: 'linear-gradient(150deg, #0c1622, #070d15)',
-  light: 'linear-gradient(150deg, #eef4fb, #b9cee4)',
-}
+const categories = [
+  { label: 'Gaming', icon: Gamepad2 },
+  { label: 'Apps', icon: Smartphone },
+  { label: 'Streaming', icon: Tv },
+  { label: 'Shopping', icon: ShoppingBag },
+  { label: 'Music', icon: Music },
+]
 
-function CatalogSection() {
+function CatalogBrandsSection() {
   return (
     <section id="catalog" className="relative overflow-hidden py-24">
       <div
@@ -135,57 +156,55 @@ function CatalogSection() {
       />
 
       <div className="relative mx-auto max-w-6xl px-4">
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-          <div>
-            <p className="text-xs font-medium tracking-[0.22em] text-brand-600/80">
-              THE CATALOG
-            </p>
-            <h2 className="mt-3 max-w-md text-balance text-3xl font-semibold tracking-tight text-ink-900 sm:text-4xl">
-              A living catalog of digital value.
-            </h2>
-          </div>
-          <p className="max-w-xs text-pretty text-sm leading-relaxed text-ink-500">
-            Hundreds of brands and denominations across gaming, streaming, and more.
+        {/* Header */}
+        <div className="mx-auto max-w-2xl text-center">
+          <p className="text-xs font-medium tracking-[0.22em] text-brand-600/80">
+            THE CATALOG
+          </p>
+          <h2 className="mt-3 text-balance text-4xl font-semibold leading-[1.05] tracking-tight text-ink-900 sm:text-5xl">
+            A living catalog of digital value.
+          </h2>
+          <p className="mx-auto mt-4 max-w-md text-pretty text-sm leading-relaxed text-ink-500">
+            Hundreds of brands and denominations across gaming, streaming, shopping, and more —
+            all in one place.
           </p>
         </div>
-      </div>
 
-      <div className="relative mt-14">
-        <div className="flex gap-6 overflow-x-auto px-4 pb-8 [scrollbar-width:none] sm:justify-center [&::-webkit-scrollbar]:hidden">
-          {categories.map((cat, i) => (
+        {/* Category filter pills */}
+        <div className="mt-10 flex flex-wrap justify-center gap-2.5">
+          {categories.map((cat) => (
             <div
-              key={i}
-              className="group flex w-[130px] shrink-0 flex-col items-center gap-3"
+              key={cat.label}
+              className="group flex items-center gap-2 rounded-full border border-ink-200 bg-white/60 px-4 py-2 backdrop-blur-sm transition-all duration-300 hover:border-brand-400/50 hover:bg-white hover:shadow-[0_4px_16px_-6px_rgba(19,93,169,0.15)]"
             >
-              <div className="relative flex h-[130px] w-[130px] items-center justify-center rounded-full border border-ink-200 bg-white/60 backdrop-blur-sm transition-all duration-500 ease-out group-hover:-translate-y-2 group-hover:border-brand-400/50 group-hover:shadow-[0_20px_40px_-15px_rgba(19,93,169,0.25)]">
-                <div
-                  className="absolute inset-0 rounded-full opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-                  style={{
-                    background:
-                      'radial-gradient(circle at 50% 40%, rgba(22,193,232,0.08), transparent 70%)',
-                  }}
-                />
-                <div className="relative flex h-[80px] w-[80px] items-center justify-center">
-                  <div
-                    className="absolute inset-0 rounded-2xl opacity-20 transition-opacity duration-500 group-hover:opacity-30"
-                    style={{
-                      background: variantGradient[cat.variant],
-                      transform: 'rotate(-15deg)',
-                    }}
-                  />
-                  <div className="relative flex h-12 w-16 items-center justify-center rounded-lg border border-ink-200 bg-white/80 transition-all duration-500 group-hover:border-brand-400/40">
-                    <span className="font-mono text-xs font-semibold text-brand-700">
-                      {cat.amount}
-                    </span>
-                  </div>
-                </div>
-              </div>
-              <span className="text-center text-sm font-medium text-ink-700 transition-colors group-hover:text-brand-600">
+              <cat.icon className="h-3.5 w-3.5 text-ink-400 transition-colors group-hover:text-brand-600" strokeWidth={1.5} />
+              <span className="text-xs font-medium text-ink-500 transition-colors group-hover:text-brand-600">
                 {cat.label}
               </span>
             </div>
           ))}
         </div>
+
+        {/* Brand cards grid */}
+        <div className="mt-14 grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-4">
+          {brandEntries.map((brand) => (
+            <div key={brand.name} className="group/brand">
+              <div className="overflow-hidden rounded-2xl border border-ink-100 bg-white/70 p-3 backdrop-blur-sm transition-all duration-300 group-hover/brand:border-brand-400/40 group-hover/brand:bg-white group-hover/brand:shadow-[0_16px_40px_-15px_rgba(19,93,169,0.2)]">
+                <GiftCard variant={brand.variant} amount={brand.amount} label={brand.name.toUpperCase()} />
+              </div>
+              <div className="mt-3 flex items-center justify-between px-1">
+                <span className="text-sm font-medium text-ink-800">{brand.name}</span>
+                <span className="rounded-full bg-ink-100 px-2.5 py-0.5 text-[10px] font-medium text-ink-400">
+                  {brand.category}
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <p className="mt-10 text-center text-sm text-ink-400">
+          …and hundreds more brands available on request.
+        </p>
       </div>
     </section>
   )
@@ -216,36 +235,12 @@ function InlineCta({ prompt, action }: { prompt: string; action: string }) {
 
 function ValueSection() {
   const features = [
-    {
-      icon: LayoutGrid,
-      title: 'Group Issuance',
-      body: 'Issue and distribute large volumes of gift cards effortlessly.',
-    },
-    {
-      icon: Wallet,
-      title: 'Competitive Pricing',
-      body: 'Access competitive bulk rates tailored to your business needs.',
-    },
-    {
-      icon: ShieldCheck,
-      title: 'Confidential Gift Code Delivery',
-      body: 'Gift codes are securely encrypted so only the intended recipient can access and use them.',
-    },
-    {
-      icon: CreditCard,
-      title: 'Flexible Access',
-      body: 'Manage everything through a real-time dashboard or integrate seamlessly with our API. No technical expertise is required for dashboard-based management.',
-    },
-    {
-      icon: Download,
-      title: 'Export Options',
-      body: 'Export structured data for accounting, reporting, and operational workflows.',
-    },
-    {
-      icon: Code2,
-      title: 'Developer Friendly',
-      body: 'Access comprehensive API documentation for seamless integration, while keeping the platform simple for non-technical teams.',
-    },
+    { icon: LayoutGrid, title: 'Group Issuance', body: 'Issue and distribute large volumes of gift cards effortlessly.' },
+    { icon: Wallet, title: 'Competitive Pricing', body: 'Access competitive bulk rates tailored to your business needs.' },
+    { icon: ShieldCheck, title: 'Confidential Gift Code Delivery', body: 'Gift codes are securely encrypted so only the intended recipient can access and use them.' },
+    { icon: CreditCard, title: 'Flexible Access', body: 'Manage everything through a real-time dashboard or integrate seamlessly with our API. No technical expertise is required for dashboard-based management.' },
+    { icon: Download, title: 'Export Options', body: 'Export structured data for accounting, reporting, and operational workflows.' },
+    { icon: Code2, title: 'Developer Friendly', body: 'Access comprehensive API documentation for seamless integration, while keeping the platform simple for non-technical teams.' },
   ]
 
   return (
@@ -266,6 +261,10 @@ function ValueSection() {
             <h2 className="mt-3 text-balance text-4xl font-semibold leading-[1.05] tracking-tight text-ink-900 sm:text-5xl">
               Everything you need to manage digital gift cards at scale.
             </h2>
+            <p className="mt-6 max-w-md text-pretty text-base leading-relaxed text-ink-500">
+              ToYouCards replaces spreadsheets, manual purchasing, and fragmented vendors
+              with a single, programmable platform for digital gift cards.
+            </p>
           </div>
 
           <div className="grid gap-4 sm:grid-cols-2">
@@ -296,30 +295,16 @@ function ValueSection() {
 
 function OrderProcessSection() {
   const steps = [
-    {
-      icon: MousePointerClick,
-      title: 'Step 1 — Choose Product',
-      body: 'Select from a wide range of digital gift cards suited to your business needs.',
-    },
-    {
-      icon: CreditCard,
-      title: 'Step 2 — Make Payment',
-      body: 'Pay securely using your wallet balance or available online payment methods.',
-    },
-    {
-      icon: Lock,
-      title: 'Step 3 — Confidential Code Delivery',
-      body: 'Receive encrypted gift codes instantly, accessible only to the intended recipient.',
-    },
+    { icon: MousePointerClick, title: 'Choose Product', body: 'Select from a wide range of digital gift cards suited to your business needs.' },
+    { icon: CreditCard, title: 'Make Payment', body: 'Pay securely using your wallet balance or available online payment methods.' },
+    { icon: Lock, title: 'Confidential Code Delivery', body: 'Receive encrypted gift codes instantly, accessible only to the intended recipient.' },
   ]
 
   return (
     <section id="order-process" className="relative overflow-hidden py-24">
       <div
         className="pointer-events-none absolute left-0 top-1/2 h-[400px] w-[500px] -translate-y-1/2"
-        style={{
-          background: 'radial-gradient(circle, rgba(22,193,232,0.08), transparent 65%)',
-        }}
+        style={{ background: 'radial-gradient(circle, rgba(22,193,232,0.08), transparent 65%)' }}
       />
 
       <div className="relative mx-auto max-w-6xl px-4">
@@ -338,6 +323,10 @@ function OrderProcessSection() {
               key={s.title}
               className="group relative rounded-2xl border border-ink-100 bg-white/70 p-7 backdrop-blur-sm transition-all duration-300 hover:border-brand-400/40 hover:shadow-[0_12px_30px_-15px_rgba(19,93,169,0.2)]"
             >
+              {/* Connector line */}
+              {i < steps.length - 1 && (
+                <div className="absolute right-[-24px] top-1/2 hidden h-px w-12 bg-gradient-to-r from-brand-400/30 to-transparent sm:block" />
+              )}
               <div className="flex items-center gap-4">
                 <span className="flex h-12 w-12 items-center justify-center rounded-xl border border-ink-200 bg-white text-brand-600 transition-colors group-hover:border-brand-400/40">
                   <s.icon className="h-5 w-5" strokeWidth={1.5} />
@@ -360,44 +349,6 @@ function OrderProcessSection() {
   )
 }
 
-/* ──────────────────────────── SUPPORTED BRANDS ──────────────────────────── */
-
-function SupportedBrandsSection() {
-  const brands = [
-    'Xbox', 'Apple', 'Google', 'Amazon', 'Netflix',
-    'Noon', 'Nintendo', 'PUBG', 'Call of Duty', 'FIFA',
-  ]
-
-  return (
-    <section id="brands" className="relative overflow-hidden py-24">
-      <div className="relative mx-auto max-w-6xl px-4">
-        <div className="mx-auto max-w-2xl text-center">
-          <p className="text-xs font-medium tracking-[0.22em] text-brand-600/80">
-            SUPPORTED BRANDS
-          </p>
-          <h2 className="mt-3 text-balance text-4xl font-semibold leading-[1.05] tracking-tight text-ink-900 sm:text-5xl">
-            Access a wide range of popular digital gift cards for your business.
-          </h2>
-        </div>
-
-        <div className="mt-14 flex flex-wrap justify-center gap-4">
-          {brands.map((brand, i) => (
-            <div
-              key={brand}
-              className="group flex h-24 w-24 items-center justify-center rounded-full border border-ink-200 bg-white/60 backdrop-blur-sm transition-all duration-500 hover:-translate-y-2 hover:border-brand-400/40 hover:shadow-[0_16px_30px_-12px_rgba(19,93,169,0.2)]"
-              style={{ animationDelay: `${i * 50}ms` }}
-            >
-              <span className="px-2 text-center text-xs font-semibold text-ink-700 transition-colors group-hover:text-brand-600">
-                {brand}
-              </span>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
-
 /* ──────────────────────────── API SECTION ──────────────────────────── */
 
 function ApiSection() {
@@ -405,9 +356,7 @@ function ApiSection() {
     <section id="api" className="relative overflow-hidden py-24">
       <div
         className="pointer-events-none absolute left-0 top-1/2 h-[400px] w-[500px] -translate-y-1/2"
-        style={{
-          background: 'radial-gradient(circle, rgba(22,193,232,0.08), transparent 65%)',
-        }}
+        style={{ background: 'radial-gradient(circle, rgba(22,193,232,0.08), transparent 65%)' }}
       />
 
       <div className="relative mx-auto grid max-w-6xl items-center gap-12 px-4 lg:grid-cols-2">
@@ -445,17 +394,13 @@ function ApiSection() {
             <span className="h-3 w-3 rounded-full bg-ink-200" />
             <span className="h-3 w-3 rounded-full bg-ink-200" />
             <span className="h-3 w-3 rounded-full bg-ink-200" />
-            <span className="ml-3 font-mono text-xs text-ink-400">
-              orders.create
-            </span>
+            <span className="ml-3 font-mono text-xs text-ink-400">orders.create</span>
           </div>
 
           <div className="space-y-5 p-5 font-mono text-[13px] leading-relaxed">
             <div>
               <div className="flex items-center gap-2">
-                <span className="rounded bg-brand-500/15 px-1.5 py-0.5 text-[11px] font-semibold text-brand-700">
-                  POST
-                </span>
+                <span className="rounded bg-brand-500/15 px-1.5 py-0.5 text-[11px] font-semibold text-brand-700">POST</span>
                 <span className="text-ink-800">/v1/orders</span>
               </div>
               <pre className="mt-3 text-ink-600">
@@ -483,16 +428,12 @@ function ApiSection() {
             <div className="rounded-xl border border-brand-400/20 bg-brand-500/[0.04] p-4">
               <div className="flex items-center gap-2 text-brand-600">
                 <Check className="h-4 w-4" strokeWidth={2.5} />
-                <span className="text-xs font-semibold tracking-wide">
-                  ORDER CREATED
-                </span>
+                <span className="text-xs font-semibold tracking-wide">ORDER CREATED</span>
               </div>
               <div className="mt-3 text-ink-600">
                 <span className="text-brand-700">"digital_code"</span>
                 <span className="text-ink-400">: </span>
-                <span className="tracking-[0.3em] text-ink-800">
-                  ••••••••••••
-                </span>
+                <span className="tracking-[0.3em] text-ink-800">••••••••••••</span>
               </div>
             </div>
           </div>
@@ -513,10 +454,7 @@ function WhyToYouCardsSection() {
     <section id="why" className="relative overflow-hidden py-24">
       <div
         className="pointer-events-none absolute inset-0"
-        style={{
-          background:
-            'radial-gradient(circle at 70% 50%, rgba(22,193,232,0.06), transparent 70%)',
-        }}
+        style={{ background: 'radial-gradient(circle at 70% 50%, rgba(22,193,232,0.06), transparent 70%)' }}
       />
 
       <div className="relative mx-auto max-w-6xl px-4">
@@ -546,10 +484,7 @@ function WhyToYouCardsSection() {
             </div>
             <div
               className="pointer-events-none absolute inset-0 -z-10"
-              style={{
-                background:
-                  'radial-gradient(circle at 50% 50%, rgba(22,193,232,0.06), transparent 65%)',
-              }}
+              style={{ background: 'radial-gradient(circle at 50% 50%, rgba(22,193,232,0.06), transparent 65%)' }}
             />
           </div>
         </div>
@@ -565,9 +500,7 @@ function DashboardPreview() {
     <section id="dashboard" className="relative overflow-hidden py-24">
       <div
         className="pointer-events-none absolute bottom-0 left-1/2 h-[420px] w-[820px] -translate-x-1/2"
-        style={{
-          background: 'radial-gradient(circle at 50% 80%, rgba(22,132,214,0.12), transparent 68%)',
-        }}
+        style={{ background: 'radial-gradient(circle at 50% 80%, rgba(22,132,214,0.12), transparent 68%)' }}
       />
 
       <div className="relative mx-auto max-w-5xl px-4 text-center">
@@ -598,17 +531,12 @@ function DashboardPreview() {
                 { icon: LayoutGrid, label: 'Orders', value: '1,284' },
                 { icon: ArrowRight, label: 'Delivered', value: '99.9%' },
               ].map((s) => (
-                <div
-                  key={s.label}
-                  className="rounded-xl border border-ink-100 bg-ink-50/50 p-4 text-left"
-                >
+                <div key={s.label} className="rounded-xl border border-ink-100 bg-ink-50/50 p-4 text-left">
                   <div className="flex items-center justify-between">
                     <span className="text-xs text-ink-400">{s.label}</span>
                     <s.icon className="h-4 w-4 text-brand-600" strokeWidth={1.5} />
                   </div>
-                  <p className="mt-2 font-mono text-2xl font-semibold tracking-tight text-ink-900">
-                    {s.value}
-                  </p>
+                  <p className="mt-2 font-mono text-2xl font-semibold tracking-tight text-ink-900">{s.value}</p>
                 </div>
               ))}
             </div>
@@ -640,9 +568,7 @@ function ContactSection() {
     <section id="contact" className="relative overflow-hidden py-24">
       <div
         className="pointer-events-none absolute top-1/3 left-1/4 h-[500px] w-[600px]"
-        style={{
-          background: 'radial-gradient(circle, rgba(22,193,232,0.08), transparent 65%)',
-        }}
+        style={{ background: 'radial-gradient(circle, rgba(22,193,232,0.08), transparent 65%)' }}
       />
 
       <div className="relative mx-auto max-w-6xl px-4">
@@ -654,9 +580,7 @@ function ContactSection() {
             <h2 className="mt-3 text-balance text-4xl font-semibold leading-[1.05] tracking-tight text-ink-900 sm:text-5xl">
               Bring digital gift cards
               <br />
-              <span className="text-gradient-brand">
-                into your business.
-              </span>
+              <span className="text-gradient-brand">into your business.</span>
             </h2>
             <p className="mt-6 max-w-md text-pretty text-base leading-relaxed text-ink-500">
               Tell us what you're building and our team will help you find the
@@ -682,10 +606,7 @@ function FinalCta() {
     <section id="cta" className="relative overflow-hidden py-32">
       <div
         className="pointer-events-none absolute inset-0"
-        style={{
-          background:
-            'radial-gradient(circle at 50% 55%, rgba(22,193,232,0.12), rgba(19,93,169,0.04) 45%, transparent 70%)',
-        }}
+        style={{ background: 'radial-gradient(circle at 50% 55%, rgba(22,193,232,0.12), rgba(19,93,169,0.04) 45%, transparent 70%)' }}
       />
 
       <div className="animate-float-slower-centered pointer-events-none absolute left-0 right-0 top-1/2 mx-auto w-[640px] max-w-[90vw] opacity-[0.12] blur-[2px]">
