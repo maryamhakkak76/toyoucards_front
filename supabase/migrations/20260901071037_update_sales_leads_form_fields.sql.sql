@@ -1,0 +1,1 @@
+ALTER TABLE sales_leads ALTER COLUMN interest DROP NOT NULL;

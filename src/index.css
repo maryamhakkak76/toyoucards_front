@@ -4,7 +4,7 @@
 
 @layer base {
   * {
-    border-color: rgba(255, 255, 255, 0.08);
+    border-color: rgba(10, 26, 42, 0.08);
   }
 
   html {
@@ -14,31 +14,31 @@
   }
 
   body {
-    @apply text-white font-sans antialiased;
-    background-color: #05080c;
+    @apply text-ink-900 font-sans antialiased;
+    background-color: #f6f8fb;
     background-image:
-      radial-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+      radial-gradient(rgba(19, 93, 169, 0.04) 1px, transparent 1px);
     background-size: 42px 42px;
     background-attachment: fixed;
   }
 
   ::selection {
-    background: rgba(22, 193, 232, 0.3);
-    color: #fff;
+    background: rgba(22, 193, 232, 0.25);
+    color: #0a1a2a;
   }
 
   ::-webkit-scrollbar {
     width: 10px;
   }
   ::-webkit-scrollbar-track {
-    background: #070b10;
+    background: #eef2f7;
   }
   ::-webkit-scrollbar-thumb {
-    background: #13233b;
+    background: #c4d4e4;
     border-radius: 5px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: #1b2f4d;
+    background: #a8c0d8;
   }
 }
 
@@ -52,7 +52,7 @@
   }
 
   .eyebrow {
-    @apply inline-flex items-center gap-2 text-[10px] font-medium uppercase tracking-[0.2em] text-brand-400;
+    @apply inline-flex items-center gap-2 text-[10px] font-medium uppercase tracking-[0.2em] text-brand-600;
   }
 
   .text-gradient {
@@ -76,15 +76,15 @@
   }
 
   .bg-app {
-    background-color: #05080c;
+    background-color: #f6f8fb;
     background-image:
-      radial-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+      radial-gradient(rgba(19, 93, 169, 0.04) 1px, transparent 1px);
     background-size: 42px 42px;
   }
 
   .glass-card {
-    background: rgba(255, 255, 255, 0.025);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(10, 26, 42, 0.08);
     backdrop-filter: blur(12px);
   }
 
@@ -92,7 +92,7 @@
     transition: border-color 0.3s ease, background 0.3s ease, transform 0.3s ease;
   }
   .glass-card-hover:hover {
-    background: rgba(255, 255, 255, 0.04);
+    background: rgba(255, 255, 255, 0.9);
     border-color: rgba(22, 193, 232, 0.4);
   }
 
@@ -105,29 +105,28 @@
   }
 
   .field-input {
-    @apply w-full rounded-xl bg-white/[0.03] border border-white/10 px-4 py-3 text-sm text-white placeholder-white/40 outline-none transition-all duration-200;
+    @apply w-full rounded-xl bg-white/60 border border-ink-200 px-4 py-3 text-sm text-ink-900 placeholder-ink-400 outline-none transition-all duration-200;
   }
   .field-input:hover {
-    border-color: rgba(255, 255, 255, 0.14);
+    border-color: rgba(22, 193, 232, 0.4);
   }
   .field-input:focus {
-    border-color: rgba(22, 193, 232, 0.5);
-    box-shadow: 0 0 0 2px rgba(22, 193, 232, 0.25);
-    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(22, 193, 232, 0.6);
+    box-shadow: 0 0 0 3px rgba(22, 193, 232, 0.15);
+    background: #fff;
   }
   .field-input::placeholder {
-    color: rgba(255, 255, 255, 0.4);
+    color: rgba(10, 26, 42, 0.4);
   }
 
-  /* Original pill-shaped gradient buttons */
   .btn-primary {
     @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-medium transition-all duration-200;
     background: linear-gradient(135deg, #16c1e8 0%, #1677c8 52%, #135da9 100%);
-    color: #04121a;
-    box-shadow: 0 10px 40px -8px rgba(22, 193, 232, 0.55);
+    color: #fff;
+    box-shadow: 0 10px 40px -8px rgba(22, 119, 200, 0.4);
   }
   .btn-primary:hover {
-    filter: brightness(1.1);
+    filter: brightness(1.08);
   }
   .btn-primary:active {
     transform: scale(0.98);
@@ -138,25 +137,25 @@
   }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-5 py-3 text-sm font-medium text-white/90 backdrop-blur-sm transition-all duration-200;
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-ink-200 bg-white px-5 py-3 text-sm font-medium text-ink-700 backdrop-blur-sm transition-all duration-200;
   }
   .btn-secondary:hover {
-    border-color: rgba(22, 193, 232, 0.4);
-    color: #16c1e8;
+    border-color: rgba(22, 193, 232, 0.5);
+    color: #1677c8;
   }
 
   .btn-ghost {
-    @apply inline-flex items-center justify-center gap-2 rounded-full px-3.5 py-2 text-sm font-medium text-white/55 transition-all duration-200;
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-3.5 py-2 text-sm font-medium text-ink-500 transition-all duration-200;
   }
   .btn-ghost:hover {
-    color: rgba(255, 255, 255, 0.95);
+    color: rgba(10, 26, 42, 0.95);
   }
 
   .link-arrow {
-    @apply inline-flex items-center gap-1.5 text-sm font-medium text-brand-400 transition-colors duration-200;
+    @apply inline-flex items-center gap-1.5 text-sm font-medium text-brand-600 transition-colors duration-200;
   }
   .link-arrow:hover {
-    color: #fff;
+    color: #135da9;
   }
   .link-arrow svg {
     transition: transform 0.2s ease;
@@ -179,7 +178,7 @@
 .noise {
   position: absolute;
   inset: 0;
-  opacity: 0.035;
+  opacity: 0.025;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   pointer-events: none;
 }

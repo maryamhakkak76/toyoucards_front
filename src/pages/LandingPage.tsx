@@ -1,6 +1,5 @@
-import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { ArrowRight, ArrowDown, Check, LayoutGrid, Zap, Globe, ShieldCheck, Wallet, Package, TrendingUp } from 'lucide-react'
+import { ArrowRight, ArrowDown, Check, LayoutGrid, ShieldCheck, Wallet, Download, Code as Code2, MousePointerClick, CreditCard, Lock } from 'lucide-react'
 import { GiftCard, type GiftCardVariant } from '@/components/GiftCard'
 import { CardOrbit } from '@/components/CardOrbit'
 import TalkToSalesForm from '@/components/TalkToSalesForm'
@@ -15,11 +14,14 @@ export default function LandingPage() {
         action="Talk to Sales"
       />
       <ValueSection />
-      <ApiSection />
+      <OrderProcessSection />
       <InlineCta
         prompt="Building something at scale with the API?"
         action="Talk to our team"
       />
+      <SupportedBrandsSection />
+      <ApiSection />
+      <WhyToYouCardsSection />
       <DashboardPreview />
       <ContactSection />
       <FinalCta />
@@ -32,33 +34,31 @@ export default function LandingPage() {
 function Hero() {
   return (
     <section id="top" className="relative overflow-hidden px-4 pb-24 pt-32 sm:pt-40">
-      {/* hero atmospheric light source */}
       <div
         className="pointer-events-none absolute left-1/2 top-0 h-[700px] w-[900px] -translate-x-1/2"
         style={{
           background:
-            'radial-gradient(circle at 50% 30%, rgba(22,193,232,0.18), rgba(19,93,169,0.05) 55%, transparent 75%)',
+            'radial-gradient(circle at 50% 30%, rgba(22,193,232,0.12), rgba(19,93,169,0.04) 55%, transparent 75%)',
         }}
       />
 
       <div className="relative mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-[1.05fr_0.95fr]">
         <div className="animate-fade-in-up text-center lg:text-left">
-          {/* eyebrow */}
-          <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3.5 py-1.5 backdrop-blur-sm">
+          <div className="inline-flex items-center gap-2 rounded-full border border-ink-200 bg-white/60 px-3.5 py-1.5 backdrop-blur-sm">
             <span className="animate-pulse-dot h-1.5 w-1.5 rounded-full bg-brand-500 shadow-[0_0_8px_#16c1e8]" />
-            <span className="text-[10px] font-medium tracking-[0.2em] text-white/50">
+            <span className="text-[10px] font-medium tracking-[0.2em] text-ink-400">
               DIGITAL GIFT CARDS · BUILT FOR BUSINESS
             </span>
           </div>
 
-          <h1 className="mt-6 text-balance text-5xl font-semibold leading-[1.02] tracking-tight text-white sm:text-6xl lg:text-7xl">
+          <h1 className="mt-6 text-balance text-5xl font-semibold leading-[1.02] tracking-tight text-ink-900 sm:text-6xl lg:text-7xl">
             Power Your Business With{' '}
-            <span className="text-gradient-brand [text-shadow:0_0_40px_rgba(22,193,232,0.35)]">
+            <span className="text-gradient-brand [text-shadow:0_0_40px_rgba(22,193,232,0.2)]">
               Digital Gift Cards
             </span>
           </h1>
 
-          <p className="mx-auto mt-6 max-w-md text-pretty text-base leading-relaxed text-white/55 lg:mx-0 lg:text-lg">
+          <p className="mx-auto mt-6 max-w-md text-pretty text-base leading-relaxed text-ink-500 lg:mx-0 lg:text-lg">
             Buy, distribute, and automate digital gift cards through one premium
             platform and a developer-first API — engineered for businesses that
             move value at scale.
@@ -67,24 +67,24 @@ function Hero() {
           <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row lg:justify-start">
             <Link
               to="/contact"
-              className="group flex items-center gap-2 rounded-full bg-gradient-brand px-5 py-3 text-sm font-medium text-[#04121a] shadow-[0_10px_40px_-8px_rgba(22,193,232,0.55)] transition-all hover:brightness-110"
+              className="group flex items-center gap-2 rounded-full bg-gradient-brand px-5 py-3 text-sm font-medium text-white shadow-[0_10px_40px_-8px_rgba(22,119,200,0.45)] transition-all hover:brightness-110"
             >
               Talk to Sales
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Link>
             <a
               href="#catalog"
-              className="rounded-full border border-white/10 bg-white/[0.03] px-5 py-3 text-sm font-medium text-white backdrop-blur-sm transition-colors hover:border-brand-400/40 hover:text-brand-400"
+              className="rounded-full border border-ink-200 bg-white/60 px-5 py-3 text-sm font-medium text-ink-700 backdrop-blur-sm transition-colors hover:border-brand-400/50 hover:text-brand-600"
             >
               Explore Gift Cards
             </a>
           </div>
 
-          <div className="mt-10 flex items-center justify-center gap-6 text-xs text-white/40 lg:justify-start">
+          <div className="mt-10 flex items-center justify-center gap-6 text-xs text-ink-400 lg:justify-start">
             <span>Global coverage</span>
-            <span className="h-1 w-1 rounded-full bg-white/20" />
+            <span className="h-1 w-1 rounded-full bg-ink-300" />
             <span>Instant delivery</span>
-            <span className="h-1 w-1 rounded-full bg-white/20" />
+            <span className="h-1 w-1 rounded-full bg-ink-300" />
             <span>API-first</span>
           </div>
         </div>
@@ -97,94 +97,94 @@ function Hero() {
   )
 }
 
-/* ──────────────────────────── CATALOG ──────────────────────────── */
+/* ──────────────────────────── CATEGORIES ──────────────────────────── */
 
-type CatalogItem = {
+type CategoryItem = {
+  label: string
   variant: GiftCardVariant
   amount: string
-  label: string
-  category: string
-  rotate: string
+}
+
+const categories: CategoryItem[] = [
+  { label: 'Gaming Gift Cards', variant: 'cyan', amount: '$50' },
+  { label: 'Xbox', variant: 'deep', amount: '$25' },
+  { label: 'PlayStation', variant: 'blue', amount: '$50' },
+  { label: 'Steam', variant: 'dark', amount: '$100' },
+  { label: 'Nintendo', variant: 'light', amount: '$35' },
+  { label: 'Google Play', variant: 'cyan', amount: '$25' },
+  { label: 'App Store', variant: 'blue', amount: '$50' },
+  { label: 'Apple', variant: 'light', amount: '$100' },
+]
+
+const variantGradient: Record<GiftCardVariant, string> = {
+  cyan: 'linear-gradient(135deg, #16c1e8, #135da9)',
+  blue: 'linear-gradient(135deg, #1677c8, #124e8f)',
+  deep: 'linear-gradient(150deg, #135da9, #0a2547)',
+  dark: 'linear-gradient(150deg, #0c1622, #070d15)',
+  light: 'linear-gradient(150deg, #eef4fb, #b9cee4)',
 }
 
 function CatalogSection() {
-  const items: CatalogItem[] = [
-    { variant: 'cyan', amount: '$50', label: 'DIGITAL VALUE', category: 'Shopping', rotate: '-rotate-3' },
-    { variant: 'blue', amount: '$100', label: 'PREMIUM', category: 'Retail', rotate: 'rotate-2' },
-    { variant: 'deep', amount: '$25', label: 'GAMING', category: 'Gaming', rotate: '-rotate-2' },
-    { variant: 'dark', amount: '$75', label: 'STREAMING', category: 'Entertainment', rotate: 'rotate-3' },
-    { variant: 'light', amount: '$200', label: 'CORPORATE', category: 'Rewards', rotate: '-rotate-1' },
-  ]
-  const [activeId, setActiveId] = useState<number | null>(null)
-
   return (
     <section id="catalog" className="relative overflow-hidden py-24">
-      {/* deep blue glow bleeding from previous section */}
       <div
         className="pointer-events-none absolute -top-32 right-0 h-[500px] w-[600px]"
         style={{
-          background: 'radial-gradient(circle, rgba(19,93,169,0.16), transparent 68%)',
+          background: 'radial-gradient(circle, rgba(19,93,169,0.08), transparent 68%)',
         }}
       />
 
       <div className="relative mx-auto max-w-6xl px-4">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <p className="text-xs font-medium tracking-[0.22em] text-brand-400/80">
+            <p className="text-xs font-medium tracking-[0.22em] text-brand-600/80">
               THE CATALOG
             </p>
-            <h2 className="mt-3 max-w-md text-balance text-3xl font-semibold tracking-tight text-white sm:text-4xl">
+            <h2 className="mt-3 max-w-md text-balance text-3xl font-semibold tracking-tight text-ink-900 sm:text-4xl">
               A living catalog of digital value.
             </h2>
           </div>
-          <p className="max-w-xs text-pretty text-sm leading-relaxed text-white/50">
-            Hundreds of brands and denominations. Hover a card to bring it
-            forward.
+          <p className="max-w-xs text-pretty text-sm leading-relaxed text-ink-500">
+            Hundreds of brands and denominations across gaming, streaming, and more.
           </p>
         </div>
       </div>
 
-      {/* flowing collection */}
       <div className="relative mt-14">
-        <div className="flex gap-6 overflow-x-auto px-4 pb-16 pt-10 [scrollbar-width:none] sm:justify-center [&::-webkit-scrollbar]:hidden">
-          {items.map((item, i) => {
-            const isActive = activeId === i
-            const isDimmed = activeId !== null && !isActive
-            return (
-              <button
-                key={i}
-                onMouseEnter={() => setActiveId(i)}
-                onMouseLeave={() => setActiveId(null)}
-                onFocus={() => setActiveId(i)}
-                onBlur={() => setActiveId(null)}
-                className={`group relative w-[260px] shrink-0 origin-bottom cursor-pointer text-left transition-all duration-500 ease-out ${item.rotate} ${
-                  isActive ? 'z-10 -translate-y-4 !rotate-0 scale-105' : ''
-                } ${isDimmed ? 'scale-95 opacity-45 blur-[1px]' : ''}`}
-              >
+        <div className="flex gap-6 overflow-x-auto px-4 pb-8 [scrollbar-width:none] sm:justify-center [&::-webkit-scrollbar]:hidden">
+          {categories.map((cat, i) => (
+            <div
+              key={i}
+              className="group flex w-[130px] shrink-0 flex-col items-center gap-3"
+            >
+              <div className="relative flex h-[130px] w-[130px] items-center justify-center rounded-full border border-ink-200 bg-white/60 backdrop-blur-sm transition-all duration-500 ease-out group-hover:-translate-y-2 group-hover:border-brand-400/50 group-hover:shadow-[0_20px_40px_-15px_rgba(19,93,169,0.25)]">
                 <div
-                  className={`transition-shadow duration-500 ${
-                    isActive ? 'drop-shadow-[0_30px_60px_rgba(22,193,232,0.28)]' : ''
-                  }`}
-                >
-                  <GiftCard
-                    variant={item.variant}
-                    amount={item.amount}
-                    label={item.label}
+                  className="absolute inset-0 rounded-full opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                  style={{
+                    background:
+                      'radial-gradient(circle at 50% 40%, rgba(22,193,232,0.08), transparent 70%)',
+                  }}
+                />
+                <div className="relative flex h-[80px] w-[80px] items-center justify-center">
+                  <div
+                    className="absolute inset-0 rounded-2xl opacity-20 transition-opacity duration-500 group-hover:opacity-30"
+                    style={{
+                      background: variantGradient[cat.variant],
+                      transform: 'rotate(-15deg)',
+                    }}
                   />
+                  <div className="relative flex h-12 w-16 items-center justify-center rounded-lg border border-ink-200 bg-white/80 transition-all duration-500 group-hover:border-brand-400/40">
+                    <span className="font-mono text-xs font-semibold text-brand-700">
+                      {cat.amount}
+                    </span>
+                  </div>
                 </div>
-                <div
-                  className={`mt-4 flex items-center justify-between transition-opacity duration-300 ${
-                    isActive ? 'opacity-100' : 'opacity-0'
-                  }`}
-                >
-                  <span className="text-sm font-medium text-white">
-                    {item.category}
-                  </span>
-                  <span className="text-xs text-brand-400">{item.amount} value</span>
-                </div>
-              </button>
-            )
-          })}
+              </div>
+              <span className="text-center text-sm font-medium text-ink-700 transition-colors group-hover:text-brand-600">
+                {cat.label}
+              </span>
+            </div>
+          ))}
         </div>
       </div>
     </section>
@@ -196,13 +196,13 @@ function CatalogSection() {
 function InlineCta({ prompt, action }: { prompt: string; action: string }) {
   return (
     <div className="relative mx-auto max-w-6xl px-4 py-6">
-      <div className="flex flex-col items-center justify-between gap-4 rounded-2xl border border-white/[0.08] bg-white/[0.02] px-6 py-5 backdrop-blur-sm sm:flex-row">
-        <p className="text-pretty text-center text-sm text-white/50 sm:text-left sm:text-base">
+      <div className="flex flex-col items-center justify-between gap-4 rounded-2xl border border-ink-100 bg-white/60 px-6 py-5 backdrop-blur-sm shadow-[0_4px_20px_-8px_rgba(19,93,169,0.1)] sm:flex-row">
+        <p className="text-pretty text-center text-sm text-ink-500 sm:text-left sm:text-base">
           {prompt}
         </p>
         <Link
           to="/contact"
-          className="group inline-flex shrink-0 items-center gap-1.5 text-sm font-medium text-brand-400 transition-colors hover:text-white"
+          className="group inline-flex shrink-0 items-center gap-1.5 text-sm font-medium text-brand-600 transition-colors hover:text-ink-900"
         >
           {action}
           <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -212,71 +212,75 @@ function InlineCta({ prompt, action }: { prompt: string; action: string }) {
   )
 }
 
-/* ──────────────────────────── VALUE SECTION ──────────────────────────── */
+/* ──────────────────────────── KEY BENEFITS SECTION ──────────────────────────── */
 
 function ValueSection() {
   const features = [
     {
       icon: LayoutGrid,
-      title: 'Digital catalog',
-      body: 'One integration unlocks hundreds of brands and denominations, always in sync.',
+      title: 'Group Issuance',
+      body: 'Issue and distribute large volumes of gift cards effortlessly.',
     },
     {
-      icon: Zap,
-      title: 'Instant delivery',
-      body: 'Codes are provisioned and delivered in milliseconds — no manual fulfillment.',
-    },
-    {
-      icon: Globe,
-      title: 'Global by default',
-      body: 'Purchase and distribute digital value across regions and currencies.',
+      icon: Wallet,
+      title: 'Competitive Pricing',
+      body: 'Access competitive bulk rates tailored to your business needs.',
     },
     {
       icon: ShieldCheck,
-      title: 'Business controls',
-      body: 'Budgets, roles, and audit trails engineered for finance and operations teams.',
+      title: 'Confidential Gift Code Delivery',
+      body: 'Gift codes are securely encrypted so only the intended recipient can access and use them.',
+    },
+    {
+      icon: CreditCard,
+      title: 'Flexible Access',
+      body: 'Manage everything through a real-time dashboard or integrate seamlessly with our API. No technical expertise is required for dashboard-based management.',
+    },
+    {
+      icon: Download,
+      title: 'Export Options',
+      body: 'Export structured data for accounting, reporting, and operational workflows.',
+    },
+    {
+      icon: Code2,
+      title: 'Developer Friendly',
+      body: 'Access comprehensive API documentation for seamless integration, while keeping the platform simple for non-technical teams.',
     },
   ]
 
   return (
     <section id="platform" className="relative overflow-hidden py-24">
-      {/* oversized background typography crossing the boundary */}
       <p
         aria-hidden="true"
-        className="pointer-events-none absolute -top-6 left-1/2 -translate-x-1/2 select-none whitespace-nowrap text-[22vw] font-bold leading-none tracking-tighter text-white/[0.015]"
+        className="pointer-events-none absolute -top-6 left-1/2 -translate-x-1/2 select-none whitespace-nowrap text-[22vw] font-bold leading-none tracking-tighter text-ink-900/[0.025]"
       >
-        VALUE
+        BENEFITS
       </p>
 
       <div className="relative mx-auto max-w-6xl px-4">
         <div className="grid items-start gap-12 lg:grid-cols-2">
           <div className="lg:sticky lg:top-28">
-            <p className="text-xs font-medium tracking-[0.22em] text-brand-400/80">
-              THE PLATFORM
+            <p className="text-xs font-medium tracking-[0.22em] text-brand-600/80">
+              KEY BENEFITS
             </p>
-            <h2 className="mt-3 text-balance text-4xl font-semibold leading-[1.05] tracking-tight text-white sm:text-5xl">
-              Everything your business needs to move digital value.
+            <h2 className="mt-3 text-balance text-4xl font-semibold leading-[1.05] tracking-tight text-ink-900 sm:text-5xl">
+              Everything you need to manage digital gift cards at scale.
             </h2>
-            <p className="mt-6 max-w-md text-pretty text-base leading-relaxed text-white/50">
-              ToYouCards replaces spreadsheets, manual purchasing, and
-              fragmented vendors with a single, programmable platform for
-              digital gift cards.
-            </p>
           </div>
 
           <div className="grid gap-4 sm:grid-cols-2">
             {features.map((f) => (
               <div
                 key={f.title}
-                className="group rounded-2xl border border-white/[0.08] bg-white/[0.025] p-6 backdrop-blur-sm transition-all duration-300 hover:border-brand-400/40 hover:bg-white/[0.04]"
+                className="group rounded-2xl border border-ink-100 bg-white/70 p-6 backdrop-blur-sm transition-all duration-300 hover:border-brand-400/40 hover:bg-white hover:shadow-[0_12px_30px_-15px_rgba(19,93,169,0.2)]"
               >
-                <span className="flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/[0.03] text-brand-400 transition-colors group-hover:border-brand-400/40">
+                <span className="flex h-11 w-11 items-center justify-center rounded-xl border border-ink-200 bg-white text-brand-600 transition-colors group-hover:border-brand-400/40">
                   <f.icon className="h-5 w-5" strokeWidth={1.5} />
                 </span>
-                <h3 className="mt-5 text-lg font-medium tracking-tight text-white">
+                <h3 className="mt-5 text-lg font-medium tracking-tight text-ink-900">
                   {f.title}
                 </h3>
-                <p className="mt-2 text-sm leading-relaxed text-white/45">
+                <p className="mt-2 text-sm leading-relaxed text-ink-500">
                   {f.body}
                 </p>
               </div>
@@ -288,28 +292,133 @@ function ValueSection() {
   )
 }
 
+/* ──────────────────────────── ORDER PROCESS ──────────────────────────── */
+
+function OrderProcessSection() {
+  const steps = [
+    {
+      icon: MousePointerClick,
+      title: 'Step 1 — Choose Product',
+      body: 'Select from a wide range of digital gift cards suited to your business needs.',
+    },
+    {
+      icon: CreditCard,
+      title: 'Step 2 — Make Payment',
+      body: 'Pay securely using your wallet balance or available online payment methods.',
+    },
+    {
+      icon: Lock,
+      title: 'Step 3 — Confidential Code Delivery',
+      body: 'Receive encrypted gift codes instantly, accessible only to the intended recipient.',
+    },
+  ]
+
+  return (
+    <section id="order-process" className="relative overflow-hidden py-24">
+      <div
+        className="pointer-events-none absolute left-0 top-1/2 h-[400px] w-[500px] -translate-y-1/2"
+        style={{
+          background: 'radial-gradient(circle, rgba(22,193,232,0.08), transparent 65%)',
+        }}
+      />
+
+      <div className="relative mx-auto max-w-6xl px-4">
+        <div className="mx-auto max-w-2xl text-center">
+          <p className="text-xs font-medium tracking-[0.22em] text-brand-600/80">
+            ORDER PROCESS
+          </p>
+          <h2 className="mt-3 text-balance text-4xl font-semibold leading-[1.05] tracking-tight text-ink-900 sm:text-5xl">
+            Get started in three simple steps.
+          </h2>
+        </div>
+
+        <div className="mt-14 grid gap-6 sm:grid-cols-3">
+          {steps.map((s, i) => (
+            <div
+              key={s.title}
+              className="group relative rounded-2xl border border-ink-100 bg-white/70 p-7 backdrop-blur-sm transition-all duration-300 hover:border-brand-400/40 hover:shadow-[0_12px_30px_-15px_rgba(19,93,169,0.2)]"
+            >
+              <div className="flex items-center gap-4">
+                <span className="flex h-12 w-12 items-center justify-center rounded-xl border border-ink-200 bg-white text-brand-600 transition-colors group-hover:border-brand-400/40">
+                  <s.icon className="h-5 w-5" strokeWidth={1.5} />
+                </span>
+                <span className="font-mono text-3xl font-bold text-ink-200">
+                  0{i + 1}
+                </span>
+              </div>
+              <h3 className="mt-5 text-lg font-medium tracking-tight text-ink-900">
+                {s.title}
+              </h3>
+              <p className="mt-2 text-sm leading-relaxed text-ink-500">
+                {s.body}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+/* ──────────────────────────── SUPPORTED BRANDS ──────────────────────────── */
+
+function SupportedBrandsSection() {
+  const brands = [
+    'Xbox', 'Apple', 'Google', 'Amazon', 'Netflix',
+    'Noon', 'Nintendo', 'PUBG', 'Call of Duty', 'FIFA',
+  ]
+
+  return (
+    <section id="brands" className="relative overflow-hidden py-24">
+      <div className="relative mx-auto max-w-6xl px-4">
+        <div className="mx-auto max-w-2xl text-center">
+          <p className="text-xs font-medium tracking-[0.22em] text-brand-600/80">
+            SUPPORTED BRANDS
+          </p>
+          <h2 className="mt-3 text-balance text-4xl font-semibold leading-[1.05] tracking-tight text-ink-900 sm:text-5xl">
+            Access a wide range of popular digital gift cards for your business.
+          </h2>
+        </div>
+
+        <div className="mt-14 flex flex-wrap justify-center gap-4">
+          {brands.map((brand, i) => (
+            <div
+              key={brand}
+              className="group flex h-24 w-24 items-center justify-center rounded-full border border-ink-200 bg-white/60 backdrop-blur-sm transition-all duration-500 hover:-translate-y-2 hover:border-brand-400/40 hover:shadow-[0_16px_30px_-12px_rgba(19,93,169,0.2)]"
+              style={{ animationDelay: `${i * 50}ms` }}
+            >
+              <span className="px-2 text-center text-xs font-semibold text-ink-700 transition-colors group-hover:text-brand-600">
+                {brand}
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
 /* ──────────────────────────── API SECTION ──────────────────────────── */
 
 function ApiSection() {
   return (
     <section id="api" className="relative overflow-hidden py-24">
-      {/* cyan line glow */}
       <div
         className="pointer-events-none absolute left-0 top-1/2 h-[400px] w-[500px] -translate-y-1/2"
         style={{
-          background: 'radial-gradient(circle, rgba(22,193,232,0.14), transparent 65%)',
+          background: 'radial-gradient(circle, rgba(22,193,232,0.08), transparent 65%)',
         }}
       />
 
       <div className="relative mx-auto grid max-w-6xl items-center gap-12 px-4 lg:grid-cols-2">
         <div>
-          <p className="text-xs font-medium tracking-[0.22em] text-brand-400/80">
+          <p className="text-xs font-medium tracking-[0.22em] text-brand-600/80">
             DEVELOPERS
           </p>
-          <h2 className="mt-3 text-balance text-4xl font-semibold leading-[1.05] tracking-tight text-white sm:text-5xl">
+          <h2 className="mt-3 text-balance text-4xl font-semibold leading-[1.05] tracking-tight text-ink-900 sm:text-5xl">
             An API built for digital value.
           </h2>
-          <p className="mt-6 max-w-md text-pretty text-base leading-relaxed text-white/50">
+          <p className="mt-6 max-w-md text-pretty text-base leading-relaxed text-ink-500">
             Create orders, issue codes, and reconcile balances programmatically.
             Predictable endpoints, typed responses, and webhooks for every event
             in the lifecycle.
@@ -322,22 +431,21 @@ function ApiSection() {
               'Sandbox environment with test value',
             ].map((t) => (
               <li key={t} className="flex items-center gap-3 text-sm">
-                <span className="flex h-5 w-5 items-center justify-center rounded-full border border-brand-400/40 bg-brand-500/10 text-brand-400">
+                <span className="flex h-5 w-5 items-center justify-center rounded-full border border-brand-400/40 bg-brand-500/10 text-brand-600">
                   <Check className="h-3 w-3" strokeWidth={2.5} />
                 </span>
-                <span className="text-white/55">{t}</span>
+                <span className="text-ink-600">{t}</span>
               </li>
             ))}
           </ul>
         </div>
 
-        {/* code window */}
-        <div className="relative rounded-2xl border border-white/10 bg-[#080c12] shadow-[0_40px_90px_-40px_rgba(2,10,20,0.9)]">
-          <div className="flex items-center gap-2 border-b border-white/[0.06] px-4 py-3">
-            <span className="h-3 w-3 rounded-full bg-white/15" />
-            <span className="h-3 w-3 rounded-full bg-white/15" />
-            <span className="h-3 w-3 rounded-full bg-white/15" />
-            <span className="ml-3 font-mono text-xs text-white/50">
+        <div className="relative rounded-2xl border border-ink-200 bg-white shadow-[0_30px_60px_-30px_rgba(19,93,169,0.25)]">
+          <div className="flex items-center gap-2 border-b border-ink-100 px-4 py-3">
+            <span className="h-3 w-3 rounded-full bg-ink-200" />
+            <span className="h-3 w-3 rounded-full bg-ink-200" />
+            <span className="h-3 w-3 rounded-full bg-ink-200" />
+            <span className="ml-3 font-mono text-xs text-ink-400">
               orders.create
             </span>
           </div>
@@ -345,44 +453,44 @@ function ApiSection() {
           <div className="space-y-5 p-5 font-mono text-[13px] leading-relaxed">
             <div>
               <div className="flex items-center gap-2">
-                <span className="rounded bg-brand-500/15 px-1.5 py-0.5 text-[11px] font-semibold text-brand-400">
+                <span className="rounded bg-brand-500/15 px-1.5 py-0.5 text-[11px] font-semibold text-brand-700">
                   POST
                 </span>
-                <span className="text-white/90">/v1/orders</span>
+                <span className="text-ink-800">/v1/orders</span>
               </div>
-              <pre className="mt-3 text-white/55">
-                <span className="text-white/40">{'{'}</span>
+              <pre className="mt-3 text-ink-600">
+                <span className="text-ink-400">{'{'}</span>
                 {'\n  '}
-                <span className="text-blue-300">"product"</span>
-                <span className="text-white/40">: </span>
-                <span className="text-brand-400">"gift-card"</span>
-                <span className="text-white/40">,</span>
+                <span className="text-brand-700">"product"</span>
+                <span className="text-ink-400">: </span>
+                <span className="text-brand-600">"gift-card"</span>
+                <span className="text-ink-400">,</span>
                 {'\n  '}
-                <span className="text-blue-300">"amount"</span>
-                <span className="text-white/40">: </span>
-                <span className="text-brand-400">50</span>
+                <span className="text-brand-700">"amount"</span>
+                <span className="text-ink-400">: </span>
+                <span className="text-brand-600">50</span>
                 {'\n'}
-                <span className="text-white/40">{'}'}</span>
+                <span className="text-ink-400">{'}'}</span>
               </pre>
             </div>
 
             <div className="flex justify-center">
-              <span className="flex h-7 w-7 items-center justify-center rounded-full border border-brand-400/30 bg-brand-500/10 text-brand-400">
+              <span className="flex h-7 w-7 items-center justify-center rounded-full border border-brand-400/30 bg-brand-500/10 text-brand-600">
                 <ArrowDown className="h-3.5 w-3.5" />
               </span>
             </div>
 
-            <div className="rounded-xl border border-brand-400/15 bg-brand-500/[0.04] p-4">
-              <div className="flex items-center gap-2 text-brand-400">
+            <div className="rounded-xl border border-brand-400/20 bg-brand-500/[0.04] p-4">
+              <div className="flex items-center gap-2 text-brand-600">
                 <Check className="h-4 w-4" strokeWidth={2.5} />
                 <span className="text-xs font-semibold tracking-wide">
                   ORDER CREATED
                 </span>
               </div>
-              <div className="mt-3 text-white/55">
-                <span className="text-blue-300">"digital_code"</span>
-                <span className="text-white/40">: </span>
-                <span className="tracking-[0.3em] text-white/80">
+              <div className="mt-3 text-ink-600">
+                <span className="text-brand-700">"digital_code"</span>
+                <span className="text-ink-400">: </span>
+                <span className="tracking-[0.3em] text-ink-800">
                   ••••••••••••
                 </span>
               </div>
@@ -391,9 +499,61 @@ function ApiSection() {
         </div>
       </div>
 
-      <p className="relative mx-auto mt-6 max-w-6xl px-4 text-[11px] text-white/30">
+      <p className="relative mx-auto mt-6 max-w-6xl px-4 text-[11px] text-ink-400">
         Illustrative example — endpoint shapes shown for demonstration.
       </p>
+    </section>
+  )
+}
+
+/* ──────────────────────────── WHY TOYOUCARDS ──────────────────────────── */
+
+function WhyToYouCardsSection() {
+  return (
+    <section id="why" className="relative overflow-hidden py-24">
+      <div
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            'radial-gradient(circle at 70% 50%, rgba(22,193,232,0.06), transparent 70%)',
+        }}
+      />
+
+      <div className="relative mx-auto max-w-6xl px-4">
+        <div className="grid items-center gap-12 lg:grid-cols-2">
+          <div>
+            <p className="text-xs font-medium tracking-[0.22em] text-brand-600/80">
+              WHY TOYOUCARDS
+            </p>
+            <h2 className="mt-3 text-balance text-4xl font-semibold leading-[1.05] tracking-tight text-ink-900 sm:text-5xl">
+              Built for businesses expanding across borders.
+            </h2>
+            <p className="mt-6 max-w-md text-pretty text-base leading-relaxed text-ink-500">
+              Headquartered in Dubai, ToYouCards is a global B2B platform built to
+              help businesses scale their digital gift card operations. Access an
+              extensive catalog of international gift cards through seamless,
+              plug-and-play infrastructure.
+            </p>
+            <p className="mt-4 max-w-md text-pretty text-base leading-relaxed text-ink-500">
+              Focus on growing your sales and reaching new markets while ToYouCards
+              handles distribution and instant automated digital delivery.
+            </p>
+          </div>
+
+          <div className="relative flex items-center justify-center">
+            <div className="animate-float-slower w-full max-w-[380px]">
+              <GiftCard variant="blue" amount="$50" label="GLOBAL VALUE" />
+            </div>
+            <div
+              className="pointer-events-none absolute inset-0 -z-10"
+              style={{
+                background:
+                  'radial-gradient(circle at 50% 50%, rgba(22,193,232,0.06), transparent 65%)',
+              }}
+            />
+          </div>
+        </div>
+      </div>
     </section>
   )
 }
@@ -403,63 +563,59 @@ function ApiSection() {
 function DashboardPreview() {
   return (
     <section id="dashboard" className="relative overflow-hidden py-24">
-      {/* blue ambient light beneath the window */}
       <div
         className="pointer-events-none absolute bottom-0 left-1/2 h-[420px] w-[820px] -translate-x-1/2"
         style={{
-          background: 'radial-gradient(circle at 50% 80%, rgba(22,132,214,0.22), transparent 68%)',
+          background: 'radial-gradient(circle at 50% 80%, rgba(22,132,214,0.12), transparent 68%)',
         }}
       />
 
       <div className="relative mx-auto max-w-5xl px-4 text-center">
-        <p className="text-xs font-medium tracking-[0.22em] text-brand-400/80">
+        <p className="text-xs font-medium tracking-[0.22em] text-brand-600/80">
           THE PRODUCT
         </p>
-        <h2 className="mx-auto mt-3 max-w-2xl text-balance text-4xl font-semibold tracking-tight text-white sm:text-5xl">
+        <h2 className="mx-auto mt-3 max-w-2xl text-balance text-4xl font-semibold tracking-tight text-ink-900 sm:text-5xl">
           Your digital value, in one dashboard.
         </h2>
       </div>
 
       <div className="relative mx-auto mt-14 max-w-4xl px-4">
-        <div className="overflow-hidden rounded-2xl border border-white/10 bg-[#0a121c]/90 shadow-[0_50px_120px_-40px_rgba(2,10,20,0.95)] backdrop-blur-xl">
-          {/* browser chrome */}
-          <div className="flex items-center gap-2 border-b border-white/[0.06] px-4 py-3">
-            <span className="h-3 w-3 rounded-full bg-white/15" />
-            <span className="h-3 w-3 rounded-full bg-white/15" />
-            <span className="h-3 w-3 rounded-full bg-white/15" />
-            <div className="mx-auto flex items-center gap-2 rounded-md border border-white/10 bg-white/[0.03] px-3 py-1 text-[11px] text-white/50">
+        <div className="overflow-hidden rounded-2xl border border-ink-200 bg-white/90 shadow-[0_40px_80px_-35px_rgba(19,93,169,0.25)] backdrop-blur-xl">
+          <div className="flex items-center gap-2 border-b border-ink-100 px-4 py-3">
+            <span className="h-3 w-3 rounded-full bg-ink-200" />
+            <span className="h-3 w-3 rounded-full bg-ink-200" />
+            <span className="h-3 w-3 rounded-full bg-ink-200" />
+            <div className="mx-auto flex items-center gap-2 rounded-md border border-ink-200 bg-ink-50 px-3 py-1 text-[11px] text-ink-400">
               <span className="h-1.5 w-1.5 rounded-full bg-brand-500" />
               app.toyoucards.com
             </div>
           </div>
 
           <div className="p-5 sm:p-7">
-            {/* stats */}
             <div className="grid gap-4 sm:grid-cols-3">
               {[
                 { icon: Wallet, label: 'Balance', value: '$24,850' },
-                { icon: Package, label: 'Orders', value: '1,284' },
-                { icon: TrendingUp, label: 'Delivered', value: '99.9%' },
+                { icon: LayoutGrid, label: 'Orders', value: '1,284' },
+                { icon: ArrowRight, label: 'Delivered', value: '99.9%' },
               ].map((s) => (
                 <div
                   key={s.label}
-                  className="rounded-xl border border-white/[0.08] bg-white/[0.025] p-4 text-left"
+                  className="rounded-xl border border-ink-100 bg-ink-50/50 p-4 text-left"
                 >
                   <div className="flex items-center justify-between">
-                    <span className="text-xs text-white/50">{s.label}</span>
-                    <s.icon className="h-4 w-4 text-brand-400" strokeWidth={1.5} />
+                    <span className="text-xs text-ink-400">{s.label}</span>
+                    <s.icon className="h-4 w-4 text-brand-600" strokeWidth={1.5} />
                   </div>
-                  <p className="mt-2 font-mono text-2xl font-semibold tracking-tight text-white">
+                  <p className="mt-2 font-mono text-2xl font-semibold tracking-tight text-ink-900">
                     {s.value}
                   </p>
                 </div>
               ))}
             </div>
 
-            {/* gift cards row */}
             <div className="mt-6 flex items-center justify-between">
-              <span className="text-sm font-medium text-white">Recent gift cards</span>
-              <span className="text-xs text-brand-400">View all</span>
+              <span className="text-sm font-medium text-ink-800">Recent gift cards</span>
+              <span className="text-xs text-brand-600">View all</span>
             </div>
             <div className="mt-4 grid grid-cols-3 gap-4">
               <GiftCard variant="cyan" amount="$50" label="SHOPPING" />
@@ -469,7 +625,7 @@ function DashboardPreview() {
           </div>
         </div>
 
-        <p className="mt-5 text-center text-[11px] text-white/30">
+        <p className="mt-5 text-center text-[11px] text-ink-400">
           Product preview — figures shown are illustrative.
         </p>
       </div>
@@ -485,31 +641,31 @@ function ContactSection() {
       <div
         className="pointer-events-none absolute top-1/3 left-1/4 h-[500px] w-[600px]"
         style={{
-          background: 'radial-gradient(circle, rgba(22,193,232,0.12), transparent 65%)',
+          background: 'radial-gradient(circle, rgba(22,193,232,0.08), transparent 65%)',
         }}
       />
 
       <div className="relative mx-auto max-w-6xl px-4">
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-20 items-start">
           <div className="lg:pt-8">
-            <p className="text-xs font-medium tracking-[0.22em] text-brand-400/80">
+            <p className="text-xs font-medium tracking-[0.22em] text-brand-600/80">
               LET'S TALK
             </p>
-            <h2 className="mt-3 text-balance text-4xl font-semibold leading-[1.05] tracking-tight text-white sm:text-5xl">
+            <h2 className="mt-3 text-balance text-4xl font-semibold leading-[1.05] tracking-tight text-ink-900 sm:text-5xl">
               Bring digital gift cards
               <br />
               <span className="text-gradient-brand">
                 into your business.
               </span>
             </h2>
-            <p className="mt-6 max-w-md text-pretty text-base leading-relaxed text-white/50">
+            <p className="mt-6 max-w-md text-pretty text-base leading-relaxed text-ink-500">
               Tell us what you're building and our team will help you find the
               right solution for your business.
             </p>
           </div>
 
           <div className="relative">
-            <div className="rounded-2xl border border-white/[0.08] bg-white/[0.035] p-5 backdrop-blur-sm sm:p-7">
+            <div className="rounded-2xl border border-ink-100 bg-white/70 p-5 backdrop-blur-sm shadow-[0_20px_50px_-20px_rgba(19,93,169,0.15)] sm:p-7">
               <TalkToSalesForm compact />
             </div>
           </div>
@@ -524,36 +680,34 @@ function ContactSection() {
 function FinalCta() {
   return (
     <section id="cta" className="relative overflow-hidden py-32">
-      {/* strongest brand glow */}
       <div
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            'radial-gradient(circle at 50% 55%, rgba(22,193,232,0.22), rgba(19,93,169,0.08) 45%, transparent 70%)',
+            'radial-gradient(circle at 50% 55%, rgba(22,193,232,0.12), rgba(19,93,169,0.04) 45%, transparent 70%)',
         }}
       />
 
-      {/* huge abstract card in the background */}
-      <div className="animate-float-slower-centered pointer-events-none absolute left-0 right-0 top-1/2 mx-auto w-[640px] max-w-[90vw] opacity-[0.14] blur-[2px]">
+      <div className="animate-float-slower-centered pointer-events-none absolute left-0 right-0 top-1/2 mx-auto w-[640px] max-w-[90vw] opacity-[0.12] blur-[2px]">
         <GiftCard variant="blue" amount="$50" label="DIGITAL VALUE" />
       </div>
 
       <div className="relative mx-auto max-w-3xl px-4 text-center">
-        <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3.5 py-1.5 backdrop-blur-sm">
+        <div className="inline-flex items-center gap-2 rounded-full border border-ink-200 bg-white/60 px-3.5 py-1.5 backdrop-blur-sm">
           <span className="animate-pulse-dot h-1.5 w-1.5 rounded-full bg-brand-500 shadow-[0_0_8px_#16c1e8]" />
-          <span className="text-[10px] font-medium tracking-[0.2em] text-white/50">
+          <span className="text-[10px] font-medium tracking-[0.2em] text-ink-400">
             START IN MINUTES
           </span>
         </div>
 
-        <h2 className="mt-6 text-balance text-4xl font-semibold leading-[1.05] tracking-tight text-white sm:text-6xl">
+        <h2 className="mt-6 text-balance text-4xl font-semibold leading-[1.05] tracking-tight text-ink-900 sm:text-6xl">
           Ready to bring digital{' '}
-          <span className="text-gradient-brand [text-shadow:0_0_40px_rgba(22,193,232,0.4)]">
+          <span className="text-gradient-brand [text-shadow:0_0_40px_rgba(22,193,232,0.2)]">
             gift cards
           </span>{' '}
           to your business?
         </h2>
-        <p className="mx-auto mt-6 max-w-lg text-pretty text-base leading-relaxed text-white/50">
+        <p className="mx-auto mt-6 max-w-lg text-pretty text-base leading-relaxed text-ink-500">
           Tell us what you're building and our team will help you find the right
           solution — from bulk purchasing to API-powered distribution.
         </p>
@@ -561,14 +715,14 @@ function FinalCta() {
         <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
           <Link
             to="/contact"
-            className="group flex items-center gap-2 rounded-full bg-gradient-brand px-6 py-3.5 text-sm font-medium text-[#04121a] shadow-[0_16px_50px_-10px_rgba(22,193,232,0.6)] transition-all hover:brightness-110"
+            className="group flex items-center gap-2 rounded-full bg-gradient-brand px-6 py-3.5 text-sm font-medium text-white shadow-[0_16px_50px_-10px_rgba(22,119,200,0.5)] transition-all hover:brightness-110"
           >
             Talk to Sales
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
           </Link>
           <a
             href="#catalog"
-            className="rounded-full border border-white/10 bg-white/[0.03] px-6 py-3.5 text-sm font-medium text-white backdrop-blur-sm transition-colors hover:border-brand-400/40 hover:text-brand-400"
+            className="rounded-full border border-ink-200 bg-white/60 px-6 py-3.5 text-sm font-medium text-ink-700 backdrop-blur-sm transition-colors hover:border-brand-400/50 hover:text-brand-600"
           >
             Explore Gift Cards
           </a>

@@ -52,45 +52,32 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-ink-950 px-5 py-12">
-      {/* Atmospheric blue glow */}
-      <div className="glow-blue top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-brand-500/12 animate-glow-pulse" />
-      <div className="glow-blue bottom-0 right-0 w-[400px] h-[400px] bg-brand-700/8" />
-      <div className="glow-blue top-1/3 left-0 w-[300px] h-[300px] bg-brand-500/6" />
+    <div className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-ink-50 px-5 py-12">
+      <div className="glow-blue top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-brand-500/8 animate-glow-pulse" />
+      <div className="glow-blue bottom-0 right-0 w-[400px] h-[400px] bg-brand-700/5" />
+      <div className="glow-blue top-1/3 left-0 w-[300px] h-[300px] bg-brand-500/4" />
 
-      {/* Abstract gift card shape */}
       <AbstractCardShape />
 
       <div className="relative z-10 w-full max-w-[440px]">
-        {/* Logo + heading */}
         <div className="text-center mb-10">
-          <Link to="/" className="inline-flex items-center gap-2.5 mb-8">
-            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-              <rect width="32" height="32" rx="7" fill="#0A1320" stroke="rgba(22,193,232,0.3)" />
-              <path
-                d="M8 11.5C8 10.67 8.67 10 9.5 10H20.5C21.33 10 22 10.67 22 11.5V18.5C22 19.33 21.33 20 20.5 20H9.5C8.67 20 8 19.33 8 18.5V11.5Z"
-                stroke="#16C1E8"
-                strokeWidth="1.8"
-              />
-              <path d="M10 22H22" stroke="#1677C8" strokeWidth="1.8" strokeLinecap="round" />
-              <circle cx="15" cy="15" r="1.5" fill="#16C1E8" />
-            </svg>
-            <span className="font-display text-xl font-semibold tracking-tight text-white">
-              ToYouCards
-            </span>
+          <Link to="/" className="inline-flex items-center mb-8">
+            <img
+              src="/ToYoucardsLogo_Light-Logotype.svg"
+              alt="ToYouCards"
+              className="h-8 w-auto"
+            />
           </Link>
-          <h1 className="text-display-md font-display text-white">Welcome back.</h1>
-          <p className="mt-3 text-[15px] text-white/50">Sign in to your business account.</p>
+          <h1 className="text-display-md font-display text-ink-900">Welcome back.</h1>
+          <p className="mt-3 text-[15px] text-ink-500">Sign in to your business account.</p>
         </div>
 
-        {/* Form panel */}
         <div className="relative">
           <div className="absolute inset-0 -inset-3 bg-brand-500/5 blur-3xl rounded-4xl" />
-          <div className="relative glass-card rounded-4xl p-7 sm:p-9 shadow-2xl">
+          <div className="relative glass-card rounded-4xl p-7 sm:p-9 shadow-[0_30px_60px_-25px_rgba(19,93,169,0.2)]">
             <form onSubmit={handleSubmit} noValidate className="space-y-5">
-              {/* Email */}
               <div>
-                <label className="mb-2 block text-sm font-medium text-white/70">Email</label>
+                <label className="mb-2 block text-sm font-medium text-ink-700">Email</label>
                 <input
                   type="email"
                   className="field-input"
@@ -106,9 +93,8 @@ export default function LoginPage() {
                 />
               </div>
 
-              {/* Password */}
               <div>
-                <label className="mb-2 block text-sm font-medium text-white/70">Password</label>
+                <label className="mb-2 block text-sm font-medium text-ink-700">Password</label>
                 <div className="relative">
                   <input
                     type={showPassword ? 'text' : 'password'}
@@ -125,7 +111,7 @@ export default function LoginPage() {
                   <button
                     type="button"
                     onClick={() => setShowPassword((v) => !v)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 p-1 text-white/30 hover:text-white/60 transition-colors"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 p-1 text-ink-400 hover:text-ink-600 transition-colors"
                     tabIndex={-1}
                     aria-label={showPassword ? 'Hide password' : 'Show password'}
                   >
@@ -134,26 +120,23 @@ export default function LoginPage() {
                 </div>
               </div>
 
-              {/* Forgot password */}
               <div className="flex justify-end">
                 <button
                   type="button"
-                  className="text-sm text-brand-500 hover:text-brand-400 transition-colors"
+                  className="text-sm text-brand-600 hover:text-brand-700 transition-colors"
                   onClick={() => setError('Password reset is not available in this demo. Contact your account manager.')}
                 >
                   Forgot password?
                 </button>
               </div>
 
-              {/* Error */}
               {error && (
-                <div className="flex items-start gap-3 rounded-xl border border-red-500/25 bg-red-500/[0.06] px-4 py-3.5 animate-fade-in">
-                  <AlertCircle className="h-5 w-5 text-red-400 shrink-0 mt-0.5" />
-                  <p className="text-sm text-red-300">{error}</p>
+                <div className="flex items-start gap-3 rounded-xl border border-red-300 bg-red-50 px-4 py-3.5 animate-fade-in">
+                  <AlertCircle className="h-5 w-5 text-red-500 shrink-0 mt-0.5" />
+                  <p className="text-sm text-red-700">{error}</p>
                 </div>
               )}
 
-              {/* Submit */}
               <button type="submit" className="btn-primary w-full" disabled={loading}>
                 {loading ? (
                   <>
@@ -169,9 +152,8 @@ export default function LoginPage() {
               </button>
             </form>
 
-            {/* Divider */}
-            <div className="mt-7 pt-6 border-t border-white/[0.06] text-center">
-              <p className="text-sm text-white/45">
+            <div className="mt-7 pt-6 border-t border-ink-100 text-center">
+              <p className="text-sm text-ink-400">
                 Don't have an account?{' '}
                 <Link to="/contact" className="link-arrow">
                   Talk to Sales
@@ -181,9 +163,8 @@ export default function LoginPage() {
           </div>
         </div>
 
-        {/* Back to site */}
         <div className="mt-6 text-center">
-          <Link to="/" className="text-sm text-white/35 hover:text-white/60 transition-colors">
+          <Link to="/" className="text-sm text-ink-400 hover:text-ink-600 transition-colors">
             ← Back to website
           </Link>
         </div>
@@ -195,7 +176,7 @@ export default function LoginPage() {
 function AbstractCardShape() {
   return (
     <svg
-      className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] opacity-[0.04] pointer-events-none"
+      className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] opacity-[0.03] pointer-events-none"
       viewBox="0 0 400 400"
       fill="none"
     >

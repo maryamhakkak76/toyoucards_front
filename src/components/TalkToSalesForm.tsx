@@ -8,39 +8,15 @@ interface FormData {
   full_name: string
   company: string
   work_email: string
-  interest: string
   phone: string
-  monthly_volume: string
-  country: string
   message: string
 }
-
-const INTEREST_OPTIONS = [
-  { value: 'Buying Gift Cards', label: 'Buying Gift Cards' },
-  { value: 'Bulk / Volume Purchasing', label: 'Bulk / Volume Purchasing' },
-  { value: 'Becoming a Reseller', label: 'Becoming a Reseller' },
-  { value: 'API Integration', label: 'API Integration' },
-  { value: 'Rewards / Loyalty', label: 'Rewards / Loyalty' },
-  { value: 'Corporate Gifting', label: 'Corporate Gifting' },
-  { value: 'Other', label: 'Other' },
-]
-
-const VOLUME_OPTIONS = [
-  'Under $5K / month',
-  '$5K – $25K / month',
-  '$25K – $100K / month',
-  '$100K+ / month',
-  'Not sure yet',
-]
 
 const emptyForm: FormData = {
   full_name: '',
   company: '',
   work_email: '',
-  interest: '',
   phone: '',
-  monthly_volume: '',
-  country: '',
   message: '',
 }
 
@@ -56,11 +32,10 @@ export default function TalkToSalesForm({ compact = false }: { compact?: boolean
 
   const validate = (): string | null => {
     if (!form.full_name.trim()) return 'Please enter your full name.'
-    if (!form.company.trim()) return 'Please enter your company name.'
-    if (!form.work_email.trim()) return 'Please enter your work email.'
+    if (!form.company.trim()) return 'Please enter your business name.'
+    if (!form.work_email.trim()) return 'Please enter your email address.'
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.work_email))
       return 'Please enter a valid email address.'
-    if (!form.interest) return "Please select what you're interested in."
     return null
   }
 
@@ -81,10 +56,7 @@ export default function TalkToSalesForm({ compact = false }: { compact?: boolean
         full_name: form.full_name.trim(),
         company: form.company.trim(),
         work_email: form.work_email.trim(),
-        interest: form.interest,
         phone: form.phone.trim() || null,
-        monthly_volume: form.monthly_volume || null,
-        country: form.country.trim() || null,
         message: form.message.trim() || null,
       })
 
@@ -111,9 +83,9 @@ export default function TalkToSalesForm({ compact = false }: { compact?: boolean
       {!compact && (
         <div className="mb-7 flex items-center gap-2.5">
           <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-brand-500/15 border border-brand-500/20">
-            <Sparkles className="h-4.5 w-4.5 text-brand-500" />
+            <Sparkles className="h-4.5 w-4.5 text-brand-600" />
           </div>
-          <span className="text-sm font-semibold text-white/80">Request a Quote</span>
+          <span className="text-sm font-semibold text-ink-800">Request a Quote</span>
         </div>
       )}
 
@@ -129,7 +101,7 @@ export default function TalkToSalesForm({ compact = false }: { compact?: boolean
           />
         </Field>
 
-        <Field label="Business / Company Name" required>
+        <Field label="Business Name" required>
           <input
             type="text"
             className="field-input"
@@ -140,43 +112,7 @@ export default function TalkToSalesForm({ compact = false }: { compact?: boolean
           />
         </Field>
 
-        <Field label="Work Email" required className={compact ? '' : 'sm:col-span-2'}>
-          <input
-            type="email"
-            className="field-input"
-            placeholder="jane@acme.com"
-            value={form.work_email}
-            onChange={(e) => update('work_email', e.target.value)}
-            disabled={status === 'loading'}
-          />
-        </Field>
-
-        <Field label="What are you interested in?" required className={compact ? '' : 'sm:col-span-2'}>
-          <div className="relative">
-            <select
-              className="field-input appearance-none pr-10 cursor-pointer"
-              value={form.interest}
-              onChange={(e) => update('interest', e.target.value)}
-              disabled={status === 'loading'}
-            >
-              <option value="" className="bg-ink-850">Select an option…</option>
-              {INTEREST_OPTIONS.map((opt) => (
-                <option key={opt.value} value={opt.value} className="bg-ink-850">
-                  {opt.label}
-                </option>
-              ))}
-            </select>
-            <svg
-              className="absolute right-4 top-1/2 -translate-y-1/2 h-4 w-4 text-white/40 pointer-events-none"
-              viewBox="0 0 20 20"
-              fill="none"
-            >
-              <path d="M6 8l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-            </svg>
-          </div>
-        </Field>
-
-        <Field label="Phone / WhatsApp" optional>
+        <Field label="Phone Number" className={compact ? '' : 'sm:col-span-2'}>
           <input
             type="tel"
             className="field-input"
@@ -187,41 +123,18 @@ export default function TalkToSalesForm({ compact = false }: { compact?: boolean
           />
         </Field>
 
-        <Field label="Estimated Monthly Volume" optional>
-          <div className="relative">
-            <select
-              className="field-input appearance-none pr-10 cursor-pointer"
-              value={form.monthly_volume}
-              onChange={(e) => update('monthly_volume', e.target.value)}
-              disabled={status === 'loading'}
-            >
-              <option value="" className="bg-ink-850">Select range…</option>
-              {VOLUME_OPTIONS.map((v) => (
-                <option key={v} value={v} className="bg-ink-850">{v}</option>
-              ))}
-            </select>
-            <svg
-              className="absolute right-4 top-1/2 -translate-y-1/2 h-4 w-4 text-white/40 pointer-events-none"
-              viewBox="0 0 20 20"
-              fill="none"
-            >
-              <path d="M6 8l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-            </svg>
-          </div>
-        </Field>
-
-        <Field label="Country / Market" optional className={compact ? '' : 'sm:col-span-2'}>
+        <Field label="Email Address" required className={compact ? '' : 'sm:col-span-2'}>
           <input
-            type="text"
+            type="email"
             className="field-input"
-            placeholder="United States, UAE, etc."
-            value={form.country}
-            onChange={(e) => update('country', e.target.value)}
+            placeholder="jane@acme.com"
+            value={form.work_email}
+            onChange={(e) => update('work_email', e.target.value)}
             disabled={status === 'loading'}
           />
         </Field>
 
-        <Field label="Message" optional className={compact ? '' : 'sm:col-span-2'}>
+        <Field label="Description / Message" className={compact ? '' : 'sm:col-span-2'}>
           <textarea
             className="field-input min-h-[110px] resize-y"
             placeholder="Tell us about your business and what you're looking for…"
@@ -233,9 +146,9 @@ export default function TalkToSalesForm({ compact = false }: { compact?: boolean
       </div>
 
       {status === 'error' && (
-        <div className="mt-5 flex items-start gap-3 rounded-xl border border-red-500/25 bg-red-500/[0.06] px-4 py-3.5">
-          <AlertCircle className="h-5 w-5 text-red-400 shrink-0 mt-0.5" />
-          <p className="text-sm text-red-300">{errorMsg}</p>
+        <div className="mt-5 flex items-start gap-3 rounded-xl border border-red-300 bg-red-50 px-4 py-3.5">
+          <AlertCircle className="h-5 w-5 text-red-500 shrink-0 mt-0.5" />
+          <p className="text-sm text-red-700">{errorMsg}</p>
         </div>
       )}
 
@@ -257,7 +170,7 @@ export default function TalkToSalesForm({ compact = false }: { compact?: boolean
         )}
       </button>
 
-      <p className="mt-4 text-center text-xs text-white/35">
+      <p className="mt-4 text-center text-xs text-ink-400">
         By submitting, you agree to be contacted by ToYouCards about your inquiry.
       </p>
     </form>
@@ -267,22 +180,19 @@ export default function TalkToSalesForm({ compact = false }: { compact?: boolean
 function Field({
   label,
   required,
-  optional,
   children,
   className = '',
 }: {
   label: string
   required?: boolean
-  optional?: boolean
   children: React.ReactNode
   className?: string
 }) {
   return (
     <div className={className}>
-      <label className="mb-2 flex items-center gap-1.5 text-sm font-medium text-white/70">
+      <label className="mb-2 flex items-center gap-1.5 text-sm font-medium text-ink-700">
         {label}
         {required && <span className="text-brand-500">*</span>}
-        {optional && <span className="text-xs font-normal text-white/30">(optional)</span>}
       </label>
       {children}
     </div>
@@ -295,13 +205,13 @@ function SuccessState({ onReset }: { onReset: () => void }) {
       <div className="relative mb-6">
         <div className="absolute inset-0 bg-brand-500/20 blur-2xl rounded-full" />
         <div className="relative flex h-16 w-16 items-center justify-center rounded-2xl bg-brand-500/15 border border-brand-500/30">
-          <Check className="h-8 w-8 text-brand-500" strokeWidth={2.5} />
+          <Check className="h-8 w-8 text-brand-600" strokeWidth={2.5} />
         </div>
       </div>
-      <h3 className="font-display text-2xl font-semibold text-white mb-3">
+      <h3 className="font-display text-2xl font-semibold text-ink-900 mb-3">
         Thanks — your request is on the way.
       </h3>
-      <p className="text-white/50 max-w-md leading-relaxed mb-8">
+      <p className="text-ink-500 max-w-md leading-relaxed mb-8">
         Our team will review your request and get back to you shortly. Keep an eye on your inbox.
       </p>
       <button onClick={onReset} className="btn-secondary">
