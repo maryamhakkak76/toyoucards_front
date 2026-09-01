@@ -17,7 +17,7 @@ import {
   ShoppingBag,
   Tv,
 } from 'lucide-react'
-import { GiftCard, type GiftCardVariant } from '@/components/GiftCard'
+import { GiftCard } from '@/components/GiftCard'
 import { CardOrbit } from '@/components/CardOrbit'
 import TalkToSalesForm from '@/components/TalkToSalesForm'
 
@@ -117,24 +117,28 @@ function Hero() {
 
 type BrandEntry = {
   name: string
-  variant: GiftCardVariant
-  amount: string
   category: string
+  initials: string
+  accent: string
 }
 
 const brandEntries: BrandEntry[] = [
-  { name: 'Xbox', variant: 'deep', amount: '$25', category: 'Gaming' },
-  { name: 'PlayStation', variant: 'blue', amount: '$50', category: 'Gaming' },
-  { name: 'Steam', variant: 'dark', amount: '$100', category: 'Gaming' },
-  { name: 'Nintendo', variant: 'light', amount: '$35', category: 'Gaming' },
-  { name: 'App Store', variant: 'blue', amount: '$50', category: 'Apps' },
-  { name: 'Google Play', variant: 'teal', amount: '$25', category: 'Apps' },
-  { name: 'Apple', variant: 'light', amount: '$100', category: 'Apps' },
-  { name: 'Netflix', variant: 'dark', amount: '$30', category: 'Streaming' },
-  { name: 'Amazon', variant: 'cyan', amount: '$50', category: 'Shopping' },
-  { name: 'Noon', variant: 'teal', amount: '$50', category: 'Shopping' },
-  { name: 'PUBG', variant: 'deep', amount: '$10', category: 'Gaming' },
-  { name: 'FIFA', variant: 'cyan', amount: '$20', category: 'Gaming' },
+  { name: 'Xbox', category: 'Gaming', initials: 'XB', accent: 'from-emerald-500 to-emerald-700' },
+  { name: 'PlayStation', category: 'Gaming', initials: 'PS', accent: 'from-blue-500 to-blue-700' },
+  { name: 'Steam', category: 'Gaming', initials: 'ST', accent: 'from-slate-500 to-slate-700' },
+  { name: 'Nintendo', category: 'Gaming', initials: 'NT', accent: 'from-rose-500 to-rose-700' },
+  { name: 'PUBG', category: 'Gaming', initials: 'PB', accent: 'from-amber-500 to-amber-700' },
+  { name: 'FIFA', category: 'Gaming', initials: 'FI', accent: 'from-teal-500 to-teal-700' },
+  { name: 'App Store', category: 'Apps', initials: 'AP', accent: 'from-blue-400 to-blue-600' },
+  { name: 'Google Play', category: 'Apps', initials: 'GP', accent: 'from-emerald-400 to-emerald-600' },
+  { name: 'Apple', category: 'Apps', initials: 'AP', accent: 'from-slate-400 to-slate-600' },
+  { name: 'Netflix', category: 'Streaming', initials: 'NF', accent: 'from-rose-600 to-rose-800' },
+  { name: 'Amazon', category: 'Shopping', initials: 'AZ', accent: 'from-amber-400 to-amber-600' },
+  { name: 'Noon', category: 'Shopping', initials: 'NO', accent: 'from-amber-500 to-amber-700' },
+  { name: 'Spotify', category: 'Music', initials: 'SP', accent: 'from-emerald-500 to-emerald-700' },
+  { name: 'Apple Music', category: 'Music', initials: 'AM', accent: 'from-rose-400 to-rose-600' },
+  { name: 'Call of Duty', category: 'Gaming', initials: 'CD', accent: 'from-slate-600 to-slate-800' },
+  { name: 'Google One', category: 'Apps', initials: 'G1', accent: 'from-blue-500 to-blue-700' },
 ]
 
 const categories = [
@@ -185,18 +189,23 @@ function CatalogBrandsSection() {
           ))}
         </div>
 
-        {/* Brand cards grid */}
-        <div className="mt-14 grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-4">
+        {/* Brand tiles grid */}
+        <div className="mt-14 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
           {brandEntries.map((brand) => (
-            <div key={brand.name} className="group/brand">
-              <div className="overflow-hidden rounded-2xl border border-ink-100 bg-white/70 p-3 backdrop-blur-sm transition-all duration-300 group-hover/brand:border-brand-400/40 group-hover/brand:bg-white group-hover/brand:shadow-[0_16px_40px_-15px_rgba(19,93,169,0.2)]">
-                <GiftCard variant={brand.variant} amount={brand.amount} label={brand.name.toUpperCase()} />
+            <div
+              key={brand.name}
+              className="group/brand relative flex flex-col items-center gap-3 rounded-2xl border border-ink-100 bg-white/70 p-6 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand-400/40 hover:bg-white hover:shadow-[0_16px_40px_-15px_rgba(19,93,169,0.2)]"
+            >
+              <div
+                className={`flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br ${brand.accent} text-white shadow-sm transition-transform duration-300 group-hover/brand:scale-110`}
+              >
+                <span className="text-sm font-bold tracking-tight">{brand.initials}</span>
               </div>
-              <div className="mt-3 flex items-center justify-between px-1">
-                <span className="text-sm font-medium text-ink-800">{brand.name}</span>
-                <span className="rounded-full bg-ink-100 px-2.5 py-0.5 text-[10px] font-medium text-ink-400">
-                  {brand.category}
-                </span>
+              <div className="text-center">
+                <p className="text-sm font-semibold text-ink-800 transition-colors group-hover/brand:text-brand-600">
+                  {brand.name}
+                </p>
+                <p className="mt-0.5 text-[11px] text-ink-400">{brand.category}</p>
               </div>
             </div>
           ))}
@@ -546,9 +555,9 @@ function DashboardPreview() {
               <span className="text-xs text-brand-600">View all</span>
             </div>
             <div className="mt-4 grid grid-cols-3 gap-4">
-              <GiftCard variant="cyan" amount="$50" label="SHOPPING" />
-              <GiftCard variant="blue" amount="$100" label="PREMIUM" />
-              <GiftCard variant="deep" amount="$25" label="GAMING" />
+              <GiftCard variant="teal" amount="$50" label="SHOPPING" />
+              <GiftCard variant="emerald" amount="$100" label="PREMIUM" />
+              <GiftCard variant="rose" amount="$25" label="GAMING" />
             </div>
           </div>
         </div>

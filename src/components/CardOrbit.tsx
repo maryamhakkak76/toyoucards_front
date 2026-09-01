@@ -47,13 +47,13 @@ export function CardOrbit() {
       </svg>
 
       <div className="animate-float-slower absolute left-[2%] top-[16%] w-[38%] -rotate-12 opacity-80 blur-[1.5px]">
-        <GiftCard variant="deep" amount="$25" label="GAMING" />
+        <GiftCard variant="emerald" amount="$25" label="GAMING" />
       </div>
       <div className="animate-float-slow-orbit absolute right-[1%] top-[20%] w-[40%] rotate-12 opacity-85 blur-[1px]">
-        <GiftCard variant="cyan" amount="$100" label="SHOPPING" />
+        <GiftCard variant="teal" amount="$100" label="SHOPPING" />
       </div>
       <div className="animate-float-slow-orbit absolute bottom-[10%] left-[10%] w-[34%] -rotate-6 opacity-70 blur-[2px]">
-        <GiftCard variant="dark" amount="$10" label="STREAMING" />
+        <GiftCard variant="slate" amount="$10" label="STREAMING" />
       </div>
 
       <div className="animate-float-slow-orbit relative z-10 w-[58%] drop-shadow-[0_40px_60px_rgba(19,93,169,0.25)]">

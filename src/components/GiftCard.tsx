@@ -1,21 +1,39 @@
-export type GiftCardVariant = 'cyan' | 'blue' | 'deep' | 'dark' | 'light' | 'teal'
+export type GiftCardVariant =
+  | 'cyan'
+  | 'blue'
+  | 'deep'
+  | 'dark'
+  | 'light'
+  | 'teal'
+  | 'emerald'
+  | 'amber'
+  | 'rose'
+  | 'slate'
 
 const surfaces: Record<GiftCardVariant, string> = {
   cyan: 'linear-gradient(135deg, #0EA5E9 0%, #1677C8 50%, #135DA9 100%)',
   blue: 'linear-gradient(135deg, #2563EB 0%, #1677C8 50%, #0E477F 100%)',
   deep: 'linear-gradient(150deg, #135DA9 0%, #0A3260 60%, #061A38 100%)',
-  dark: 'linear-gradient(150deg, #1E293B 0%, #0F172A 55%, #020617 100%)',
-  light: 'linear-gradient(150deg, #F0F9FF 0%, #DBEAFE 55%, #BFDBFE 100%)',
+  dark: 'linear-gradient(150deg, #1E3A5F 0%, #15243A 55%, #0B1520 100%)',
+  light: 'linear-gradient(150deg, #E0F2FE 0%, #BAE6FD 55%, #7DD3FC 100%)',
   teal: 'linear-gradient(135deg, #06B6D4 0%, #0891B2 50%, #155E75 100%)',
+  emerald: 'linear-gradient(135deg, #10B981 0%, #059669 50%, #065F46 100%)',
+  amber: 'linear-gradient(135deg, #F59E0B 0%, #D97706 50%, #92400E 100%)',
+  rose: 'linear-gradient(135deg, #F43F5E 0%, #E11D48 50%, #9F1239 100%)',
+  slate: 'linear-gradient(150deg, #475569 0%, #334155 50%, #1E293B 100%)',
 }
 
 const glowColors: Record<GiftCardVariant, string> = {
   cyan: '#7DD3FC',
   blue: '#93C5FD',
   deep: '#60A5FA',
-  dark: '#475569',
+  dark: '#64748B',
   light: '#FFFFFF',
   teal: '#67E8F9',
+  emerald: '#6EE7B7',
+  amber: '#FCD34D',
+  rose: '#FDA4AF',
+  slate: '#94A3B8',
 }
 
 const isLight = (v: GiftCardVariant) => v === 'light'
@@ -35,7 +53,7 @@ export function GiftCard({
 }) {
   const light = isLight(variant)
   const glow = glowColors[variant]
-  const cardId = `gc-${variant}-${label.replace(/\s/g, '')}`
+  const cardId = `gc-${variant}-${label.replace(/[^a-zA-Z0-9]/g, '')}`
 
   return (
     <div
@@ -52,7 +70,7 @@ export function GiftCard({
         }}
       />
 
-      {/* Radial glow */}
+      {/* Radial glow + decorative lines */}
       <svg
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 h-full w-full"
