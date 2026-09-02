@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 export type GiftCardVariant =
   | 'cyan'
   | 'blue'
@@ -54,17 +56,38 @@ export function GiftCard({
   const light = isLight(variant)
   const glow = glowColors[variant]
   const cardId = `gc-${variant}-${label.replace(/[^a-zA-Z0-9]/g, '')}`
+  const [isHovered, setIsHovered] = useState(false)
+  const [rotation, setRotation] = useState({ x: 0, y: 0 })
+
+  const handlePointerMove = (event: React.PointerEvent<HTMLDivElement>): void => {
+    const bounds = event.currentTarget.getBoundingClientRect()
+    const x = (event.clientX - bounds.left) / bounds.width
+    const y = (event.clientY - bounds.top) / bounds.height
+    setRotation({ x: (0.5 - y) * 12, y: (x - 0.5) * 12 })
+  }
+
+  const handlePointerLeave = (): void => {
+    setIsHovered(false)
+    setRotation({ x: 0, y: 0 })
+  }
 
   return (
     <div
-      className={`group/gc relative aspect-[1.586/1] w-full overflow-hidden rounded-2xl border shadow-[0_20px_50px_-20px_rgba(19,93,169,0.35)] transition-shadow duration-500 hover:shadow-[0_30px_70px_-20px_rgba(22,193,232,0.4)] ${
+      className={`group/gc relative aspect-[1.586/1] w-full cursor-pointer overflow-hidden rounded-2xl border shadow-[0_25px_70px_-25px_rgba(0,0,0,0.65)] transition-[transform,box-shadow] duration-300 ease-out ${
         light ? 'border-black/10' : 'border-white/15'
       } ${className ?? ''}`}
-      style={{ background: surfaces[variant], ...style }}
+      onPointerEnter={() => setIsHovered(true)}
+      onPointerMove={handlePointerMove}
+      onPointerLeave={handlePointerLeave}
+      style={{
+        background: surfaces[variant],
+        transform: `perspective(900px) rotateX(${rotation.x}deg) rotateY(${rotation.y}deg) scale(${isHovered ? 1.035 : 1})`,
+        ...style,
+      }}
     >
       {/* Holographic sheen layer */}
       <div
-        className="pointer-events-none absolute inset-0 opacity-60 transition-opacity duration-500 group-hover/gc:opacity-90"
+        className="pointer-events-none absolute inset-0 -translate-x-full opacity-60 transition-[transform,opacity] duration-700 group-hover/gc:translate-x-full group-hover/gc:opacity-90"
         style={{
           background: `linear-gradient(105deg, transparent 30%, ${light ? 'rgba(255,255,255,0.5)' : 'rgba(255,255,255,0.12)'} 45%, ${light ? 'rgba(255,255,255,0.7)' : 'rgba(255,255,255,0.22)'} 50%, ${light ? 'rgba(255,255,255,0.5)' : 'rgba(255,255,255,0.12)'} 55%, transparent 70%)`,
         }}
@@ -101,6 +124,7 @@ export function GiftCard({
         </g>
       </svg>
 
+      <div className="pointer-events-none absolute inset-0 rounded-[inherit] opacity-0 transition-opacity duration-300 group-hover/gc:opacity-100" style={{ boxShadow: 'inset 0 0 0 1px rgba(255,255,255,0.28), inset 0 -45px 70px rgba(0,0,0,0.18)' }} />
       <div className="noise" />
 
       {/* Content */}
@@ -142,7 +166,7 @@ export function GiftCard({
           >
             {label}
           </p>
-          <p className="font-mono text-2xl font-bold tracking-tight sm:text-3xl">
+          <p className="font-mono text-2xl font-bold tracking-tight transition-transform duration-300 group-hover/gc:translate-x-1 sm:text-3xl">
             {amount}
           </p>
         </div>

@@ -14,6 +14,7 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
   const location = useLocation()
+  const isLanding = location.pathname === '/'
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12)
@@ -28,9 +29,13 @@ export default function Navbar() {
     <header className="fixed inset-x-0 top-0 z-50 flex justify-center px-4 pt-4">
       <nav
         className={`w-full max-w-6xl rounded-3xl border transition-all duration-300 ${
-          scrolled || open
-            ? 'border-ink-200 bg-white/80 backdrop-blur-xl shadow-[0_8px_30px_-12px_rgba(19,93,169,0.15)]'
-            : 'border-transparent bg-transparent'
+          isLanding
+            ? scrolled || open
+              ? 'border-cyan-300/20 bg-[#070d27]/85 backdrop-blur-xl shadow-[0_8px_30px_-12px_rgba(0,0,0,0.6)]'
+              : 'border-white/10 bg-[#070d27]/35 backdrop-blur-md'
+            : scrolled || open
+              ? 'border-ink-200 bg-white/80 backdrop-blur-xl shadow-[0_8px_30px_-12px_rgba(19,93,169,0.15)]'
+              : 'border-transparent bg-transparent'
         }`}
       >
         <div className="flex items-center justify-between px-4 py-2.5 sm:px-5">

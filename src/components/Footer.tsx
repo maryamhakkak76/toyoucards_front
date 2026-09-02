@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
 const groups = [
   {
@@ -31,8 +31,11 @@ const groups = [
 ]
 
 export default function Footer() {
+  const location = useLocation()
+  const isLanding = location.pathname === '/'
+
   return (
-    <footer className="relative border-t border-ink-100 px-4 py-14">
+    <footer className={`relative border-t px-4 py-14 ${isLanding ? 'border-white/10 bg-[#05091f] text-white' : 'border-ink-100'}`}>
       <div className="mx-auto max-w-6xl">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
           <div>
