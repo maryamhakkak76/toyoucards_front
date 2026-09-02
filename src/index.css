@@ -164,69 +164,6 @@
     transform: translateX(3px);
   }
 
-  .landing-page {
-    --landing-bg: #05091f;
-    --landing-panel: #0b1230;
-    --landing-panel-soft: rgba(13, 22, 57, 0.72);
-    --landing-copy: #f4f9ff;
-    --landing-muted: #9aa8c6;
-    color: var(--landing-copy);
-    background:
-      radial-gradient(circle at 12% 3%, rgba(0, 99, 180, 0.25), transparent 28rem),
-      radial-gradient(circle at 88% 18%, rgba(28, 228, 243, 0.12), transparent 26rem),
-      var(--landing-bg);
-  }
-
-  .landing-page .landing-section {
-    border-top: 1px solid rgba(148, 181, 224, 0.12);
-  }
-
-  .landing-page .landing-panel {
-    background: var(--landing-panel-soft);
-    border: 1px solid rgba(148, 181, 224, 0.14);
-    box-shadow: 0 22px 60px -30px rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(18px);
-  }
-
-  .landing-page .landing-muted {
-    color: var(--landing-muted);
-  }
-
-  .landing-page .landing-grid {
-    background-image: linear-gradient(rgba(28, 228, 243, 0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(28, 228, 243, 0.035) 1px, transparent 1px);
-    background-size: 48px 48px;
-  }
-}
-
-@layer utilities {
-  .landing-page .landing-copy-gradient {
-    background: linear-gradient(100deg, #ffffff 15%, #1CE4F3 68%, #0063B4 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-  }
-
-  .landing-page .landing-glow {
-    box-shadow: 0 0 0 1px rgba(28, 228, 243, 0.18), 0 0 42px rgba(28, 228, 243, 0.18);
-  }
-
-  .landing-page .landing-brand-gradient {
-    background: linear-gradient(135deg, #1CE4F3 0%, #0063B4 100%);
-  }
-
-  .landing-page .landing-outline {
-    border: 1px solid rgba(28, 228, 243, 0.28);
-    background: rgba(5, 9, 31, 0.45);
-    color: #e8fbfe;
-  }
-
-  .landing-page .landing-outline:hover {
-    border-color: rgba(28, 228, 243, 0.7);
-    background: rgba(0, 99, 180, 0.2);
-  }
-}
-
-@layer utilities {
   .animate-delay-100 { animation-delay: 0.1s; opacity: 0; }
   .animate-delay-200 { animation-delay: 0.2s; opacity: 0; }
   .animate-delay-300 { animation-delay: 0.3s; opacity: 0; }
