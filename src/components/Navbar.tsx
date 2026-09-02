@@ -41,9 +41,9 @@ export default function Navbar() {
         <div className="flex items-center justify-between px-4 py-2.5 sm:px-5">
           <Link to="/" className="flex items-center shrink-0">
             <img
-              src="/ToYoucardsLogo_Light-Logotype.svg"
+              src={isLanding ? '/modern-minimal-logo-for--kahan-tech---highly-creat_(1)_40.png' : '/ToYoucardsLogo_Light-Logotype.svg'}
               alt="ToYouCards"
-              className="h-7 w-auto"
+              className={isLanding ? 'h-8 w-[178px] object-cover object-center' : 'h-7 w-auto'}
             />
           </Link>
 
@@ -52,7 +52,7 @@ export default function Navbar() {
               <a
                 key={l.href}
                 href={l.href}
-                className="text-sm text-ink-500 transition-colors hover:text-brand-600"
+                className={`text-sm transition-colors hover:text-brand-400 ${isLanding ? 'text-white/70 hover:text-white' : 'text-ink-500 hover:text-brand-600'}`}
               >
                 {l.label}
               </a>
@@ -62,7 +62,7 @@ export default function Navbar() {
           <div className="flex items-center gap-2">
             <Link
               to="/login"
-              className="hidden rounded-full px-3.5 py-2 text-sm text-ink-500 transition-colors hover:text-ink-900 sm:block"
+              className={`hidden rounded-full px-3.5 py-2 text-sm transition-colors sm:block ${isLanding ? 'text-white/70 hover:text-white' : 'text-ink-500 hover:text-ink-900'}`}
             >
               Login
             </Link>
@@ -77,7 +77,7 @@ export default function Navbar() {
             <button
               type="button"
               onClick={() => setOpen((v) => !v)}
-              className="flex h-9 w-9 items-center justify-center rounded-full border border-ink-200 text-ink-700 md:hidden"
+              className={`flex h-9 w-9 items-center justify-center rounded-full md:hidden ${isLanding ? 'border-white/20 text-white' : 'border-ink-200 text-ink-700'}`}
               aria-label={open ? 'Close menu' : 'Open menu'}
               aria-expanded={open}
             >
@@ -87,22 +87,22 @@ export default function Navbar() {
         </div>
 
         {open && (
-          <div className="flex flex-col gap-1 border-t border-ink-100 px-3 py-3 md:hidden">
+          <div className={`flex flex-col gap-1 border-t px-3 py-3 md:hidden ${isLanding ? 'border-white/10' : 'border-ink-100'}`}>
             {links.map((l) => (
               <a
                 key={l.href}
                 href={l.href}
                 onClick={() => setOpen(false)}
-                className="rounded-xl px-3 py-2.5 text-sm text-ink-500 transition-colors hover:bg-ink-50 hover:text-brand-600"
+                className={`rounded-xl px-3 py-2.5 text-sm transition-colors ${isLanding ? 'text-white/70 hover:bg-white/10 hover:text-white' : 'text-ink-500 hover:bg-ink-50 hover:text-brand-600'}`}
               >
                 {l.label}
               </a>
             ))}
-            <div className="mt-1 flex flex-col gap-2 border-t border-ink-100 pt-3">
+            <div className={`mt-1 flex flex-col gap-2 border-t pt-3 ${isLanding ? 'border-white/10' : 'border-ink-100'}`}>
               <Link
                 to="/login"
                 onClick={() => setOpen(false)}
-                className="rounded-full border border-ink-200 px-4 py-2.5 text-center text-sm text-ink-700"
+                className={`rounded-full border px-4 py-2.5 text-center text-sm ${isLanding ? 'border-white/20 text-white' : 'border-ink-200 text-ink-700'}`}
               >
                 Login
               </Link>

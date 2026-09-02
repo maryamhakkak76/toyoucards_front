@@ -7,7 +7,7 @@ export function CardOrbit() {
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            'radial-gradient(circle at 50% 45%, rgba(22,193,232,0.14), rgba(19,93,169,0.04) 55%, transparent 72%)',
+            'radial-gradient(circle at 50% 45%, rgba(28,228,243,0.14), rgba(0,99,180,0.05) 55%, transparent 72%)',
         }}
       />
 
@@ -19,9 +19,9 @@ export function CardOrbit() {
       >
         <defs>
           <linearGradient id="orbit-stroke" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="#16c1e8" stopOpacity="0.4" />
-            <stop offset="60%" stopColor="#1677c8" stopOpacity="0.12" />
-            <stop offset="100%" stopColor="#135da9" stopOpacity="0" />
+            <stop offset="0%" stopColor="#1CE4F3" stopOpacity="0.4" />
+            <stop offset="60%" stopColor="#087AC7" stopOpacity="0.12" />
+            <stop offset="100%" stopColor="#0063B4" stopOpacity="0" />
           </linearGradient>
         </defs>
         <ellipse
@@ -41,9 +41,9 @@ export function CardOrbit() {
           strokeWidth="1"
           transform="rotate(28 280 280)"
         />
-        <circle cx="30" cy="215" r="2.5" fill="#16c1e8" />
-        <circle cx="520" cy="330" r="2" fill="#1677c8" />
-        <circle cx="360" cy="40" r="2" fill="#16c1e8" />
+        <circle cx="30" cy="215" r="2.5" fill="#1CE4F3" />
+        <circle cx="520" cy="330" r="2" fill="#087AC7" />
+        <circle cx="360" cy="40" r="2" fill="#1CE4F3" />
       </svg>
 
       <div className="animate-float-slower absolute left-[2%] top-[16%] w-[38%] -rotate-12 opacity-80 blur-[1.5px]">
@@ -56,7 +56,7 @@ export function CardOrbit() {
         <GiftCard variant="slate" amount="$10" label="STREAMING" />
       </div>
 
-      <div className="animate-float-slow-orbit relative z-10 w-[58%] drop-shadow-[0_40px_60px_rgba(19,93,169,0.25)]">
+      <div className="animate-float-slow-orbit relative z-10 w-[58%] drop-shadow-[0_40px_60px_rgba(0,99,180,0.35)]">
         <GiftCard variant="blue" amount="$50" label="DIGITAL VALUE" />
       </div>
     </div>

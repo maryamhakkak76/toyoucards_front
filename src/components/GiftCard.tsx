@@ -13,10 +13,10 @@ export type GiftCardVariant =
   | 'slate'
 
 const surfaces: Record<GiftCardVariant, string> = {
-  cyan: 'linear-gradient(135deg, #0EA5E9 0%, #1677C8 50%, #135DA9 100%)',
-  blue: 'linear-gradient(135deg, #2563EB 0%, #1677C8 50%, #0E477F 100%)',
-  deep: 'linear-gradient(150deg, #135DA9 0%, #0A3260 60%, #061A38 100%)',
-  dark: 'linear-gradient(150deg, #1E3A5F 0%, #15243A 55%, #0B1520 100%)',
+  cyan: 'linear-gradient(135deg, #1CE4F3 0%, #087AC7 50%, #0063B4 100%)',
+  blue: 'linear-gradient(135deg, #087AC7 0%, #0063B4 50%, #003B70 100%)',
+  deep: 'linear-gradient(150deg, #0063B4 0%, #003B70 60%, #001F3F 100%)',
+  dark: 'linear-gradient(150deg, #0D2240 0%, #0A1A30 55%, #050D1A 100%)',
   light: 'linear-gradient(150deg, #E0F2FE 0%, #BAE6FD 55%, #7DD3FC 100%)',
   teal: 'linear-gradient(135deg, #06B6D4 0%, #0891B2 50%, #155E75 100%)',
   emerald: 'linear-gradient(135deg, #10B981 0%, #059669 50%, #065F46 100%)',
@@ -26,10 +26,10 @@ const surfaces: Record<GiftCardVariant, string> = {
 }
 
 const glowColors: Record<GiftCardVariant, string> = {
-  cyan: '#7DD3FC',
-  blue: '#93C5FD',
-  deep: '#60A5FA',
-  dark: '#64748B',
+  cyan: '#1CE4F3',
+  blue: '#087AC7',
+  deep: '#0063B4',
+  dark: '#3B6FA0',
   light: '#FFFFFF',
   teal: '#67E8F9',
   emerald: '#6EE7B7',
