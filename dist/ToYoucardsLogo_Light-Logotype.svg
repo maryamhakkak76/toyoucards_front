@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 40" fill="none">
+  <rect x="2" y="6" width="28" height="28" rx="7" fill="url(#tyc-grad)"/>
+  <path d="M9 16.5C9 15.67 9.67 15 10.5 15H21.5C22.33 15 23 15.67 23 16.5V23.5C23 24.33 22.33 25 21.5 25H10.5C9.67 25 9 24.33 9 23.5V16.5Z" stroke="#fff" stroke-width="1.6" opacity="0.9"/>
+  <path d="M11 27H23" stroke="#fff" stroke-width="1.6" stroke-linecap="round" opacity="0.7"/>
+  <circle cx="16" cy="20" r="1.3" fill="#fff" opacity="0.9"/>
+  <text x="38" y="26" font-family="Sora, Inter, sans-serif" font-size="17" font-weight="600" fill="#0A1A2A" letter-spacing="-0.02em">ToYouCards</text>
+  <defs>
+    <linearGradient id="tyc-grad" x1="2" y1="6" x2="30" y2="34" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#16C1E8"/>
+      <stop offset="0.52" stop-color="#1677C8"/>
+      <stop offset="1" stop-color="#135DA9"/>
+    </linearGradient>
+  </defs>
+</svg>
