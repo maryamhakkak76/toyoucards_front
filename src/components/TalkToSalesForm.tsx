@@ -66,7 +66,7 @@ export default function TalkToSalesForm({ compact = false }: { compact?: boolean
       setForm(emptyForm)
     } catch {
       setStatus('error')
-      setErrorMsg('Something went wrong sending your request. Please try again.')
+      setErrorMsg('Something went wrong sending your inquiry. Please try again.')
     }
   }
 
@@ -85,7 +85,7 @@ export default function TalkToSalesForm({ compact = false }: { compact?: boolean
           <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-brand-500/15 border border-brand-500/20">
             <Sparkles className="h-4.5 w-4.5 text-brand-600" />
           </div>
-          <span className="text-sm font-semibold text-ink-800">Request a Quote</span>
+          <span className="text-sm font-semibold text-ink-800">Get Started</span>
         </div>
       )}
 
@@ -134,10 +134,10 @@ export default function TalkToSalesForm({ compact = false }: { compact?: boolean
           />
         </Field>
 
-        <Field label="Description / Message" className={compact ? '' : 'sm:col-span-2'}>
+        <Field label="Message" className={compact ? '' : 'sm:col-span-2'}>
           <textarea
             className="field-input min-h-[110px] resize-y"
-            placeholder="Tell us about your business and what you're looking for…"
+            placeholder="Tell us what you're looking for…"
             value={form.message}
             onChange={(e) => update('message', e.target.value)}
             disabled={status === 'loading'}
@@ -164,14 +164,14 @@ export default function TalkToSalesForm({ compact = false }: { compact?: boolean
           </>
         ) : (
           <>
-            Send Request
+            Send Inquiry
             <ArrowRight className="h-4.5 w-4.5" />
           </>
         )}
       </button>
 
       <p className="mt-4 text-center text-xs text-ink-400">
-        By submitting, you agree to be contacted by ToYouCards about your inquiry.
+        We'll get back to you within one business day.
       </p>
     </form>
   )
@@ -209,13 +209,13 @@ function SuccessState({ onReset }: { onReset: () => void }) {
         </div>
       </div>
       <h3 className="font-display text-2xl font-semibold text-ink-900 mb-3">
-        Thanks — your request is on the way.
+        Thanks — your inquiry is in!
       </h3>
       <p className="text-ink-500 max-w-md leading-relaxed mb-8">
-        Our team will review your request and get back to you shortly. Keep an eye on your inbox.
+        We've received your message and our team will get back to you within one business day.
       </p>
       <button onClick={onReset} className="btn-secondary">
-        Send another request
+        Send another message
       </button>
     </div>
   )

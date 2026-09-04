@@ -13,16 +13,16 @@ export default function ContactPage() {
           <div className="mx-auto max-w-3xl text-center">
             <div className="eyebrow justify-center mb-5">
               <span className="flex h-1.5 w-1.5 rounded-full bg-brand-500" />
-              Talk to Our Team
+              Get In Touch
             </div>
             <h1 className="text-display-2xl font-display text-ink-900">
-              Let's build your digital
+              Let's get your business
               <br />
-              <span className="text-gradient">gift card business.</span>
+              <span className="text-gradient">started with gift cards.</span>
             </h1>
             <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-ink-500">
-              Whether you're looking for bulk gift cards, reseller pricing, rewards solutions, or
-              API integration — tell us what you need and we'll help you find the right path.
+              Whether you're looking for bulk gift cards, reseller pricing, or a reliable
+              fulfillment partner — tell us what you need and we'll help you find the right fit.
             </p>
           </div>
         </div>
@@ -41,23 +41,23 @@ export default function ContactPage() {
                 Let's talk.
               </h2>
               <p className="mt-5 text-display-md font-display text-ink-300 leading-[1.15]">
-                Tell us what you're building.
+                Tell us what you need.
                 <br />
                 We'll help you figure out
                 <br />
-                what comes next.
+                the best way forward.
               </p>
               <p className="mt-8 text-[15px] leading-relaxed text-ink-500 max-w-md">
-                From bulk gift card purchasing to API-powered distribution, our team can help you
-                find the right solution for your business.
+                From bulk gift card purchasing to reseller arrangements, our team can help
+                you find the right solution for your business.
               </p>
 
               <div className="mt-10 space-y-3.5">
                 {[
                   'Business pricing',
                   'Bulk purchasing',
-                  'API integration',
                   'Reseller solutions',
+                  'Fast fulfillment',
                 ].map((item) => (
                   <div key={item} className="flex items-center gap-3">
                     <span className="flex h-5 w-5 items-center justify-center rounded-full bg-brand-500/15 border border-brand-500/20">
@@ -90,7 +90,7 @@ export default function ContactPage() {
             <NextStep
               num="01"
               title="Tell us about your business"
-              description="Share what you're building and what you need."
+              description="Share what you're looking for and what you need."
             />
             <NextStep
               num="02"
@@ -100,7 +100,7 @@ export default function ContactPage() {
             <NextStep
               num="03"
               title="We discuss the right solution"
-              description="A real conversation about pricing, volume, and integration."
+              description="A conversation about pricing, volume, and getting started."
               last
             />
           </div>
@@ -115,28 +115,24 @@ export default function ContactPage() {
               Frequently asked questions
             </h2>
             <p className="text-center text-ink-400 mb-12">
-              Common questions from businesses evaluating ToYouCards.
+              Common questions from businesses getting started with ToYouCards.
             </p>
             <div className="space-y-3">
               <FaqItem
                 question="Do you offer volume pricing?"
-                answer="Yes. Business pricing scales with volume. The more you purchase, the better your rates. Talk to our team for a quote based on your expected volume."
+                answer="Yes. Business pricing scales with volume — the more you purchase, the better your rates. Contact us for a quote based on your expected volume."
               />
               <FaqItem
                 question="Can I resell the gift cards?"
-                answer="Yes. We support reseller and distributor arrangements with competitive margins and white-label options. Select 'Becoming a Reseller' in the form above to get started."
+                answer="Yes. We support reseller and distributor arrangements with competitive margins. Mention 'Reseller Inquiry' in your message to get started."
               />
               <FaqItem
-                question="Can I integrate through API?"
-                answer="Yes. ToYouCards provides a RESTful API with webhooks for order management, balance checks, and real-time fulfillment. A sandbox environment is available for testing."
-              />
-              <FaqItem
-                question="What markets and products do you support?"
-                answer="Our catalog spans many brands across multiple regions, covering retail, gaming, entertainment, food delivery, streaming, and more. Availability varies by region — our team can confirm specific products for your markets."
+                question="What brands and products do you support?"
+                answer="Our catalog covers gaming, apps, lifestyle, and streaming brands. Availability may vary — our team can confirm specific products for your needs."
               />
               <FaqItem
                 question="How does business onboarding work?"
-                answer="Onboarding starts with a conversation with our sales team. We'll understand your requirements, configure your account, set up pricing, and provide API access and documentation if needed."
+                answer="Onboarding starts with a conversation. We'll understand your requirements, configure your account, and set up pricing so you can start ordering right away."
               />
             </div>
           </div>
@@ -148,13 +144,13 @@ export default function ContactPage() {
         <div className="glow-blue top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-brand-500/6" />
         <div className="container-max container-px relative text-center">
           <h2 className="text-display-lg font-display text-ink-900">
-            Still deciding?
+            Ready to get started?
           </h2>
           <p className="mx-auto mt-4 max-w-lg text-ink-500">
-            Send us a message with what you're thinking about. No commitment required.
+            Send us a message and we'll help you find the right solution. No commitment required.
           </p>
           <Link to="/contact" className="btn-primary mt-8">
-            Talk to Sales
+            Start Now
             <ArrowRight className="h-4.5 w-4.5" />
           </Link>
         </div>

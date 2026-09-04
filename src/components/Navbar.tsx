@@ -3,10 +3,10 @@ import { Link, useLocation } from 'react-router-dom'
 import { Menu, X, ArrowRight } from 'lucide-react'
 
 const links = [
-  { label: 'Key Benefits', href: '/#platform' },
-  { label: 'Gift Cards', href: '/#catalog' },
+  { label: 'Benefits', href: '/#platform' },
+  { label: 'Catalog', href: '/#catalog' },
   { label: 'How It Works', href: '/#order-process' },
-  { label: 'API', href: '/#api' },
+  { label: 'Dashboard', href: '/#dashboard' },
   { label: 'Contact', href: '/contact' },
 ]
 
@@ -42,7 +42,7 @@ export default function Navbar() {
             />
           </Link>
 
-          <div className="hidden items-center gap-6 lg:gap-7 md:flex">
+          <div className="hidden items-center gap-5 lg:gap-7 md:flex">
             {links.map((l) => (
               <a
                 key={l.href}
@@ -65,7 +65,7 @@ export default function Navbar() {
               to="/contact"
               className="group hidden items-center gap-1.5 rounded-full bg-gradient-brand px-4 py-2 text-sm font-medium text-white shadow-[0_8px_30px_-8px_rgba(0,99,180,0.5)] transition-all hover:brightness-110 sm:flex"
             >
-              Talk to Sales
+              Start Now
               <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
             </Link>
 
@@ -106,7 +106,7 @@ export default function Navbar() {
                 onClick={() => setOpen(false)}
                 className="flex items-center justify-center gap-1.5 rounded-full bg-gradient-brand px-4 py-2.5 text-sm font-medium text-white"
               >
-                Talk to Sales
+                Start Now
                 <ArrowRight className="h-3.5 w-3.5" />
               </Link>
             </div>

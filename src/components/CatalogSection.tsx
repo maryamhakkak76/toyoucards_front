@@ -4,7 +4,6 @@ import {
   Smartphone,
   Tv,
   ShoppingBag,
-  Music,
   LayoutGrid,
   ArrowRight,
 } from 'lucide-react'
@@ -12,7 +11,7 @@ import { GiftCard, type GiftCardVariant } from '@/components/GiftCard'
 
 type Brand = {
   name: string
-  category: string
+  category: 'Gaming' | 'Apps' | 'Lifestyle' | 'Streaming'
   initials: string
   cardVariant: GiftCardVariant
   amount: string
@@ -20,34 +19,27 @@ type Brand = {
 
 const brands: Brand[] = [
   { name: 'Xbox', category: 'Gaming', initials: 'XB', cardVariant: 'emerald', amount: '$50' },
-  { name: 'PlayStation', category: 'Gaming', initials: 'PS', cardVariant: 'blue', amount: '$100' },
-  { name: 'Steam', category: 'Gaming', initials: 'ST', cardVariant: 'dark', amount: '$25' },
   { name: 'Nintendo', category: 'Gaming', initials: 'NT', cardVariant: 'rose', amount: '$35' },
   { name: 'PUBG', category: 'Gaming', initials: 'PB', cardVariant: 'amber', amount: '$10' },
-  { name: 'FIFA', category: 'Gaming', initials: 'FI', cardVariant: 'teal', amount: '$20' },
-  { name: 'App Store', category: 'Apps', initials: 'AP', cardVariant: 'blue', amount: '$25' },
-  { name: 'Google Play', category: 'Apps', initials: 'GP', cardVariant: 'emerald', amount: '$15' },
-  { name: 'Apple', category: 'Apps', initials: 'AP', cardVariant: 'slate', amount: '$50' },
-  { name: 'Google One', category: 'Apps', initials: 'G1', cardVariant: 'cyan', amount: '$30' },
-  { name: 'Netflix', category: 'Streaming', initials: 'NF', cardVariant: 'rose', amount: '$25' },
-  { name: 'Amazon', category: 'Shopping', initials: 'AZ', cardVariant: 'amber', amount: '$50' },
-  { name: 'Noon', category: 'Shopping', initials: 'NO', cardVariant: 'amber', amount: '$100' },
-  { name: 'Spotify', category: 'Music', initials: 'SP', cardVariant: 'emerald', amount: '$30' },
-  { name: 'Apple Music', category: 'Music', initials: 'AM', cardVariant: 'rose', amount: '$15' },
   { name: 'Call of Duty', category: 'Gaming', initials: 'CD', cardVariant: 'slate', amount: '$20' },
+  { name: 'FIFA', category: 'Gaming', initials: 'FI', cardVariant: 'teal', amount: '$20' },
+  { name: 'Apple', category: 'Apps', initials: 'AP', cardVariant: 'slate', amount: '$50' },
+  { name: 'Google', category: 'Apps', initials: 'GG', cardVariant: 'emerald', amount: '$15' },
+  { name: 'Amazon', category: 'Lifestyle', initials: 'AZ', cardVariant: 'amber', amount: '$50' },
+  { name: 'Noon', category: 'Lifestyle', initials: 'NO', cardVariant: 'amber', amount: '$100' },
+  { name: 'Netflix', category: 'Streaming', initials: 'NF', cardVariant: 'rose', amount: '$25' },
 ]
 
 const categories = [
   { label: 'All', icon: LayoutGrid },
   { label: 'Gaming', icon: Gamepad2 },
   { label: 'Apps', icon: Smartphone },
+  { label: 'Lifestyle', icon: ShoppingBag },
   { label: 'Streaming', icon: Tv },
-  { label: 'Shopping', icon: ShoppingBag },
-  { label: 'Music', icon: Music },
-]
+] as const
 
 export default function CatalogSection() {
-  const [active, setActive] = useState('All')
+  const [active, setActive] = useState<string>('All')
   const [hovered, setHovered] = useState<string | null>(null)
 
   const filtered = active === 'All' ? brands : brands.filter((b) => b.category === active)
@@ -69,12 +61,12 @@ export default function CatalogSection() {
             THE CATALOG
           </p>
           <h2 className="mt-3 text-balance text-3xl font-semibold leading-[1.1] tracking-tight text-ink-900 sm:text-4xl lg:text-5xl">
-            A living catalog of{' '}
+            A curated catalog of{' '}
             <span className="text-gradient-brand">digital value.</span>
           </h2>
           <p className="mx-auto mt-4 max-w-md text-pretty text-sm leading-relaxed text-ink-500 sm:text-base">
-            Hundreds of brands and denominations across gaming, streaming, shopping, and more —
-            all in one place.
+            Popular brands across gaming, apps, lifestyle, and streaming —
+            all available for fast, secure digital delivery.
           </p>
         </div>
 
@@ -116,17 +108,17 @@ export default function CatalogSection() {
             >
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-500/8 text-sm font-bold text-brand-700 ring-1 ring-brand-400/15 transition-all duration-300 group-hover/brand:bg-brand-500/15 group-hover/brand:ring-brand-400/30">
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-500/8 text-sm font-bold text-brand-700 ring-1 ring-brand-400/15 transition-all duration-300 group-hover/brand:bg-brand-500/15 group-hover/brand:ring-brand-400/30">
                     {brand.initials}
                   </span>
-                  <div>
-                    <p className="text-sm font-semibold text-ink-800 transition-colors group-hover/brand:text-brand-700">
+                  <div className="min-w-0">
+                    <p className="truncate text-sm font-semibold text-ink-800 transition-colors group-hover/brand:text-brand-700">
                       {brand.name}
                     </p>
                     <p className="text-[11px] text-ink-400">{brand.category}</p>
                   </div>
                 </div>
-                <span className="rounded-full bg-ink-50 px-2.5 py-1 text-[10px] font-medium tracking-wider text-ink-500 ring-1 ring-ink-100 transition-colors group-hover/brand:text-brand-700/70 group-hover/brand:ring-brand-400/20">
+                <span className="shrink-0 rounded-full bg-ink-50 px-2.5 py-1 text-[10px] font-medium tracking-wider text-ink-500 ring-1 ring-ink-100 transition-colors group-hover/brand:text-brand-700/70 group-hover/brand:ring-brand-400/20">
                   {brand.amount}
                 </span>
               </div>
@@ -155,7 +147,7 @@ export default function CatalogSection() {
         </div>
 
         <p className="mt-8 text-center text-sm text-ink-400 sm:mt-10">
-          …and hundreds more brands available on request.
+          More brands available on request — contact us for the full list.
         </p>
       </div>
     </section>

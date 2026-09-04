@@ -127,46 +127,60 @@ export function GiftCard({
       <div className="pointer-events-none absolute inset-0 rounded-[inherit] opacity-0 transition-opacity duration-300 group-hover/gc:opacity-100" style={{ boxShadow: 'inset 0 0 0 1px rgba(255,255,255,0.28), inset 0 -45px 70px rgba(0,0,0,0.18)' }} />
       <div className="noise" />
 
-      {/* Content */}
+      {/* Content — clamp-based text sizes for responsive scaling */}
       <div
-        className={`relative flex h-full flex-col justify-between p-4 sm:p-5 ${
+        className={`relative flex h-full flex-col justify-between p-3 sm:p-4 lg:p-5 ${
           light ? 'text-[#0A2547]' : 'text-white'
         }`}
       >
         {/* Top row */}
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5 sm:gap-2">
             <span
-              className={`flex h-6 w-6 items-center justify-center rounded-md ${
+              className={`flex h-5 w-5 items-center justify-center rounded-md sm:h-6 sm:w-6 ${
                 light ? 'bg-[#135DA9]/10' : 'bg-white/15'
               }`}
             >
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+              <svg width="10" height="10" viewBox="0 0 12 12" fill="none" className="sm:hidden">
+                <rect x="1" y="3" width="10" height="6" rx="1.5" stroke="currentColor" strokeWidth="1" opacity="0.8" />
+                <line x1="1" y1="5.5" x2="11" y2="5.5" stroke="currentColor" strokeWidth="1" opacity="0.6" />
+              </svg>
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" className="hidden sm:block">
                 <rect x="1" y="3" width="10" height="6" rx="1.5" stroke="currentColor" strokeWidth="1" opacity="0.8" />
                 <line x1="1" y1="5.5" x2="11" y2="5.5" stroke="currentColor" strokeWidth="1" opacity="0.6" />
               </svg>
             </span>
-            <span className="text-[10px] font-semibold tracking-[0.2em]">TOYOUCARDS</span>
+            <span
+              className="font-semibold tracking-[0.15em] sm:tracking-[0.2em]"
+              style={{ fontSize: 'clamp(7px, 2.2vw, 10px)' }}
+            >
+              TOYOUCARDS
+            </span>
           </div>
           <span
-            className={`rounded-full px-2 py-0.5 text-[8px] font-semibold tracking-wider ${
+            className={`rounded-full px-1.5 py-0.5 font-semibold tracking-wider sm:px-2 ${
               light ? 'bg-[#135DA9]/10 text-[#135DA9]/70' : 'bg-white/15 text-white/70'
             }`}
+            style={{ fontSize: 'clamp(6px, 1.8vw, 8px)' }}
           >
             SECURE
           </span>
         </div>
 
         {/* Middle — amount */}
-        <div className="space-y-1">
+        <div className="space-y-0.5 sm:space-y-1">
           <p
-            className={`text-[9px] font-medium tracking-[0.24em] ${
+            className={`font-medium tracking-[0.18em] sm:tracking-[0.24em] ${
               light ? 'text-[#135DA9]/60' : 'text-white/55'
             }`}
+            style={{ fontSize: 'clamp(7px, 2vw, 9px)' }}
           >
             {label}
           </p>
-          <p className="font-mono text-2xl font-bold tracking-tight transition-transform duration-300 group-hover/gc:translate-x-1 sm:text-3xl">
+          <p
+            className="font-mono font-bold tracking-tight transition-transform duration-300 group-hover/gc:translate-x-1"
+            style={{ fontSize: 'clamp(1.1rem, 5vw, 1.875rem)' }}
+          >
             {amount}
           </p>
         </div>
@@ -174,9 +188,10 @@ export function GiftCard({
         {/* Bottom row */}
         <div className="flex items-center justify-between">
           <span
-            className={`text-[8px] font-medium tracking-[0.22em] ${
+            className={`font-medium tracking-[0.18em] sm:tracking-[0.22em] ${
               light ? 'text-[#135DA9]/60' : 'text-white/45'
             }`}
+            style={{ fontSize: 'clamp(6px, 1.8vw, 8px)' }}
           >
             DIGITAL GIFT CARD
           </span>
@@ -184,7 +199,7 @@ export function GiftCard({
             {[0, 1, 2].map((i) => (
               <span
                 key={i}
-                className={`h-1 w-3 rounded-full ${light ? 'bg-[#135DA9]/30' : 'bg-white/35'}`}
+                className={`h-0.5 w-2 rounded-full sm:h-1 sm:w-3 ${light ? 'bg-[#135DA9]/30' : 'bg-white/35'}`}
               />
             ))}
           </div>

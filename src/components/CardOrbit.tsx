@@ -11,9 +11,10 @@ export function CardOrbit() {
         }}
       />
 
+      {/* Orbit rings — hidden on mobile to reduce clutter */}
       <svg
         aria-hidden="true"
-        className="animate-orbit-spin absolute inset-0 h-full w-full opacity-50"
+        className="animate-orbit-spin absolute inset-0 hidden h-full w-full opacity-50 sm:block"
         viewBox="0 0 560 560"
         fill="none"
       >
@@ -24,21 +25,10 @@ export function CardOrbit() {
             <stop offset="100%" stopColor="#0063B4" stopOpacity="0" />
           </linearGradient>
         </defs>
+        <ellipse cx="280" cy="280" rx="250" ry="150" stroke="url(#orbit-stroke)" strokeWidth="1" />
         <ellipse
-          cx="280"
-          cy="280"
-          rx="250"
-          ry="150"
-          stroke="url(#orbit-stroke)"
-          strokeWidth="1"
-        />
-        <ellipse
-          cx="280"
-          cy="280"
-          rx="185"
-          ry="255"
-          stroke="url(#orbit-stroke)"
-          strokeWidth="1"
+          cx="280" cy="280" rx="185" ry="255"
+          stroke="url(#orbit-stroke)" strokeWidth="1"
           transform="rotate(28 280 280)"
         />
         <circle cx="30" cy="215" r="2.5" fill="#1CE4F3" />
@@ -46,17 +36,19 @@ export function CardOrbit() {
         <circle cx="360" cy="40" r="2" fill="#1CE4F3" />
       </svg>
 
-      <div className="animate-float-slower absolute left-[2%] top-[16%] w-[38%] -rotate-12 opacity-80 blur-[1.5px]">
+      {/* Floating satellite cards — hidden on mobile, shown on sm+ */}
+      <div className="animate-float-slower absolute left-[2%] top-[16%] hidden w-[38%] -rotate-12 opacity-80 blur-[1.5px] sm:block">
         <GiftCard variant="emerald" amount="$25" label="GAMING" />
       </div>
-      <div className="animate-float-slow-orbit absolute right-[1%] top-[20%] w-[40%] rotate-12 opacity-85 blur-[1px]">
-        <GiftCard variant="teal" amount="$100" label="SHOPPING" />
+      <div className="animate-float-slow-orbit absolute right-[1%] top-[20%] hidden w-[40%] rotate-12 opacity-85 blur-[1px] sm:block">
+        <GiftCard variant="amber" amount="$100" label="LIFESTYLE" />
       </div>
-      <div className="animate-float-slow-orbit absolute bottom-[10%] left-[10%] w-[34%] -rotate-6 opacity-70 blur-[2px]">
-        <GiftCard variant="slate" amount="$10" label="STREAMING" />
+      <div className="animate-float-slow-orbit absolute bottom-[10%] left-[10%] hidden w-[34%] -rotate-6 opacity-70 blur-[2px] sm:block">
+        <GiftCard variant="rose" amount="$25" label="STREAMING" />
       </div>
 
-      <div className="animate-float-slow-orbit relative z-10 w-[58%] drop-shadow-[0_40px_60px_rgba(0,99,180,0.35)]">
+      {/* Center card — always visible, larger on mobile */}
+      <div className="animate-float-slow-orbit relative z-10 w-[72%] drop-shadow-[0_40px_60px_rgba(0,99,180,0.35)] sm:w-[58%]">
         <GiftCard variant="blue" amount="$50" label="DIGITAL VALUE" />
       </div>
     </div>
