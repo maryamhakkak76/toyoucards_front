@@ -3,8 +3,9 @@ import { Link, useLocation } from 'react-router-dom'
 import { Menu, X, ArrowRight } from 'lucide-react'
 
 const links = [
+  { label: 'Categories', href: '/#categories' },
+  { label: 'Brands', href: '/#brands' },
   { label: 'Benefits', href: '/#platform' },
-  { label: 'Catalog', href: '/#catalog' },
   { label: 'How It Works', href: '/#order-process' },
   { label: 'Dashboard', href: '/#dashboard' },
   { label: 'Contact', href: '/contact' },

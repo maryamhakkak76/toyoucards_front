@@ -1,32 +1,35 @@
 import { Link } from 'react-router-dom'
 import {
   ArrowRight,
-  LayoutGrid,
   ShieldCheck,
-  Wallet,
-  Download,
-  CreditCard,
-  MousePointerClick,
-  Gift,
   Zap,
   Headphones,
   Sparkles,
+  Wallet,
   TrendingUp,
+  Gift,
+  LayoutGrid,
+  Download,
+  CreditCard,
+  MousePointerClick,
 } from 'lucide-react'
 import { GiftCard } from '@/components/GiftCard'
 import { CardOrbit } from '@/components/CardOrbit'
-import CatalogSection from '@/components/CatalogSection'
+import CategorySection from '@/components/CategorySection'
+import BuiltForMarquee from '@/components/BuiltForMarquee'
+import BrandsSection from '@/components/BrandsSection'
 import TalkToSalesForm from '@/components/TalkToSalesForm'
 
 export default function LandingPage() {
   return (
     <>
       <Hero />
-      <CatalogSection />
+      <CategorySection />
+      <BuiltForMarquee />
+      <BrandsSection />
       <InlineCta prompt="Need gift cards in bulk for your business?" action="Contact Us" />
       <ValueSection />
       <OrderProcessSection />
-      <WhyToYouCardsSection />
       <DashboardPreview />
       <ContactSection />
       <FinalCta />
@@ -57,16 +60,16 @@ function Hero() {
           </div>
 
           <h1 className="mt-5 text-balance text-4xl font-semibold leading-[1.05] tracking-tight text-ink-900 sm:text-5xl lg:text-6xl xl:text-7xl">
-            Sell, send, and manage{' '}
+            Digital gift cards,{' '}
             <span className="text-gradient-brand [text-shadow:0_0_40px_rgba(28,228,243,0.15)]">
-              digital gift cards
+              made simple
             </span>{' '}
-            from one simple platform.
+            for business.
           </h1>
 
           <p className="mx-auto mt-5 max-w-md text-pretty text-base leading-relaxed text-ink-500 lg:mx-0 lg:text-lg">
-            A curated catalog of popular brands for businesses that need fast,
-            reliable digital gift card fulfillment.
+            Access popular digital gift cards, place business orders, and manage
+            delivery from one simple platform.
           </p>
 
           <div className="mt-7 flex flex-col items-center gap-3 sm:flex-row lg:justify-start">
@@ -78,10 +81,10 @@ function Hero() {
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Link>
             <a
-              href="#catalog"
+              href="#brands"
               className="w-full rounded-full border border-ink-200 bg-white/60 px-5 py-3 text-center text-sm font-medium text-ink-700 backdrop-blur-sm transition-colors hover:border-brand-400/50 hover:text-brand-700 sm:w-auto"
             >
-              Browse Catalog
+              Explore Catalog
             </a>
           </div>
 
@@ -129,13 +132,13 @@ function InlineCta({ prompt, action }: { prompt: string; action: string }) {
   )
 }
 
-/* ──────────────────────────── KEY BENEFITS SECTION ──────────────────────────── */
+/* ──────────────────────────── BENEFITS SECTION ──────────────────────────── */
 
 function BenefitIcon({ children, color }: { children: React.ReactNode; color: string }) {
   return (
     <span
       className="flex h-11 w-11 items-center justify-center rounded-xl transition-transform duration-300 group-hover:scale-110"
-      style={{ background: `${color}15`, border: `1px solid ${color}30` }}
+      style={{ background: `${color}12`, border: `1px solid ${color}28` }}
     >
       {children}
     </span>
@@ -144,23 +147,16 @@ function BenefitIcon({ children, color }: { children: React.ReactNode; color: st
 
 function ValueSection() {
   const features = [
-    { icon: Gift, color: '#087AC7', title: 'Curated Brand Catalog', body: 'A hand-picked selection of popular gaming, app, lifestyle, and streaming brands your customers actually want.' },
-    { icon: LayoutGrid, color: '#10B981', title: 'Bulk Ordering', body: 'Place large-volume orders with a few clicks. Built for businesses that need gift cards at scale.' },
-    { icon: ShieldCheck, color: '#F43F5E', title: 'Secure Code Delivery', body: 'Digital codes are delivered securely so only the intended recipient can access and redeem them.' },
-    { icon: LayoutGrid, color: '#8B5CF6', title: 'Easy Dashboard Management', body: 'Track orders, manage balances, and view history from one clean, intuitive dashboard.' },
-    { icon: CreditCard, color: '#F59E0B', title: 'Flexible Payment Options', body: 'Pay using wallet balance or available online payment methods — whatever works for your business.' },
-    { icon: Download, color: '#087AC7', title: 'Export & Reporting', body: 'Export structured data for accounting, reporting, and operational workflows.' },
+    { icon: Gift, color: '#087AC7', title: 'Curated Catalog', body: 'Access popular digital products from trusted brands.' },
+    { icon: LayoutGrid, color: '#10B981', title: 'Bulk Ordering', body: 'Purchase the quantity your business needs through a streamlined ordering experience.' },
+    { icon: ShieldCheck, color: '#8B5CF6', title: 'Secure Delivery', body: 'Keep digital codes protected throughout the ordering and delivery process.' },
+    { icon: Sparkles, color: '#087AC7', title: 'Simple Management', body: 'Keep products, orders, and activity organized from one place.' },
+    { icon: CreditCard, color: '#F59E0B', title: 'Flexible Payments', body: 'Use the payment options available to your business.' },
+    { icon: Download, color: '#10B981', title: 'Reporting & Exports', body: 'Keep records organized for your operational and reporting needs.' },
   ]
 
   return (
     <section id="platform" className="relative overflow-hidden py-20 sm:py-24">
-      <p
-        aria-hidden="true"
-        className="pointer-events-none absolute -top-6 left-1/2 -translate-x-1/2 select-none whitespace-nowrap text-[18vw] font-bold leading-none tracking-tighter text-ink-900/[0.025] sm:text-[22vw]"
-      >
-        BENEFITS
-      </p>
-
       <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
         <div className="grid items-start gap-10 lg:grid-cols-2 lg:gap-12">
           <div className="lg:sticky lg:top-28">
@@ -169,11 +165,11 @@ function ValueSection() {
             </p>
             <h2 className="mt-3 text-balance text-3xl font-semibold leading-[1.1] tracking-tight text-ink-900 sm:text-4xl lg:text-5xl">
               Everything you need to manage{' '}
-              <span className="text-gradient-brand">digital gift cards</span> at scale.
+              <span className="text-gradient-brand">digital gift cards</span> with less friction.
             </h2>
             <p className="mt-5 max-w-md text-pretty text-base leading-relaxed text-ink-500">
-              ToYouCards replaces spreadsheets, manual purchasing, and fragmented vendors
-              with one simple platform for digital gift cards.
+              ToYouCards brings ordering, management, and delivery together in one
+              calm, dependable platform.
             </p>
           </div>
 
@@ -201,37 +197,33 @@ function ValueSection() {
   )
 }
 
-/* ──────────────────────────── ORDER PROCESS ──────────────────────────── */
+/* ──────────────────────────── HOW IT WORKS ──────────────────────────── */
 
 function OrderProcessSection() {
   const steps = [
-    { icon: MousePointerClick, color: '#087AC7', title: 'Choose a category or brand', body: 'Browse our curated catalog and pick the gift cards that fit your needs.' },
-    { icon: CreditCard, color: '#10B981', title: 'Place your order', body: 'Submit your order with flexible payment options — wallet balance or online payment.' },
-    { icon: Zap, color: '#F43F5E', title: 'Receive your digital codes', body: 'Get your digital gift codes delivered fast and securely, ready to use or distribute.' },
+    { icon: MousePointerClick, color: '#087AC7', title: 'Choose your products', body: 'Browse the available categories and brands and select what your business needs.' },
+    { icon: CreditCard, color: '#10B981', title: 'Place your order', body: 'Choose your quantity and complete your business order.' },
+    { icon: Zap, color: '#8B5CF6', title: 'Receive your codes', body: 'Your digital gift card codes are securely prepared for delivery.' },
   ]
 
   return (
     <section id="order-process" className="relative overflow-hidden py-20 sm:py-24">
-      <div
-        className="pointer-events-none absolute left-0 top-1/2 h-[400px] w-[500px] -translate-y-1/2"
-        style={{ background: 'radial-gradient(circle, rgba(28,228,243,0.07), transparent 65%)' }}
-      />
-
       <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
         <div className="mx-auto max-w-2xl text-center">
           <p className="text-xs font-medium tracking-[0.22em] text-brand-700/80">
-            ORDER PROCESS
+            HOW IT WORKS
           </p>
           <h2 className="mt-3 text-balance text-3xl font-semibold leading-[1.1] tracking-tight text-ink-900 sm:text-4xl lg:text-5xl">
             Get started in <span className="text-gradient-brand">three simple steps.</span>
           </h2>
         </div>
 
-        <div className="mt-10 grid gap-5 sm:mt-14 sm:grid-cols-3 sm:gap-6">
+        {/* Desktop: horizontal with connectors */}
+        <div className="mt-10 hidden gap-6 sm:mt-14 sm:grid sm:grid-cols-3">
           {steps.map((s, i) => (
             <div
               key={s.title}
-              className="group relative rounded-2xl border border-ink-100 bg-white/70 p-6 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand-400/40 hover:shadow-[0_12px_30px_-15px_rgba(0,99,180,0.18)] sm:p-7"
+              className="group relative rounded-2xl border border-ink-100 bg-white/70 p-7 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand-400/40 hover:shadow-[0_12px_30px_-15px_rgba(0,99,180,0.18)]"
             >
               {i < steps.length - 1 && (
                 <div className="absolute right-[-24px] top-1/2 hidden h-px w-12 bg-gradient-to-r from-brand-400/30 to-transparent sm:block" />
@@ -239,7 +231,7 @@ function OrderProcessSection() {
               <div className="flex items-center gap-4">
                 <span
                   className="flex h-12 w-12 items-center justify-center rounded-xl transition-transform duration-300 group-hover:scale-110"
-                  style={{ background: `${s.color}15`, border: `1px solid ${s.color}30` }}
+                  style={{ background: `${s.color}12`, border: `1px solid ${s.color}28` }}
                 >
                   <s.icon className="h-5 w-5" strokeWidth={1.5} style={{ color: s.color }} />
                 </span>
@@ -256,67 +248,35 @@ function OrderProcessSection() {
             </div>
           ))}
         </div>
-      </div>
-    </section>
-  )
-}
 
-/* ──────────────────────────── WHY TOYOUCARDS ──────────────────────────── */
-
-function WhyToYouCardsSection() {
-  return (
-    <section id="why" className="relative overflow-hidden py-20 sm:py-24">
-      <div
-        className="pointer-events-none absolute inset-0"
-        style={{ background: 'radial-gradient(circle at 70% 50%, rgba(28,228,243,0.06), transparent 70%)' }}
-      />
-
-      <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
-        <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-12">
-          <div>
-            <p className="text-xs font-medium tracking-[0.22em] text-brand-700/80">
-              WHY TOYOUCARDS
-            </p>
-            <h2 className="mt-3 text-balance text-3xl font-semibold leading-[1.1] tracking-tight text-ink-900 sm:text-4xl lg:text-5xl">
-              Built for businesses that need{' '}
-              <span className="text-gradient-brand">reliable fulfillment.</span>
-            </h2>
-            <p className="mt-5 max-w-md text-pretty text-base leading-relaxed text-ink-500">
-              ToYouCards is a B2B platform built to help businesses manage their
-              digital gift card operations. Access a curated catalog of popular
-              brands through a simple, easy-to-use dashboard.
-            </p>
-            <p className="mt-4 max-w-md text-pretty text-base leading-relaxed text-ink-500">
-              Focus on growing your sales while ToYouCards handles fast,
-              secure digital delivery.
-            </p>
-
-            <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:gap-5">
-              <Link
-                to="/contact"
-                className="group flex items-center justify-center gap-2 rounded-full bg-gradient-brand px-5 py-3 text-sm font-medium text-white shadow-[0_10px_40px_-8px_rgba(0,99,180,0.45)] transition-all hover:brightness-110 sm:w-auto"
-              >
-                Start Now
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </Link>
-              <a
-                href="#catalog"
-                className="rounded-full border border-ink-200 bg-white/60 px-5 py-3 text-center text-sm font-medium text-ink-700 backdrop-blur-sm transition-colors hover:border-brand-400/50 hover:text-brand-700 sm:w-auto"
-              >
-                Browse Catalog
-              </a>
+        {/* Mobile: vertical with connecting line */}
+        <div className="mt-10 flex flex-col gap-5 sm:hidden">
+          {steps.map((s, i) => (
+            <div key={s.title} className="relative">
+              {i < steps.length - 1 && (
+                <div className="absolute left-[23px] top-[52px] h-[calc(100%-20px)] w-px bg-gradient-to-b from-brand-400/30 to-transparent" />
+              )}
+              <div className="group flex items-start gap-4 rounded-2xl border border-ink-100 bg-white/70 p-5 backdrop-blur-sm">
+                <span
+                  className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl"
+                  style={{ background: `${s.color}12`, border: `1px solid ${s.color}28` }}
+                >
+                  <s.icon className="h-5 w-5" strokeWidth={1.5} style={{ color: s.color }} />
+                </span>
+                <div className="min-w-0">
+                  <div className="flex items-center gap-2">
+                    <span className="font-mono text-sm font-bold text-ink-300">0{i + 1}</span>
+                    <h3 className="text-base font-medium tracking-tight text-ink-900">
+                      {s.title}
+                    </h3>
+                  </div>
+                  <p className="mt-1.5 text-sm leading-relaxed text-ink-500">
+                    {s.body}
+                  </p>
+                </div>
+              </div>
             </div>
-          </div>
-
-          <div className="relative flex items-center justify-center">
-            <div className="animate-float-slower w-full max-w-[300px] sm:max-w-[380px]">
-              <GiftCard variant="blue" amount="$50" label="DIGITAL VALUE" />
-            </div>
-            <div
-              className="pointer-events-none absolute inset-0 -z-10"
-              style={{ background: 'radial-gradient(circle at 50% 50%, rgba(28,228,243,0.07), transparent 65%)' }}
-            />
-          </div>
+          ))}
         </div>
       </div>
     </section>
@@ -338,9 +298,12 @@ function DashboardPreview() {
           THE PRODUCT
         </p>
         <h2 className="mx-auto mt-3 max-w-2xl text-balance text-3xl font-semibold tracking-tight text-ink-900 sm:text-4xl lg:text-5xl">
-          Your digital value, in{' '}
-          <span className="text-gradient-brand">one dashboard.</span>
+          Manage your digital gift card{' '}
+          <span className="text-gradient-brand">activity in one place.</span>
         </h2>
+        <p className="mx-auto mt-3 max-w-md text-pretty text-sm leading-relaxed text-ink-500 sm:text-base">
+          Keep track of orders, balances, and delivery from a simple business dashboard.
+        </p>
       </div>
 
       <div className="relative mx-auto mt-10 max-w-4xl px-4 sm:mt-14 sm:px-6">
@@ -377,9 +340,9 @@ function DashboardPreview() {
               <span className="text-xs text-brand-700">View all</span>
             </div>
             <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-3">
-              <GiftCard variant="teal" amount="$50" label="LIFESTYLE" />
-              <GiftCard variant="emerald" amount="$100" label="GAMING" />
-              <GiftCard variant="rose" amount="$25" label="STREAMING" />
+              <GiftCard variant="deep" amount="$50" label="LIFESTYLE" />
+              <GiftCard variant="dark" amount="$100" label="GAMING" />
+              <GiftCard variant="blue" amount="$25" label="STREAMING" />
             </div>
           </div>
         </div>
@@ -409,13 +372,12 @@ function ContactSection() {
               LET'S TALK
             </p>
             <h2 className="mt-3 text-balance text-3xl font-semibold leading-[1.1] tracking-tight text-ink-900 sm:text-4xl lg:text-5xl">
-              Bring digital gift cards
-              <br />
-              <span className="text-gradient-brand">into your business.</span>
+              Let's find what works{' '}
+              <span className="text-gradient-brand">for your business.</span>
             </h2>
             <p className="mt-5 max-w-md text-pretty text-base leading-relaxed text-ink-500">
-              Tell us what you're looking for and our team will help you find
-              the right solution for your business.
+              Tell us what products you're interested in, the volume you need, or any
+              questions you have. Our team will help you get started.
             </p>
           </div>
 
@@ -440,7 +402,7 @@ function FinalCta() {
         style={{ background: 'radial-gradient(circle at 50% 55%, rgba(28,228,243,0.1), rgba(0,99,180,0.04) 45%, transparent 70%)' }}
       />
 
-      <div className="animate-float-slower-centered pointer-events-none absolute left-0 right-0 top-1/2 mx-auto w-[640px] max-w-[90vw] opacity-[0.1] blur-[2px]">
+      <div className="animate-float-slower-centered pointer-events-none absolute left-0 right-0 top-1/2 mx-auto w-[640px] max-w-[90vw] opacity-[0.08] blur-[2px]">
         <GiftCard variant="blue" amount="$50" label="DIGITAL VALUE" />
       </div>
 
@@ -473,10 +435,10 @@ function FinalCta() {
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
           </Link>
           <a
-            href="#catalog"
+            href="#brands"
             className="w-full rounded-full border border-ink-200 bg-white/60 px-6 py-3.5 text-center text-sm font-medium text-ink-700 backdrop-blur-sm transition-colors hover:border-brand-400/50 hover:text-brand-700 sm:w-auto"
           >
-            Browse Catalog
+            Explore Catalog
           </a>
         </div>
       </div>

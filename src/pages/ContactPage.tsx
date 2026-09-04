@@ -16,13 +16,13 @@ export default function ContactPage() {
               Get In Touch
             </div>
             <h1 className="text-display-2xl font-display text-ink-900">
-              Let's get your business
+              Let's find what works
               <br />
-              <span className="text-gradient">started with gift cards.</span>
+              <span className="text-gradient">for your business.</span>
             </h1>
             <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-ink-500">
-              Whether you're looking for bulk gift cards, reseller pricing, or a reliable
-              fulfillment partner — tell us what you need and we'll help you find the right fit.
+              Tell us what products you're interested in, the volume you need, or any
+              questions you have. Our team will help you get started.
             </p>
           </div>
         </div>
@@ -48,8 +48,8 @@ export default function ContactPage() {
                 the best way forward.
               </p>
               <p className="mt-8 text-[15px] leading-relaxed text-ink-500 max-w-md">
-                From bulk gift card purchasing to reseller arrangements, our team can help
-                you find the right solution for your business.
+                From bulk purchasing to reseller arrangements, our team can help
+                you find the right fit for your business.
               </p>
 
               <div className="mt-10 space-y-3.5">
