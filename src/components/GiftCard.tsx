@@ -73,7 +73,7 @@ export function GiftCard({
 
   return (
     <div
-      className={`group/gc relative aspect-[1.586/1] w-full cursor-pointer overflow-hidden rounded-2xl border shadow-[0_25px_70px_-25px_rgba(0,0,0,0.65)] transition-[transform,box-shadow] duration-300 ease-out ${
+      className={`group/gc gift-card-container relative aspect-[1.586/1] w-full cursor-pointer overflow-hidden rounded-2xl border shadow-[0_25px_70px_-25px_rgba(0,0,0,0.65)] transition-[transform,box-shadow] duration-300 ease-out ${
         light ? 'border-black/10' : 'border-white/15'
       } ${className ?? ''}`}
       onPointerEnter={() => setIsHovered(true)}
@@ -81,6 +81,7 @@ export function GiftCard({
       onPointerLeave={handlePointerLeave}
       style={{
         background: surfaces[variant],
+        containerType: 'inline-size',
         transform: `perspective(900px) rotateX(${rotation.x}deg) rotateY(${rotation.y}deg) scale(${isHovered ? 1.035 : 1})`,
         ...style,
       }}
@@ -128,14 +129,14 @@ export function GiftCard({
       {/* Content — all text uses clamp() for smooth responsive scaling */}
       <div
         className={`relative flex h-full flex-col justify-between ${light ? 'text-[#0A2547]' : 'text-white'}`}
-        style={{ padding: 'clamp(12px, 3vw, 20px)' }}
+        style={{ padding: 'clamp(8px, 5cqw, 20px)' }}
       >
         {/* Top row */}
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-1.5 sm:gap-2">
+          <div className="flex min-w-0 items-center gap-[clamp(4px,1.5cqw,8px)]">
             <span
               className={`flex items-center justify-center rounded-md ${light ? 'bg-[#135DA9]/10' : 'bg-white/15'}`}
-              style={{ width: 'clamp(20px, 4vw, 24px)', height: 'clamp(20px, 4vw, 24px)' }}
+              style={{ width: 'clamp(18px, 7cqw, 24px)', height: 'clamp(18px, 7cqw, 24px)' }}
             >
               <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
                 <rect x="1" y="3" width="10" height="6" rx="1.5" stroke="currentColor" strokeWidth="1" opacity="0.8" />
@@ -143,15 +144,15 @@ export function GiftCard({
               </svg>
             </span>
             <span
-              className="font-semibold tracking-[0.15em] sm:tracking-[0.2em]"
-              style={{ fontSize: 'clamp(10px, 2.4vw, 14px)' }}
+              className="whitespace-nowrap font-semibold"
+              style={{ fontSize: 'clamp(8px, 4.2cqw, 14px)', letterSpacing: 'clamp(0.08em, 0.7cqw, 0.2em)' }}
             >
               TOYOUCARDS
             </span>
           </div>
           <span
-            className={`rounded-full font-semibold tracking-wider ${light ? 'bg-[#135DA9]/10 text-[#135DA9]/70' : 'bg-white/15 text-white/70'}`}
-            style={{ fontSize: 'clamp(9px, 1.8vw, 11px)', padding: 'clamp(2px, 0.6vw, 3px) clamp(6px, 1.5vw, 8px)' }}
+            className={`shrink-0 whitespace-nowrap rounded-full font-semibold tracking-wider ${light ? 'bg-[#135DA9]/10 text-[#135DA9]/70' : 'bg-white/15 text-white/70'}`}
+            style={{ fontSize: 'clamp(7px, 3cqw, 11px)', padding: 'clamp(2px, 0.8cqw, 3px) clamp(5px, 2cqw, 8px)' }}
           >
             SECURE
           </span>
@@ -160,14 +161,14 @@ export function GiftCard({
         {/* Middle — amount */}
         <div className="space-y-0.5 sm:space-y-1">
           <p
-            className={`font-medium tracking-[0.18em] sm:tracking-[0.24em] ${light ? 'text-[#135DA9]/60' : 'text-white/55'}`}
-            style={{ fontSize: 'clamp(10px, 2vw, 12px)' }}
+            className={`whitespace-nowrap font-medium ${light ? 'text-[#135DA9]/60' : 'text-white/55'}`}
+            style={{ fontSize: 'clamp(7px, 3.5cqw, 12px)', letterSpacing: 'clamp(0.08em, 0.65cqw, 0.24em)' }}
           >
             {label}
           </p>
           <p
-            className="font-mono font-bold tracking-tight transition-transform duration-300 group-hover/gc:translate-x-1"
-            style={{ fontSize: 'clamp(22px, 5vw, 32px)' }}
+            className="whitespace-nowrap font-mono font-bold tracking-tight transition-transform duration-300 group-hover/gc:translate-x-1"
+            style={{ fontSize: 'clamp(17px, 10cqw, 32px)' }}
           >
             {amount}
           </p>
@@ -176,8 +177,8 @@ export function GiftCard({
         {/* Bottom row — decorative, hides on very small screens */}
         <div className="flex items-center justify-between">
           <span
-            className={`hidden font-medium tracking-[0.18em] sm:tracking-[0.22em] xs:block ${light ? 'text-[#135DA9]/60' : 'text-white/45'}`}
-            style={{ fontSize: 'clamp(10px, 1.8vw, 12px)' }}
+            className={`gift-card-detail hidden whitespace-nowrap font-medium tracking-[0.18em] sm:tracking-[0.22em] xs:block ${light ? 'text-[#135DA9]/60' : 'text-white/45'}`}
+            style={{ fontSize: 'clamp(7px, 3cqw, 12px)' }}
           >
             DIGITAL GIFT CARD
           </span>

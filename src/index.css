@@ -229,6 +229,12 @@
   animation: marquee 40s linear infinite;
 }
 
+@container (max-width: 240px) {
+  .gift-card-detail {
+    display: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .animate-pulse-dot,
   .animate-float-slow-orbit,
