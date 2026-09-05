@@ -37,7 +37,7 @@ export default function Navbar() {
         <div className="flex items-center justify-between px-4 py-2.5 sm:px-5">
           <Link to="/" className="flex items-center shrink-0">
             <img
-              src="/ToYoucardsLogo_Light-Logotype.svg"
+              src="/Link_→_ToYouCards.png"
               alt="ToYouCards"
               className="h-7 w-auto sm:h-8"
             />
